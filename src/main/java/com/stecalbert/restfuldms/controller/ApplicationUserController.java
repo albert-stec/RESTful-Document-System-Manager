@@ -1,12 +1,17 @@
 package com.stecalbert.restfuldms.controller;
 
+import com.stecalbert.restfuldms.exception.ExistingUsernameException;
 import com.stecalbert.restfuldms.model.ApplicationUser;
 import com.stecalbert.restfuldms.repository.ApplicationUserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
 
 import java.util.List;
 import java.util.Optional;
@@ -28,16 +33,19 @@ public class ApplicationUserController {
     }
 
     @PostMapping
-    public void registerUser(@RequestBody ApplicationUser applicationUser) {
+    public ResponseEntity<ApplicationUser> registerUser(@RequestBody ApplicationUser applicationUser) {
         Optional<ApplicationUser> userOptional =
                 userRepository.findByUsername(applicationUser.getUsername());
         userOptional.ifPresent(e -> {
-            throw new RuntimeException("User with that username already exists.");
+            throw new ExistingUsernameException("User with that username already exists.");
         });
 
         String encryptedPassword = bCryptPasswordEncoder.encode(applicationUser.getPassword());
         applicationUser.setPassword(encryptedPassword);
-        userRepository.save(applicationUser);
+        return new ResponseEntity<>(
+                userRepository.save(applicationUser),
+                HttpStatus.OK
+        );
     }
 
     @GetMapping

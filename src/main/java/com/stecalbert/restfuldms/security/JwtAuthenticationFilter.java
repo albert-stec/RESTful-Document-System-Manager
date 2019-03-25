@@ -6,12 +6,10 @@ import com.stecalbert.restfuldms.model.ApplicationUser;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
-import org.springframework.security.core.AuthenticationException;
 import org.springframework.security.core.userdetails.User;
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
 
 import javax.servlet.FilterChain;
-import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
@@ -19,7 +17,10 @@ import java.util.Collections;
 import java.util.Date;
 
 import static com.auth0.jwt.algorithms.Algorithm.HMAC512;
-import static com.stecalbert.restfuldms.security.SecurityConstants.*;
+import static com.stecalbert.restfuldms.security.SecurityConstants.AUTHORIZATION_HEADER_KEY;
+import static com.stecalbert.restfuldms.security.SecurityConstants.EXPIRATION_TIME;
+import static com.stecalbert.restfuldms.security.SecurityConstants.SECRET;
+import static com.stecalbert.restfuldms.security.SecurityConstants.TOKEN_PREFIX;
 
 public class JwtAuthenticationFilter extends UsernamePasswordAuthenticationFilter {
 
@@ -30,8 +31,7 @@ public class JwtAuthenticationFilter extends UsernamePasswordAuthenticationFilte
     }
 
     @Override
-    public Authentication attemptAuthentication(HttpServletRequest request, HttpServletResponse response)
-            throws AuthenticationException {
+    public Authentication attemptAuthentication(HttpServletRequest request, HttpServletResponse response) {
         ApplicationUser credentials = parseApplicationUserData(request);
 
         return authenticationManager.authenticate(
@@ -53,14 +53,13 @@ public class JwtAuthenticationFilter extends UsernamePasswordAuthenticationFilte
 
     @Override
     protected void successfulAuthentication(HttpServletRequest request, HttpServletResponse response,
-                                            FilterChain chain, Authentication authResult)
-            throws IOException, ServletException {
+                                            FilterChain chain, Authentication authResult) {
         User principal = (User) authResult.getPrincipal();
         String token = JWT.create()
                 .withSubject(principal.getUsername())
                 .withExpiresAt(new Date(System.currentTimeMillis() + EXPIRATION_TIME))
                 .sign(HMAC512(SECRET.getBytes()));
 
-        response.addHeader(HEADER_STRING, TOKEN_PREFIX + token);
+        response.addHeader(AUTHORIZATION_HEADER_KEY, TOKEN_PREFIX + token);
     }
 }

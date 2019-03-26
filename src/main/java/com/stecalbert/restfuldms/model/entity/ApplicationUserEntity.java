@@ -1,4 +1,4 @@
-package com.stecalbert.restfuldms.model;
+package com.stecalbert.restfuldms.model.entity;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -15,7 +15,7 @@ import javax.persistence.Id;
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
-public class ApplicationUser {
+public class ApplicationUserEntity {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

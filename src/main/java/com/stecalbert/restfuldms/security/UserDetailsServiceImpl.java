@@ -1,6 +1,6 @@
 package com.stecalbert.restfuldms.security;
 
-import com.stecalbert.restfuldms.model.ApplicationUser;
+import com.stecalbert.restfuldms.model.entity.ApplicationUserEntity;
 import com.stecalbert.restfuldms.repository.ApplicationUserRepository;
 import org.springframework.security.core.userdetails.User;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -21,8 +21,8 @@ public class UserDetailsServiceImpl implements UserDetailsService {
 
     @Override
     public UserDetails loadUserByUsername(String username) {
-        Optional<ApplicationUser> userOptional = applicationUserRepository.findByUsername(username);
-        ApplicationUser user = userOptional.orElseThrow(() -> new UsernameNotFoundException(username));
+        Optional<ApplicationUserEntity> userOptional = applicationUserRepository.findByUsername(username);
+        ApplicationUserEntity user = userOptional.orElseThrow(() -> new UsernameNotFoundException(username));
         return new User(user.getUsername(),
                 user.getPassword(), Collections.emptyList());
     }

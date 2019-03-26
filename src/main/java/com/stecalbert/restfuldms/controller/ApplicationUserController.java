@@ -3,7 +3,7 @@ package com.stecalbert.restfuldms.controller;
 import com.stecalbert.restfuldms.exception.ExistingUsernameException;
 import com.stecalbert.restfuldms.model.dto.ApplicationUserDto;
 import com.stecalbert.restfuldms.model.entity.ApplicationUserEntity;
-import com.stecalbert.restfuldms.repository.ApplicationUserRepository;
+import com.stecalbert.restfuldms.service.UserService;
 import org.modelmapper.ModelMapper;
 import org.modelmapper.TypeToken;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -26,20 +26,20 @@ public class ApplicationUserController {
 
     private final BCryptPasswordEncoder bCryptPasswordEncoder;
 
-    private final ApplicationUserRepository userRepository;
+    private final UserService userService;
 
 
     @Autowired
-    public ApplicationUserController(ApplicationUserRepository userRepository,
+    public ApplicationUserController(UserService userService,
                                      BCryptPasswordEncoder bCryptPasswordEncoder) {
-        this.userRepository = userRepository;
+        this.userService = userService;
         this.bCryptPasswordEncoder = bCryptPasswordEncoder;
     }
 
     @PostMapping
     public ResponseEntity<ApplicationUserEntity> registerUser(@RequestBody ApplicationUserDto applicationUserDto) {
         Optional<ApplicationUserEntity> userOptional =
-                userRepository.findByUsername(applicationUserDto.getUsername());
+                userService.findByUsername(applicationUserDto.getUsername());
         userOptional.ifPresent(e -> {
             throw new ExistingUsernameException("User with that username already exists.");
         });
@@ -52,7 +52,7 @@ public class ApplicationUserController {
                 modelMapper.map(applicationUserDto, ApplicationUserEntity.class);
 
         return new ResponseEntity<>(
-                userRepository.save(applicationUserEntity),
+                userService.save(applicationUserEntity),
                 HttpStatus.OK
         );
     }
@@ -60,7 +60,7 @@ public class ApplicationUserController {
     @GetMapping
     public ResponseEntity<List<ApplicationUserDto>> getAll() {
         var modelMapper = new ModelMapper();
-        List<ApplicationUserEntity> applicationUserEntityList = userRepository.findAll();
+        List<ApplicationUserEntity> applicationUserEntityList = userService.findAll();
         Type sourceListType =
                 new TypeToken<List<ApplicationUserEntity>>() {
                 }.getType();

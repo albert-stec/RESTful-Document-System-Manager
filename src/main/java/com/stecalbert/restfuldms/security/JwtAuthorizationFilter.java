@@ -15,9 +15,9 @@ import java.io.IOException;
 import java.util.Collections;
 import java.util.Optional;
 
-import static com.stecalbert.restfuldms.security.SecurityConstants.AUTHORIZATION_HEADER_KEY;
-import static com.stecalbert.restfuldms.security.SecurityConstants.SECRET;
-import static com.stecalbert.restfuldms.security.SecurityConstants.TOKEN_PREFIX;
+import static com.stecalbert.restfuldms.security.JwtConstants.AUTHORIZATION_HEADER_KEY;
+import static com.stecalbert.restfuldms.security.JwtConstants.SECRET;
+import static com.stecalbert.restfuldms.security.JwtConstants.TOKEN_PREFIX;
 
 class JwtAuthorizationFilter extends BasicAuthenticationFilter {
 

@@ -17,10 +17,10 @@ import java.util.Collections;
 import java.util.Date;
 
 import static com.auth0.jwt.algorithms.Algorithm.HMAC512;
-import static com.stecalbert.restfuldms.security.SecurityConstants.AUTHORIZATION_HEADER_KEY;
-import static com.stecalbert.restfuldms.security.SecurityConstants.EXPIRATION_TIME;
-import static com.stecalbert.restfuldms.security.SecurityConstants.SECRET;
-import static com.stecalbert.restfuldms.security.SecurityConstants.TOKEN_PREFIX;
+import static com.stecalbert.restfuldms.security.JwtConstants.AUTHORIZATION_HEADER_KEY;
+import static com.stecalbert.restfuldms.security.JwtConstants.EXPIRATION_TIME;
+import static com.stecalbert.restfuldms.security.JwtConstants.SECRET;
+import static com.stecalbert.restfuldms.security.JwtConstants.TOKEN_PREFIX;
 
 public class JwtAuthenticationFilter extends UsernamePasswordAuthenticationFilter {
 

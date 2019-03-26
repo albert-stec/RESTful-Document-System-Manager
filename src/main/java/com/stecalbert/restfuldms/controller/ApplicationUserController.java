@@ -61,8 +61,9 @@ public class ApplicationUserController {
     public ResponseEntity<List<ApplicationUserDto>> getAll() {
         var modelMapper = new ModelMapper();
         List<ApplicationUserEntity> applicationUserEntityList = userRepository.findAll();
-        Type sourceListType = new TypeToken<List<ApplicationUserEntity>>() {
-        }.getType();
+        Type sourceListType =
+                new TypeToken<List<ApplicationUserEntity>>() {
+                }.getType();
         List<ApplicationUserDto> applicationUserDtoList
                 = modelMapper.map(applicationUserEntityList, sourceListType);
 

@@ -2,7 +2,7 @@ package com.stecalbert.restfuldms.security;
 
 import com.auth0.jwt.JWT;
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.stecalbert.restfuldms.model.entity.ApplicationUserEntity;
+import com.stecalbert.restfuldms.model.entity.UserEntity;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
@@ -32,7 +32,7 @@ public class JwtAuthenticationFilter extends UsernamePasswordAuthenticationFilte
 
     @Override
     public Authentication attemptAuthentication(HttpServletRequest request, HttpServletResponse response) {
-        ApplicationUserEntity credentials = parseApplicationUserData(request);
+        UserEntity credentials = parseApplicationUserData(request);
 
         return authenticationManager.authenticate(
                 new UsernamePasswordAuthenticationToken(
@@ -42,10 +42,10 @@ public class JwtAuthenticationFilter extends UsernamePasswordAuthenticationFilte
         );
     }
 
-    private ApplicationUserEntity parseApplicationUserData(HttpServletRequest request) {
+    private UserEntity parseApplicationUserData(HttpServletRequest request) {
         try {
             return new ObjectMapper()
-                    .readValue(request.getInputStream(), ApplicationUserEntity.class);
+                    .readValue(request.getInputStream(), UserEntity.class);
         } catch (IOException e) {
             throw new IllegalArgumentException("Error parsing application user data");
         }

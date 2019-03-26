@@ -1,17 +1,17 @@
 package com.stecalbert.restfuldms.service;
 
-import com.stecalbert.restfuldms.model.entity.ApplicationUserEntity;
+import com.stecalbert.restfuldms.model.entity.UserEntity;
 
 import java.util.List;
 import java.util.Optional;
 
 public interface UserService {
 
-    List<ApplicationUserEntity> findAll();
+    List<UserEntity> findAll();
 
-    Optional<ApplicationUserEntity> findById(Long id);
+    Optional<UserEntity> findById(Long id);
 
-    Optional<ApplicationUserEntity> findByUsername(String username);
+    Optional<UserEntity> findByUsername(String username);
 
-    ApplicationUserEntity save(ApplicationUserEntity applicationUserEntity);
+    UserEntity save(UserEntity userEntity);
 }

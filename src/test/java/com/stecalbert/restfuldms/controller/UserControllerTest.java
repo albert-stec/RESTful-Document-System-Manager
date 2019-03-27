@@ -19,6 +19,7 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
+import static java.util.Collections.emptySet;
 import static org.hamcrest.Matchers.hasSize;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
@@ -67,9 +68,9 @@ public class UserControllerTest {
 
     private List<UserEntity> getMockUserEntityList() {
         return new ArrayList<>(Arrays.asList(
-                new UserEntity(1L, "admin_jack", "admin123"),
-                new UserEntity(2L, "user_mathew", "user123"),
-                new UserEntity(3L, "moderator_philip", "moderator123")
+                new UserEntity(1L, "admin_jack", "admin123", emptySet()),
+                new UserEntity(2L, "user_mathew", "user123", emptySet()),
+                new UserEntity(3L, "moderator_philip", "moderator123", emptySet())
         ));
     }
 }

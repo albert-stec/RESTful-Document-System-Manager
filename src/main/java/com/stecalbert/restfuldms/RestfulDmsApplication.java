@@ -42,7 +42,7 @@ public class RestfulDmsApplication {
         moderatorAuthority.setName("MODERATOR");
 
         AuthorityEntity userAuthority = new AuthorityEntity();
-        userAuthority.setName("USER");
+        userAuthority.setName("DOMAIN");
 
         UserEntity superUser = new UserEntity();
         superUser.setUsername("super-user");

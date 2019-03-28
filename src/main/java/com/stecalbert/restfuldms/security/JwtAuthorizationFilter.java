@@ -2,8 +2,12 @@ package com.stecalbert.restfuldms.security;
 
 import com.auth0.jwt.JWT;
 import com.auth0.jwt.algorithms.Algorithm;
+import com.auth0.jwt.interfaces.DecodedJWT;
+import org.apache.commons.lang3.ArrayUtils;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
+import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.web.authentication.www.BasicAuthenticationFilter;
 
@@ -12,8 +16,10 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
+import java.util.Arrays;
 import java.util.Collections;
-import java.util.Optional;
+import java.util.List;
+import java.util.stream.Collectors;
 
 import static com.stecalbert.restfuldms.security.JwtConstants.AUTHORIZATION_HEADER_KEY;
 import static com.stecalbert.restfuldms.security.JwtConstants.SECRET;
@@ -31,12 +37,15 @@ class JwtAuthorizationFilter extends BasicAuthenticationFilter {
                                     FilterChain chain) throws IOException, ServletException {
         String authorizationHeader = req.getHeader(AUTHORIZATION_HEADER_KEY);
         if (isPresentAndValid(authorizationHeader)) {
-            Optional<String> userOptional = getUser(authorizationHeader);
-            userOptional.ifPresent(e -> {
-                var authenticationToken = new UsernamePasswordAuthenticationToken(userOptional.get(),
-                        null, Collections.emptyList());
-                SecurityContextHolder.getContext().setAuthentication(authenticationToken);
-            });
+            DecodedJWT decodedJwt = getDecodedToken(authorizationHeader);
+            String username = decodedJwt.getSubject();
+            String[] authorities = decodedJwt.getClaim("authorities").asArray(String.class);
+
+            var authenticationToken = new UsernamePasswordAuthenticationToken(
+                    username,
+                    null,
+                    mapToGrantedAuthorities(authorities));
+            SecurityContextHolder.getContext().setAuthentication(authenticationToken);
         }
 
         chain.doFilter(req, res);
@@ -47,10 +56,17 @@ class JwtAuthorizationFilter extends BasicAuthenticationFilter {
                 && authorizationHeader.startsWith(TOKEN_PREFIX);
     }
 
-    private Optional<String> getUser(String token) {
-        return Optional.ofNullable(JWT.require(Algorithm.HMAC512(SECRET.getBytes()))
+    private DecodedJWT getDecodedToken(String token) {
+        return JWT.require(Algorithm.HMAC512(SECRET.getBytes()))
                 .build()
-                .verify(token.replace(TOKEN_PREFIX, ""))
-                .getSubject());
+                .verify(token.replace(TOKEN_PREFIX, ""));
+    }
+
+    private List<GrantedAuthority> mapToGrantedAuthorities(String[] authorities) {
+        return !ArrayUtils.isEmpty(authorities)
+                ? Arrays.stream(authorities)
+                .map(SimpleGrantedAuthority::new)
+                .collect(Collectors.toList())
+                : Collections.emptyList();
     }
 }

@@ -13,9 +13,9 @@ import javax.persistence.ManyToOne;
 
 @Entity(name = "authorities")
 @Data
-@Builder
 @NoArgsConstructor
 @AllArgsConstructor
+@Builder
 public class AuthorityEntity {
 
     @Id

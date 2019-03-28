@@ -55,11 +55,14 @@ public class JwtAuthenticationFilter extends UsernamePasswordAuthenticationFilte
     protected void successfulAuthentication(HttpServletRequest request, HttpServletResponse response,
                                             FilterChain chain, Authentication authResult) {
         User principal = (User) authResult.getPrincipal();
-        String token = JWT.create()
+        String token = buildJwtTokenAndGet(principal);
+        response.addHeader(AUTHORIZATION_HEADER_KEY, TOKEN_PREFIX + token);
+    }
+
+    private String buildJwtTokenAndGet(User principal) {
+        return JWT.create()
                 .withSubject(principal.getUsername())
                 .withExpiresAt(new Date(System.currentTimeMillis() + EXPIRATION_TIME))
                 .sign(HMAC512(SECRET.getBytes()));
-
-        response.addHeader(AUTHORIZATION_HEADER_KEY, TOKEN_PREFIX + token);
     }
 }

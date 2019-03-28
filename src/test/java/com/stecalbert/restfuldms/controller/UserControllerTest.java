@@ -1,6 +1,6 @@
 package com.stecalbert.restfuldms.controller;
 
-import com.stecalbert.restfuldms.model.entity.UserEntity;
+import com.stecalbert.restfuldms.model.dto.UserDto;
 import com.stecalbert.restfuldms.service.UserService;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -66,11 +66,11 @@ public class UserControllerTest {
     }
 
 
-    private List<UserEntity> getMockUserEntityList() {
+    private List<UserDto> getMockUserEntityList() {
         return new ArrayList<>(Arrays.asList(
-                new UserEntity(1L, "admin_jack", "admin123", emptySet()),
-                new UserEntity(2L, "user_mathew", "user123", emptySet()),
-                new UserEntity(3L, "moderator_philip", "moderator123", emptySet())
+                new UserDto(1L, "admin_jack", "admin123", emptySet()),
+                new UserDto(2L, "user_mathew", "user123", emptySet()),
+                new UserDto(3L, "moderator_philip", "moderator123", emptySet())
         ));
     }
 }

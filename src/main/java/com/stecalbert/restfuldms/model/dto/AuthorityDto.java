@@ -5,19 +5,14 @@ import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-import java.util.Set;
-
 @Data
-@NoArgsConstructor
 @Builder
+@NoArgsConstructor
 @AllArgsConstructor
-public class UserDto {
+class AuthorityDto {
 
-    private String username;
+    private Long id;
 
-    private String password;
-
-    private Set<AuthorityDto> authorities;
-
+    private String name;
 
 }

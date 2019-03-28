@@ -1,5 +1,6 @@
 package com.stecalbert.restfuldms.model.entity;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -24,5 +25,6 @@ public class AuthorityEntity {
     private String name;
 
     @ManyToOne
+    @JsonIgnore
     private UserEntity user;
 }

@@ -34,12 +34,12 @@ public class WebSecurity extends WebSecurityConfigurerAdapter {
     };
     private final Environment environment;
     private final JwtTokenProvider jwtTokenProvider;
-    private UserDetailsServiceImpl userDetailsService;
+    private final UserDetailsServiceImpl userDetailsService;
 
     @Autowired
     public WebSecurity(UserDetailsServiceImpl userDetailsService, Environment env, JwtTokenProvider jwtTokenProvider) {
         this.userDetailsService = userDetailsService;
-        this.environment = env;
+        environment = env;
         this.jwtTokenProvider = jwtTokenProvider;
     }
 

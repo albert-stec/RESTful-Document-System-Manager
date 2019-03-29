@@ -75,7 +75,7 @@ public class UserControllerTest {
     }
 
 
-    private List<UserDto> getMockUserEntityList() {
+    private static List<UserDto> getMockUserEntityList() {
         return new ArrayList<>(Arrays.asList(
                 new UserDto(1L, "admin_jack", "admin123", emptySet()),
                 new UserDto(2L, "user_mathew", "user123", emptySet()),
@@ -83,13 +83,13 @@ public class UserControllerTest {
         ));
     }
 
-    private String getDomainAuthorityToken() {
+    private static String getDomainAuthorityToken() {
         return "Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzUxMiJ9" +
                 ".eyJzdWIiOiJlbG8iLCJleHAiOjE1NTQ3MTE3MDAsImF1dGhvcml0aWVzIjpbIlVTRVIiXX0" +
                 ".9Tv_0eXTvV3v4R-Q5zjv_EYRRikhQq2lVNND4S7mMNHKaT0lRCszQu0WmEC0bYuphB4nHqoW9STJ6oAv_jSqJg";
     }
 
-    private String getAdminAuthorityToken() {
+    private static String getAdminAuthorityToken() {
         return "Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzUxMiJ9" +
                 ".eyJzdWIiOiJzdXBlci11c2VyIiwiZXhwIjoxNTU0NzExNjM0LCJhdXRob3JpdGllcyI6WyJBRE1JTiIsIkRPTUFJTiIsIk1PREVSQVRPUiJdfQ" +
                 ".L6vCr76bkuuAIoBy3BtA7kjNrO7tWevvM3atAqr86dLh8waHSMY3X0Lj1OZMk3Gg4mx9CgRxvSA90x1Ap3UP5Q";

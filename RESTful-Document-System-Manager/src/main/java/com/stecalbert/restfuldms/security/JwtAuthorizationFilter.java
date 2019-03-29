@@ -51,7 +51,7 @@ class JwtAuthorizationFilter extends BasicAuthenticationFilter {
         chain.doFilter(req, res);
     }
 
-    private List<GrantedAuthority> mapToGrantedAuthorities(String[] authorities) {
+    private static List<GrantedAuthority> mapToGrantedAuthorities(String[] authorities) {
         return !ArrayUtils.isEmpty(authorities)
                 ? Arrays.stream(authorities)
                 .map(SimpleGrantedAuthority::new)

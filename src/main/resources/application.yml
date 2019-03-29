@@ -1,1 +1,6 @@
+client:
+  jwt:
+    encryption_key: r3s15ul@#$()
+    expiration_time: 864_000_000
+    token_type: Bearer
 

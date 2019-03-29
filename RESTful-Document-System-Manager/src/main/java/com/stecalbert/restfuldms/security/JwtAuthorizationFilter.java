@@ -32,10 +32,10 @@ class JwtAuthorizationFilter extends BasicAuthenticationFilter {
 
 
     @Override
-    protected void doFilterInternal(HttpServletRequest req,
-                                    HttpServletResponse res,
+    protected void doFilterInternal(HttpServletRequest request,
+                                    HttpServletResponse response,
                                     FilterChain chain) throws IOException, ServletException {
-        String authorizationHeader = req.getHeader(HttpHeaders.AUTHORIZATION);
+        String authorizationHeader = request.getHeader(HttpHeaders.AUTHORIZATION);
         if (jwtTokenProvider.isTokenPresentAndValidType(authorizationHeader)) {
             DecodedJWT decodedJwt = jwtTokenProvider.getDecodedToken(authorizationHeader);
             String username = decodedJwt.getSubject();
@@ -48,10 +48,10 @@ class JwtAuthorizationFilter extends BasicAuthenticationFilter {
             SecurityContextHolder.getContext().setAuthentication(authenticationToken);
         }
 
-        chain.doFilter(req, res);
+        chain.doFilter(request, response);
     }
 
-    private static List<GrantedAuthority> mapToGrantedAuthorities(String[] authorities) {
+    private static List<GrantedAuthority> mapToGrantedAuthorities(String... authorities) {
         return !ArrayUtils.isEmpty(authorities)
                 ? Arrays.stream(authorities)
                 .map(SimpleGrantedAuthority::new)

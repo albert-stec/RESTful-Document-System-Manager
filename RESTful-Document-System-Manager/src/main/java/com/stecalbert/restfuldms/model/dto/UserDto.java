@@ -12,7 +12,7 @@ import java.util.Set;
 @Builder
 @AllArgsConstructor
 public class UserDto {
-    Long id;
+    private Long id;
 
     private String username;
 

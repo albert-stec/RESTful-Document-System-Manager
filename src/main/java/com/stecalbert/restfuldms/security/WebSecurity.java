@@ -32,13 +32,15 @@ public class WebSecurity extends WebSecurityConfigurerAdapter {
             "/webjars/**",
             "/h2-console/**"
     };
-    private final Environment env;
+    private final Environment environment;
+    private final JwtTokenProvider jwtTokenProvider;
     private UserDetailsServiceImpl userDetailsService;
 
     @Autowired
-    public WebSecurity(UserDetailsServiceImpl userDetailsService, Environment env) {
+    public WebSecurity(UserDetailsServiceImpl userDetailsService, Environment env, JwtTokenProvider jwtTokenProvider) {
         this.userDetailsService = userDetailsService;
-        this.env = env;
+        this.environment = env;
+        this.jwtTokenProvider = jwtTokenProvider;
     }
 
     @Override
@@ -49,12 +51,12 @@ public class WebSecurity extends WebSecurityConfigurerAdapter {
                 .antMatchers(AUTH_WHITELIST).permitAll()
                 .anyRequest().authenticated()
                 .and()
-                .addFilter(new JwtAuthenticationFilter(authenticationManager()))
-                .addFilter(new JwtAuthorizationFilter(authenticationManager()))
+                .addFilter(new JwtAuthenticationFilter(authenticationManager(), jwtTokenProvider))
+                .addFilter(new JwtAuthorizationFilter(authenticationManager(), jwtTokenProvider))
                 .sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS);
 
         // FrameOptions for headers must be disabled to view H2-console on dev profile
-        if (Arrays.asList(env.getActiveProfiles()).contains("dev")) {
+        if (Arrays.asList(environment.getActiveProfiles()).contains("dev")) {
             http.headers().frameOptions().disable();
         }
     }

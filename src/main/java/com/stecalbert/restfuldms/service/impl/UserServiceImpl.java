@@ -14,7 +14,6 @@ import org.springframework.transaction.annotation.Transactional;
 
 import java.lang.reflect.Type;
 import java.util.List;
-import java.util.Optional;
 
 @Service
 public class UserServiceImpl implements UserService {
@@ -55,10 +54,8 @@ public class UserServiceImpl implements UserService {
     }
 
     private void throwIfUsernameExists(String username) {
-        Optional<UserEntity> userOptional =
-                userRepository.findByUsername(username);
-        userOptional.ifPresent(e -> {
+        if (userRepository.countByUsername(username) > 0) {
             throw new ExistingUsernameException("User with that username already exists.");
-        });
+        }
     }
 }

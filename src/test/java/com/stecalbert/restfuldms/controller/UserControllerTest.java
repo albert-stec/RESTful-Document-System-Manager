@@ -28,14 +28,6 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 @SpringBootTest
 @AutoConfigureMockMvc
 public class UserControllerTest {
-    private static final String DOMAIN_TOKEN =
-            "Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzUxMiJ9" +
-                    ".eyJzdWIiOiJlbG8iLCJleHAiOjE1NTQ0MDk4MDZ9" +
-                    ".exgHQqyAjMeRmbHT8ii2eE1iaLLKtnHaQxDkXJdBDLSCaWqx1Qy314SvPUGAKm7IT1hcLuydOso9JtEjOWUnLw";
-
-    private static final String ADMIN_TOKEN = "Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzUxMiJ9" +
-            ".eyJzdWIiOiJzdXBlci11c2VyIiwiZXhwIjoxNTU0NjU3MzcxLCJhdXRob3JpdGllcyI6WyJBRE1JTiIsIkRPTUFJTiIsIk1PREVSQVRPUiJdfQ" +
-            ".B_obMAWv8rmeMXqO8KfFOOif40Btgq5hvr5EACeXiuXuezC_WB8TErJbpMELYfuxF_3586P_lgJGzN7qh0uxJQ";
 
     @MockBean
     private UserService userService;
@@ -60,7 +52,7 @@ public class UserControllerTest {
         Mockito.when(userService.findAll()).thenReturn(getMockUserEntityList());
         RequestBuilder requestBuilder = MockMvcRequestBuilders
                 .get("/users")
-                .header("Authorization", ADMIN_TOKEN)
+                .header("Authorization", getAdminAuthorityToken())
                 .contentType(MediaType.APPLICATION_JSON);
 
         mvc.perform(requestBuilder)
@@ -74,7 +66,7 @@ public class UserControllerTest {
         Mockito.when(userService.findAll()).thenReturn(getMockUserEntityList());
         RequestBuilder requestBuilder = MockMvcRequestBuilders
                 .get("/users")
-                .header("Authorization", DOMAIN_TOKEN)
+                .header("Authorization", getDomainAuthorityToken())
                 .contentType(MediaType.APPLICATION_JSON);
 
         mvc.perform(requestBuilder)
@@ -89,5 +81,17 @@ public class UserControllerTest {
                 new UserDto(2L, "user_mathew", "user123", emptySet()),
                 new UserDto(3L, "moderator_philip", "moderator123", emptySet())
         ));
+    }
+
+    private String getDomainAuthorityToken() {
+        return "Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzUxMiJ9" +
+                ".eyJzdWIiOiJlbG8iLCJleHAiOjE1NTQ3MTE3MDAsImF1dGhvcml0aWVzIjpbIlVTRVIiXX0" +
+                ".9Tv_0eXTvV3v4R-Q5zjv_EYRRikhQq2lVNND4S7mMNHKaT0lRCszQu0WmEC0bYuphB4nHqoW9STJ6oAv_jSqJg";
+    }
+
+    private String getAdminAuthorityToken() {
+        return "Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzUxMiJ9" +
+                ".eyJzdWIiOiJzdXBlci11c2VyIiwiZXhwIjoxNTU0NzExNjM0LCJhdXRob3JpdGllcyI6WyJBRE1JTiIsIkRPTUFJTiIsIk1PREVSQVRPUiJdfQ" +
+                ".L6vCr76bkuuAIoBy3BtA7kjNrO7tWevvM3atAqr86dLh8waHSMY3X0Lj1OZMk3Gg4mx9CgRxvSA90x1Ap3UP5Q";
     }
 }

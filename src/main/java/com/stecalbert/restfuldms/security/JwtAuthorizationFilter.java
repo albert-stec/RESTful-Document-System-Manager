@@ -1,9 +1,8 @@
 package com.stecalbert.restfuldms.security;
 
-import com.auth0.jwt.JWT;
-import com.auth0.jwt.algorithms.Algorithm;
 import com.auth0.jwt.interfaces.DecodedJWT;
 import org.apache.commons.lang3.ArrayUtils;
+import org.springframework.http.HttpHeaders;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.GrantedAuthority;
@@ -21,23 +20,24 @@ import java.util.Collections;
 import java.util.List;
 import java.util.stream.Collectors;
 
-import static com.stecalbert.restfuldms.security.JwtConstants.AUTHORIZATION_HEADER_KEY;
-import static com.stecalbert.restfuldms.security.JwtConstants.SECRET;
-import static com.stecalbert.restfuldms.security.JwtConstants.TOKEN_PREFIX;
 
 class JwtAuthorizationFilter extends BasicAuthenticationFilter {
 
-    JwtAuthorizationFilter(AuthenticationManager authManager) {
+    private final JwtTokenProvider jwtTokenProvider;
+
+    JwtAuthorizationFilter(AuthenticationManager authManager, JwtTokenProvider jwtTokenProvider) {
         super(authManager);
+        this.jwtTokenProvider = jwtTokenProvider;
     }
+
 
     @Override
     protected void doFilterInternal(HttpServletRequest req,
                                     HttpServletResponse res,
                                     FilterChain chain) throws IOException, ServletException {
-        String authorizationHeader = req.getHeader(AUTHORIZATION_HEADER_KEY);
-        if (isPresentAndValid(authorizationHeader)) {
-            DecodedJWT decodedJwt = getDecodedToken(authorizationHeader);
+        String authorizationHeader = req.getHeader(HttpHeaders.AUTHORIZATION);
+        if (jwtTokenProvider.isTokenPresentAndValidType(authorizationHeader)) {
+            DecodedJWT decodedJwt = jwtTokenProvider.getDecodedToken(authorizationHeader);
             String username = decodedJwt.getSubject();
             String[] authorities = decodedJwt.getClaim("authorities").asArray(String.class);
 
@@ -49,17 +49,6 @@ class JwtAuthorizationFilter extends BasicAuthenticationFilter {
         }
 
         chain.doFilter(req, res);
-    }
-
-    private boolean isPresentAndValid(String authorizationHeader) {
-        return authorizationHeader != null
-                && authorizationHeader.startsWith(TOKEN_PREFIX);
-    }
-
-    private DecodedJWT getDecodedToken(String token) {
-        return JWT.require(Algorithm.HMAC512(SECRET.getBytes()))
-                .build()
-                .verify(token.replace(TOKEN_PREFIX, ""));
     }
 
     private List<GrantedAuthority> mapToGrantedAuthorities(String[] authorities) {

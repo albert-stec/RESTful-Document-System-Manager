@@ -1,12 +1,11 @@
 package com.stecalbert.restfuldms.security;
 
-import com.auth0.jwt.JWT;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.stecalbert.restfuldms.model.entity.UserEntity;
+import org.springframework.http.HttpHeaders;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
-import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.User;
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
 
@@ -15,20 +14,17 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.util.Collections;
-import java.util.Date;
-
-import static com.auth0.jwt.algorithms.Algorithm.HMAC512;
-import static com.stecalbert.restfuldms.security.JwtConstants.AUTHORIZATION_HEADER_KEY;
-import static com.stecalbert.restfuldms.security.JwtConstants.EXPIRATION_TIME;
-import static com.stecalbert.restfuldms.security.JwtConstants.SECRET;
-import static com.stecalbert.restfuldms.security.JwtConstants.TOKEN_PREFIX;
 
 public class JwtAuthenticationFilter extends UsernamePasswordAuthenticationFilter {
 
     private final AuthenticationManager authenticationManager;
+    private final JwtTokenProvider jwtTokenProvider;
 
-    JwtAuthenticationFilter(AuthenticationManager authenticationManager) {
+
+    JwtAuthenticationFilter(AuthenticationManager authenticationManager,
+                            JwtTokenProvider jwtTokenProvider) {
         this.authenticationManager = authenticationManager;
+        this.jwtTokenProvider = jwtTokenProvider;
     }
 
     @Override
@@ -56,19 +52,10 @@ public class JwtAuthenticationFilter extends UsernamePasswordAuthenticationFilte
     protected void successfulAuthentication(HttpServletRequest request, HttpServletResponse response,
                                             FilterChain chain, Authentication authResult) {
         User principal = (User) authResult.getPrincipal();
-        String token = buildJwtTokenAndGet(principal);
-        response.addHeader(AUTHORIZATION_HEADER_KEY, TOKEN_PREFIX + token);
+        String token = jwtTokenProvider.buildJwtTokenAndGet(principal);
+        response.addHeader(HttpHeaders.AUTHORIZATION,
+                jwtTokenProvider.addTokenTypePrefix(token));
     }
 
-    private String buildJwtTokenAndGet(User principal) {
-        String[] authorities = principal.getAuthorities().stream()
-                .map(GrantedAuthority::getAuthority)
-                .toArray(String[]::new);
 
-        return JWT.create()
-                .withSubject(principal.getUsername())
-                .withExpiresAt(new Date(System.currentTimeMillis() + EXPIRATION_TIME))
-                .withArrayClaim("authorities", authorities)
-                .sign(HMAC512(SECRET.getBytes()));
-    }
 }

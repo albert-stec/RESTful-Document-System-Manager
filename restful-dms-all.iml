@@ -6,6 +6,8 @@
     <content url="file://$MODULE_DIR$">
       <excludeFolder url="file://$MODULE_DIR$/restful-dms-frontend/dist" />
       <excludeFolder url="file://$MODULE_DIR$/restful-dms-frontend/tmp" />
+      <excludeFolder url="file://$MODULE_DIR$/restful-dms-ui/dist" />
+      <excludeFolder url="file://$MODULE_DIR$/restful-dms-ui/tmp" />
       <excludeFolder url="file://$MODULE_DIR$/target" />
     </content>
     <orderEntry type="inheritedJdk" />

@@ -1,12 +1,14 @@
 <main>
   <div class="view" id="intro" *ngIf="!currentUser">
-    <div class="mask flex-center waves-effect waves-light rgba-stylish-strong"></div>
+    <div class="mask flex-center waves-effect waves-light rgba-indigo-light"></div>
 
     <div class="container h-100">
       <div class="row align-items-center h-100">
         <div class="col-6 mx-auto p-0">
           <div class="card h-100  justify-content-center">
-            <h5 class="card-header unique-color white-text text-center py-4">
+            <h5 class="card-header
+            info-color-dark
+            white-text text-center py-4">
               <strong>Sign in</strong>
             </h5>
 
@@ -26,7 +28,7 @@
                 </div>
 
                 <!-- Remember me container -->
-                <div class="d-flex justify-content-around">
+                <div class="d-flex justify-content-around" *ngIf="false">
                   <div>
                     <!-- Remember me -->
                     <mdb-checkbox [default]="true">Remember me</mdb-checkbox>
@@ -38,8 +40,8 @@
                 </div>
 
                 <!-- Sign in button -->
-                <button mdbBtn color="info" outline="true" block="true" class="my-4 waves-effect z-depth-0"
-                  mdbWavesEffect type="submit" style="border-radius: 20px">
+                <button mdbBtn outline="true" block="true" class="my-4 waves-effect z-depth-0 signInBtn" mdbWavesEffect
+                  type="submit" >
                   Sign in
                 </button>
 

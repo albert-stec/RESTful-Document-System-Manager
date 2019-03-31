@@ -1,7 +1,6 @@
-import { User } from './../models/user';
-import { UserService } from './../services/user.service';
-import { first } from 'rxjs/operators';
-import { Component, OnInit } from '@angular/core';
+import { User } from "./../models/user";
+import { first } from "rxjs/operators";
+import { Component, OnInit } from "@angular/core";
 
 @Component({
   selector: 'app-home',
@@ -9,15 +8,16 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./home.component.scss']
 })
 export class HomeComponent implements OnInit {
-
   users: User[] = [];
 
-  constructor() { }
+  constructor() {}
 
   ngOnInit() {
-    // this.userService.getAll().pipe(first()).subscribe(users => {
-    //   this.users = users;
-    // });
+    // this.userService
+    //   .getAll()
+    //   .pipe(first())
+    //   .subscribe(users => {
+    //     this.users = users;
+    //   });
   }
-
 }

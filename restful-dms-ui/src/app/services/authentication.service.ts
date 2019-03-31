@@ -4,7 +4,6 @@ import {HttpClient, HttpResponse} from '@angular/common/http';
 import {BehaviorSubject, Observable} from 'rxjs';
 import {map, tap} from 'rxjs/operators';
 import { environment } from 'src/environments/environment';
-import { JwtHelperService } from '@auth0/angular-jwt';
 
 
 @Injectable({providedIn: 'root'})
@@ -26,10 +25,11 @@ export class AuthenticationService {
     return this.http.post<any>(this.apiHost + '/login', {username, password}, {observe: 'response', })
       .pipe(
         map((response: HttpResponse<any>) => {
-          const token = response.headers.get('Authorization').replace('Bearer','').trim();
+          const token = response.headers.get('Authorization').replace('Bearer', '').trim();
+          console.log(token);
+          const user: User = new User();
 
           if (token) {
-            const user: User = new User();
             user.token = token;
             user.username = username;
             localStorage.setItem('currentUser', JSON.stringify(user));
@@ -42,7 +42,6 @@ export class AuthenticationService {
   }
 
   logout() {
-    // remove user from local storage to log user out
     localStorage.removeItem('currentUser');
     this.currentUserSubject.next(null);
   }

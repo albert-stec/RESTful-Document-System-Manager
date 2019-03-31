@@ -7,7 +7,6 @@ import { LoginComponent } from './login/login.component';
 import { routing } from './app-routing.module';
 import { HomeComponent } from './home/home.component';
 import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
-import { fakeBackendProvider } from './helpers/fake-backend';
 
 @NgModule({
   declarations: [AppComponent, LoginComponent, HomeComponent],

@@ -1,6 +1,6 @@
-import { User } from "./../models/user";
-import { first } from "rxjs/operators";
-import { Component, OnInit } from "@angular/core";
+import { User } from '../models/user';
+import { first } from 'rxjs/operators';
+import { Component, OnInit } from '@angular/core';
 
 @Component({
   selector: 'app-home',

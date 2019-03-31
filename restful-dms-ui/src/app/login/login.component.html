@@ -18,7 +18,7 @@
                 <!-- Login -->
                 <div class="md-form">
                   <input type="text" id="materialLoginFormUsername" class="form-control" formControlName="username"
-                    mdbInput [ngClass]="{ 'is-invalid': submitted && f.username.errors }" />
+                         mdbInput [ngClass]="{ 'is-invalid': submitted && f.username.errors }"/>
                   <label for="materialLoginFormUsername">Username</label>
 
                   <div *ngIf="submitted && f.username.errors" class="invalid-feedback">
@@ -29,7 +29,7 @@
                 <!-- Password -->
                 <div class="md-form">
                   <input type="password" id="materialLoginFormPassword" class="form-control" formControlName="password"
-                    mdbInput [ngClass]="{ 'is-invalid': submitted && f.password.errors }" />
+                         mdbInput [ngClass]="{ 'is-invalid': submitted && f.password.errors }"/>
                   <label for="materialLoginFormPassword">Password</label>
 
                   <div *ngIf="submitted && f.password.errors" class="invalid-feedback">
@@ -51,7 +51,7 @@
 
                 <!-- Sign in button -->
                 <button mdbBtn outline="true" block="true" class="my-4 waves-effect z-depth-0 signInBtn" mdbWavesEffect
-                  type="submit">
+                        type="submit">
                   Sign in
                 </button>
 

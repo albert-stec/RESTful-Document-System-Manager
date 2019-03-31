@@ -19,7 +19,7 @@ import { fakeBackendProvider } from './helpers/fake-backend';
     MDBBootstrapModule.forRoot()
   ],
   schemas: [NO_ERRORS_SCHEMA],
-  providers: [fakeBackendProvider],
+  providers: [],
   bootstrap: [AppComponent]
 })
 export class AppModule {}

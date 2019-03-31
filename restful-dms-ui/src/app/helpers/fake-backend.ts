@@ -1,3 +1,6 @@
+// Copyright (c) 2018 Jason Watmore
+// https://github.com/cornflourblue/angular-7-jwt-authentication-example/blob/master/LICENSE
+
 import {Injectable} from '@angular/core';
 import {HTTP_INTERCEPTORS, HttpEvent, HttpHandler, HttpInterceptor, HttpRequest, HttpResponse} from '@angular/common/http';
 import {Observable, of, throwError} from 'rxjs';

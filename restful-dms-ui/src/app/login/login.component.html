@@ -59,7 +59,7 @@
                 <!-- Register -->
                 <p>
                   Not a member?
-                  <a href="javascript:void(0);" (click)="switchLoginAndRegisterForm()" >Sign up</a>
+                  <a href="javascript:void(0);" (click)="onSwitchLoginAndRegisterForm()">Sign up</a>
                 </p>
                 <!-- style="color: #0000FF" -->
 
@@ -70,61 +70,61 @@
             <!-- Register form -->
             <div id="registerCard" class="card-body p-0" *ngIf="!showLoginCard">
               <!-- Default form register -->
-              <form class="text-center p-4" [formGroup]="loginForm" (ngSubmit)="onRegister()">
+              <form class="text-center p-4" [formGroup]="registerForm" (ngSubmit)="onRegister()">
 
                 <div class="md-form">
-                  <input type="text" id="materialLoginFormUsername" class="form-control" formControlName="username"
-                         mdbInput [ngClass]="{ 'is-invalid': submitted && f.username.errors }"/>
-                  <label for="materialLoginFormUsername">Username</label>
+                  <input type="text" id="materialRegisterFormUsername" class="form-control" formControlName="username"
+                         mdbInput [ngClass]="{ 'is-invalid': submitted && rf.username.errors }"/>
+                  <label for="materialRegisterFormUsername">Username</label>
 
-                  <div *ngIf="submitted && f.username.errors" class="invalid-feedback">
-                    <div *ngIf="f.username.errors.required">Username is required</div>
+                  <div *ngIf="submitted && rf.username.errors" class="invalid-feedback">
+                    <div *ngIf="rf.username.errors.required">Username is required</div>
                   </div>
                 </div>
 
                 <!-- Password -->
                 <div class="md-form">
-                  <input type="password" id="materialLoginFormPassword" class="form-control" formControlName="password"
-                         mdbInput [ngClass]="{ 'is-invalid': submitted && f.password.errors }"/>
-                  <label for="materialLoginFormPassword">Password</label>
+                  <input type="password" id="materialRegisterFormPassword" class="form-control" formControlName="password"
+                         mdbInput [ngClass]="{ 'is-invalid': submitted && rf.password.errors }"/>
+                  <label for="materialRegisterFormPassword">Password</label>
 
-                  <div *ngIf="submitted && f.password.errors" class="invalid-feedback">
-                    <div *ngIf="f.password.errors.required">Password is required</div>
+                  <div *ngIf="submitted && rf.password.errors" class="invalid-feedback">
+                    <div *ngIf="rf.password.errors.required">Password is required</div>
                   </div>
                 </div>
 
                 <!-- First name -->
                 <div class="md-form">
-                    <input type="password" id="materialLoginFormPassword" class="form-control" formControlName="password"
-                           mdbInput [ngClass]="{ 'is-invalid': submitted && f.password.errors }"/>
-                    <label for="materialLoginFormPassword">First Name</label>
-  
-                    <div *ngIf="submitted && f.password.errors" class="invalid-feedback">
-                      <div *ngIf="f.password.errors.required">First Name</div>
-                    </div>
-                  </div>
-              
-                  <!-- Last name -->
-                <div class="md-form">
-                    <input type="password" id="materialLoginFormPassword" class="form-control" formControlName="password"
-                           mdbInput [ngClass]="{ 'is-invalid': submitted && f.password.errors }"/>
-                    <label for="materialLoginFormPassword">Last Name</label>
-  
-                    <div *ngIf="submitted && f.password.errors" class="invalid-feedback">
-                      <div *ngIf="f.password.errors.required">Last Name req</div>
-                    </div>
-                  </div>
+                  <input type="password" id="materialLoginFormPassword" class="form-control" formControlName="password"
+                         mdbInput [ngClass]="{ 'is-invalid': submitted && f.password.errors }"/>
+                  <label for="materialLoginFormPassword">First Name</label>
 
-                    <!-- E-mail -->
-                <div class="md-form">
-                    <input type="email" id="materialLoginFormPassword" class="form-control" formControlName="password"
-                           mdbInput [ngClass]="{ 'is-invalid': submitted && f.password.errors }"/>
-                    <label for="materialLoginFormPassword">E-mail</label>
-  
-                    <div *ngIf="submitted && f.password.errors" class="invalid-feedback">
-                      <div *ngIf="f.password.errors.required">E-mail req</div>
-                    </div>
+                  <div *ngIf="submitted && f.password.errors" class="invalid-feedback">
+                    <div *ngIf="f.password.errors.required">First Name</div>
                   </div>
+                </div>
+
+                <!-- Last name -->
+                <div class="md-form">
+                  <input type="password" id="materialLoginFormPassword" class="form-control" formControlName="password"
+                         mdbInput [ngClass]="{ 'is-invalid': submitted && f.password.errors }"/>
+                  <label for="materialLoginFormPassword">Last Name</label>
+
+                  <div *ngIf="submitted && f.password.errors" class="invalid-feedback">
+                    <div *ngIf="f.password.errors.required">Last Name req</div>
+                  </div>
+                </div>
+
+                <!-- E-mail -->
+                <div class="md-form">
+                  <input type="email" id="materialLoginFormPassword" class="form-control" formControlName="password"
+                         mdbInput [ngClass]="{ 'is-invalid': submitted && f.password.errors }"/>
+                  <label for="materialLoginFormPassword">E-mail</label>
+
+                  <div *ngIf="submitted && f.password.errors" class="invalid-feedback">
+                    <div *ngIf="f.password.errors.required">E-mail req</div>
+                  </div>
+                </div>
 
                 <!-- Sign in button -->
                 <button mdbBtn outline="true" block="true" class="my-4 waves-effect z-depth-0 signInBtn" mdbWavesEffect
@@ -134,7 +134,7 @@
 
                 <p>
                   Already a member?
-                  <a href="javascript:void(0);" (click)="switchLoginAndRegisterForm()" >Sign in</a>
+                  <a href="javascript:void(0);" (click)="onSwitchLoginAndRegisterForm()">Sign in</a>
                 </p>
 
               </form>

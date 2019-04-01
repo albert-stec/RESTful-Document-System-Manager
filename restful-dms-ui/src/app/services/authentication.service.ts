@@ -25,12 +25,12 @@ export class AuthenticationService {
     return this.http.post<any>(this.apiHost + '/login', {username, password}, {observe: 'response', })
       .pipe(
         map((response: HttpResponse<any>) => {
-          const token = response.headers.get('Authorization').replace('Bearer', '').trim();
+          const token = response.headers.get('Authorization');
           console.log(token);
           const user: User = new User();
 
           if (token) {
-            user.token = token;
+            user.token = token.replace('Bearer', '').trim();
             user.username = username;
             localStorage.setItem('currentUser', JSON.stringify(user));
             this.currentUserSubject.next(user);

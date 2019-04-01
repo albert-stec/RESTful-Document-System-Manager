@@ -13,10 +13,17 @@ export class ErrorInterceptor implements HttpInterceptor {
         return next.handle(request).pipe(catchError(err => {
             if (err.status === 401) {
                 this.authenticationService.logout();
+
+              if (!request.url.includes('login')) {
                 location.reload(true);
+              }
             }
 
-            const error = err.error.message || err.statusText;
+            const  error = {
+              'status': err.status,
+              'message': err.message || err.error.message || err.statusText
+            };
+
             return throwError(error);
         }))
     }

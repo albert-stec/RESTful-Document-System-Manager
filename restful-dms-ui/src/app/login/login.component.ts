@@ -4,7 +4,8 @@ import {FormBuilder, FormGroup, Validators} from '@angular/forms';
 import {ActivatedRoute, Router} from '@angular/router';
 import {first} from 'rxjs/operators';
 import {UserService} from "../services/user.service";
-import { User } from '../models/user';
+import {User} from '../models/user';
+import {ToastrService} from "ngx-toastr";
 
 @Component({
   selector: 'app-login',
@@ -25,7 +26,8 @@ export class LoginComponent implements OnInit {
     private route: ActivatedRoute,
     private router: Router,
     private authenticationService: AuthenticationService,
-    private userService: UserService
+    private userService: UserService,
+    private toastr: ToastrService
   ) {
   }
 
@@ -58,6 +60,8 @@ export class LoginComponent implements OnInit {
     this.authenticationService.logout();
 
     this.returnUrl = this.route.snapshot.queryParams.returnUrl || '/';
+
+
   }
 
 
@@ -88,7 +92,8 @@ export class LoginComponent implements OnInit {
           this.loading = false;
 
           if (error.status === 401) {
-            alert("Invalid username or password. Enter new username and try again.")
+            this.toastr.error("Enter valid credentials and try again.",
+              "Invalid username or password.")
           }
         }
       )
@@ -111,13 +116,16 @@ export class LoginComponent implements OnInit {
     this.userService.register(user)
       .pipe(first())
       .subscribe(
-        response => console.log(JSON.stringify(response)),
+        () => {
+          this.toastr.success('You can now sign in.', 'Registered!');
+          this.onSwitchLoginAndRegisterForm();
+        },
         err => {
           if (err.status === 409) {
-            alert("Username already taken. Please provide a new username and try again.")
+            this.toastr.error("Try again with different one.",
+              err.message)
           }
-        }
-      )
+        })
   }
 
   onSwitchLoginAndRegisterForm() {

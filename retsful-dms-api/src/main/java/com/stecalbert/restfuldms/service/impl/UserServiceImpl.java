@@ -45,6 +45,7 @@ public class UserServiceImpl implements UserService {
     @Override
     public UserEntity save(UserDto userDto) {
         throwIfUsernameExists(userDto.getUsername());
+        throwIfEmailExists(userDto.getEmail());
 
         String encryptedPassword = bCryptPasswordEncoder.encode(userDto.getPassword());
         userDto.setPassword(encryptedPassword);
@@ -56,6 +57,12 @@ public class UserServiceImpl implements UserService {
     private void throwIfUsernameExists(String username) {
         if (userRepository.countByUsername(username) > 0) {
             throw new ExistingUsernameException("User with that username already exists.");
+        }
+    }
+
+    private void throwIfEmailExists(String email) {
+        if (userRepository.countByEmail(email) > 0) {
+            throw new ExistingUsernameException("User with that email already exists.");
         }
     }
 }

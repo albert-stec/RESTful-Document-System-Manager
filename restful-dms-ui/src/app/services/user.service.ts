@@ -15,7 +15,7 @@ export class UserService {
     return this.http.get<User[]>(this.apiHost + "/users");
   }
 
-  register(username, password) {
-    return this.http.post<any>(this.apiHost + '/users', {username, password}, {observe: 'response', });
+  register(user) {
+    return this.http.post<any>(this.apiHost + '/users', user, {observe: 'response', });
   }
 }

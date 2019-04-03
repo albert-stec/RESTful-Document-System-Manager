@@ -4,6 +4,7 @@ import {FormBuilder, FormGroup, Validators} from '@angular/forms';
 import {ActivatedRoute, Router} from '@angular/router';
 import {first} from 'rxjs/operators';
 import {UserService} from "../services/user.service";
+import { User } from '../models/user';
 
 @Component({
   selector: 'app-login',
@@ -35,14 +36,30 @@ export class LoginComponent implements OnInit {
     });
 
     this.registerForm = this.formBuilder.group({
-      username: ['', Validators.required],
-      password: ['', Validators.required]
+      username: ['', {validators: [Validators.required, Validators.minLength(5)]}],
+      password: ['', {
+        validators: [Validators.required,
+          Validators.pattern('(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[$@$!%*?&])[A-Za-z\d$@$!%*?&].{8,}')
+        ]
+      }],
+      firstName: ['', {
+        validators: [Validators.required,
+          Validators.pattern('[a-zA-Z]+')
+        ]
+      }],
+      lastName: ['', {
+        validators: [Validators.required,
+          Validators.pattern('[a-zA-Z]+')
+        ]
+      }],
+      email: ['', {validators: [Validators.required, Validators.email]}],
     });
 
     this.authenticationService.logout();
 
     this.returnUrl = this.route.snapshot.queryParams.returnUrl || '/';
   }
+
 
   get f() {
     return this.loginForm.controls;
@@ -71,20 +88,33 @@ export class LoginComponent implements OnInit {
           this.loading = false;
 
           if (error.status === 401) {
-            alert("Invalid username or password. Try again.")
+            alert("Invalid username or password. Enter new username and try again.")
           }
         }
       )
   }
 
   onRegister() {
-    this.userService.register(this.rf.username.value, this.rf.password.value)
+    this.submitted = true;
+
+    if (this.registerForm.invalid) {
+      return;
+    }
+
+    const user = new User();
+    user.firstName = this.rf.firstName.value;
+    user.lastName = this.rf.lastName.value;
+    user.password = this.rf.password.value;
+    user.email = this.rf.email.value;
+    user.username = this.rf.username.value;
+
+    this.userService.register(user)
       .pipe(first())
       .subscribe(
         response => console.log(JSON.stringify(response)),
-        error1 => {
-          if (error1.status === 409) {
-            alert("Username taken.")
+        err => {
+          if (err.status === 409) {
+            alert("Username already taken. Please provide a new username and try again.")
           }
         }
       )

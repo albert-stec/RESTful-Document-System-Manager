@@ -46,6 +46,7 @@ public class RestfulDmsApplication {
 
         UserEntity superUser = new UserEntity();
         superUser.setUsername("super-user");
+        superUser.setFirstName("superUserFirstName");
         superUser.setPassword(bCryptPasswordEncoder.encode("dmsadmin"));
         superUser.setUserRoles(new HashSet<>(Set.of(adminAuthority, moderatorAuthority, userAuthority)));
 

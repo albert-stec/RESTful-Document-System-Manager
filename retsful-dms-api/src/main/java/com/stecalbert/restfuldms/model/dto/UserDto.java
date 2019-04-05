@@ -5,6 +5,7 @@ import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+import javax.validation.constraints.NotBlank;
 import java.util.Set;
 
 @Data
@@ -14,17 +15,15 @@ import java.util.Set;
 public class UserDto {
     private Long id;
 
-    private String username;
+    private @NotBlank String username;
 
-    private String password;
+    private @NotBlank String password;
 
-    private String firstName;
+    private @NotBlank String firstName;
 
-    private String lastName;
+    private @NotBlank String lastName;
 
-    private String email;
+    private @NotBlank String email;
 
     private Set<AuthorityDto> authorities;
-
-
 }

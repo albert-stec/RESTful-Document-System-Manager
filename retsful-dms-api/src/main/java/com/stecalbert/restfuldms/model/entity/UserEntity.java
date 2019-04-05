@@ -5,6 +5,7 @@ import lombok.Builder;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
+import org.springframework.lang.NonNull;
 import org.springframework.util.CollectionUtils;
 
 import javax.persistence.CascadeType;
@@ -17,6 +18,7 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.OneToMany;
 import javax.persistence.PrePersist;
+import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.NotNull;
 import java.util.HashSet;
 import java.util.Set;
@@ -32,19 +34,22 @@ public class UserEntity {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
+
     @Column(unique = true)
     private String username;
 
     private String password;
 
-    @NotNull
+
     @OneToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
     @JoinColumn(name = "user_id")
-    Set<AuthorityEntity> userRoles;
+    private Set<AuthorityEntity> userRoles;
 
     private String firstName;
 
+
     private String lastName;
+
 
     private String email;
 

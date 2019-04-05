@@ -4,3 +4,6 @@ client:
     expiration_time: 864_000_000
     token_type: Bearer
 
+logging:
+  level:
+    org.zalando.logbook: TRACE

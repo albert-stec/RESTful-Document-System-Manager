@@ -4,8 +4,8 @@ import {FormBuilder, FormGroup, Validators} from '@angular/forms';
 import {ActivatedRoute, Router} from '@angular/router';
 import {first} from 'rxjs/operators';
 import {UserService} from "../services/user.service";
-import {User} from '../models/user';
 import {ToastrService} from "ngx-toastr";
+import {User} from "../models/user";
 
 @Component({
   selector: 'app-login',
@@ -31,12 +31,30 @@ export class LoginComponent implements OnInit {
   ) {
   }
 
+  get loginFormControls() {
+    return this.loginForm.controls;
+  }
+
+  get registerFormControls() {
+    return this.registerForm.controls;
+  }
+
   ngOnInit() {
+    this.setupLoginForm();
+    this.setupRegisterForm();
+
+    this.authenticationService.logout();
+    this.returnUrl = this.route.snapshot.queryParams.returnUrl || '/';
+  }
+
+  setupLoginForm() {
     this.loginForm = this.formBuilder.group({
       username: ['', Validators.required],
       password: ['', Validators.required]
     });
+  }
 
+  setupRegisterForm() {
     this.registerForm = this.formBuilder.group({
       username: ['', {validators: [Validators.required, Validators.minLength(5)]}],
       password: ['', {
@@ -56,21 +74,6 @@ export class LoginComponent implements OnInit {
       }],
       email: ['', {validators: [Validators.required, Validators.email]}],
     });
-
-    this.authenticationService.logout();
-
-    this.returnUrl = this.route.snapshot.queryParams.returnUrl || '/';
-
-
-  }
-
-
-  get f() {
-    return this.loginForm.controls;
-  }
-
-  get rf() {
-    return this.registerForm.controls;
   }
 
   onLogin() {
@@ -82,7 +85,7 @@ export class LoginComponent implements OnInit {
 
     this.loading = true;
     this.authenticationService
-      .login(this.f.username.value, this.f.password.value)
+      .login(this.loginFormControls.username.value, this.loginFormControls.password.value)
       .pipe(first())
       .subscribe(
         () => {
@@ -106,12 +109,7 @@ export class LoginComponent implements OnInit {
       return;
     }
 
-    const user = new User();
-    user.firstName = this.rf.firstName.value;
-    user.lastName = this.rf.lastName.value;
-    user.password = this.rf.password.value;
-    user.email = this.rf.email.value;
-    user.username = this.rf.username.value;
+    const user: User = this.registerForm.value;
 
     this.userService.register(user)
       .pipe(first())

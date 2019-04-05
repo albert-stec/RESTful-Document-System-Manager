@@ -4,9 +4,9 @@ import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.ResponseStatus;
 
 @ResponseStatus(HttpStatus.CONFLICT)
-public class ExistingUsernameException extends RuntimeException {
+public class ExistingUserException extends RuntimeException {
 
-    public ExistingUsernameException(String message) {
+    public ExistingUserException(String message) {
         super(message);
     }
 }

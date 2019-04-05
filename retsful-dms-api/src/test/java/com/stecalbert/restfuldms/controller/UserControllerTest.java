@@ -75,11 +75,14 @@ public class UserControllerTest {
     }
 
 
-    private static List<UserDto> getMockUserEntityList() {
+      private static List<UserDto> getMockUserEntityList() {
         return new ArrayList<>(Arrays.asList(
-                new UserDto(1L, "admin_jack", "admin123", emptySet()),
-                new UserDto(2L, "user_mathew", "user123", emptySet()),
-                new UserDto(3L, "moderator_philip", "moderator123", emptySet())
+                new UserDto(1L, "admin_jack", "admin123",
+                        "Albert", "Stec", "mail@mial.mail", emptySet()),
+                new UserDto(2L, "user_mathew", "user123",
+                        "Kamil", "Kot", "mail@mial.pl", emptySet()),
+                new UserDto(3L, "moderator_philip", "moderator123",
+                        "Maciej", "Smith", "mail@mial.com", emptySet())
         ));
     }
 

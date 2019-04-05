@@ -42,6 +42,12 @@ public class UserEntity {
     @JoinColumn(name = "user_id")
     Set<AuthorityEntity> userRoles;
 
+    private String firstName;
+
+    private String lastName;
+
+    private String email;
+
     @PrePersist
     void setUserDefaultAuthorityIfNone() {
         if (CollectionUtils.isEmpty(userRoles)) {

@@ -3,7 +3,6 @@
   <component name="ProjectModuleManager">
     <modules>
       <module fileurl="file://$PROJECT_DIR$/retsful-dms-api/restful-dms.iml" filepath="$PROJECT_DIR$/retsful-dms-api/restful-dms.iml" />
-      <module fileurl="file://$PROJECT_DIR$/retsful-dms-api/restful-dms.iml" filepath="$PROJECT_DIR$/retsful-dms-api/restful-dms.iml" />
       <module fileurl="file://$PROJECT_DIR$/restful-dms-all.iml" filepath="$PROJECT_DIR$/restful-dms-all.iml" />
     </modules>
   </component>

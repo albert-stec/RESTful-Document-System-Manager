@@ -7,8 +7,6 @@ import com.stecalbert.restfuldms.repository.UserRepository;
 import com.stecalbert.restfuldms.service.UserService;
 import org.modelmapper.ModelMapper;
 import org.modelmapper.TypeToken;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
@@ -19,9 +17,6 @@ import java.util.List;
 
 @Service
 public class UserServiceImpl implements UserService {
-
-    private final Logger logger = LoggerFactory.getLogger(UserServiceImpl.class);
-
     private final UserRepository userRepository;
 
     private final BCryptPasswordEncoder bCryptPasswordEncoder;
@@ -60,17 +55,13 @@ public class UserServiceImpl implements UserService {
 
     private void throwIfUsernameExists(String username) {
         if (userRepository.countByUsername(username) > 0) {
-            var e = new ExistingUserException("User with that username already exists.");
-            logger.error("ExistingUserException for username {}", username, e);
-            throw e;
+            throw new ExistingUserException("User with that username already exists.");
         }
     }
 
     private void throwIfEmailExists(String email) {
         if (userRepository.countByEmail(email) > 0) {
-            var e = new ExistingUserException("User with that email already exists.");
-            logger.error("ExistingUserException for username {}", email, e);
-            throw e;
+            throw new ExistingUserException("User with that email already exists.");
         }
     }
 }

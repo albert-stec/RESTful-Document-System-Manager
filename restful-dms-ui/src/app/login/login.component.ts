@@ -2,7 +2,6 @@ import {AuthenticationService} from './../services/authentication.service';
 import {Component, OnInit} from '@angular/core';
 import {FormBuilder, FormGroup, Validators} from '@angular/forms';
 import {ActivatedRoute, Router} from '@angular/router';
-import {first} from 'rxjs/operators';
 import {UserService} from "../services/user.service";
 import {ToastrService} from "ngx-toastr";
 import {User} from "../models/user";
@@ -86,7 +85,6 @@ export class LoginComponent implements OnInit {
     this.loading = true;
     this.authenticationService
       .login(this.loginFormControls.username.value, this.loginFormControls.password.value)
-      .pipe(first())
       .subscribe(
         () => {
           this.router.navigate([this.returnUrl]);
@@ -112,7 +110,6 @@ export class LoginComponent implements OnInit {
     const user: User = this.registerForm.value;
 
     this.userService.register(user)
-      .pipe(first())
       .subscribe(
         () => {
           this.toastr.success('You can now sign in.', 'Registered!');

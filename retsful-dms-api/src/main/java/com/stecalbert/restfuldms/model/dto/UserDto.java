@@ -1,5 +1,6 @@
 package com.stecalbert.restfuldms.model.dto;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -13,6 +14,8 @@ import java.util.Set;
 @Builder
 @AllArgsConstructor
 public class UserDto {
+
+    @JsonProperty(access = JsonProperty.Access.READ_ONLY)
     private Long id;
 
     private @NotBlank String username;
@@ -25,5 +28,6 @@ public class UserDto {
 
     private @NotBlank String email;
 
+    @JsonProperty(access = JsonProperty.Access.READ_ONLY)
     private Set<AuthorityDto> authorities;
 }

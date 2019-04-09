@@ -40,6 +40,7 @@ public class UserController {
     }
 
     @PostMapping
+    @ApiOperation("Register new user")
     public ResponseEntity<UserEntity> registerUser(@RequestBody @Valid UserDto userDto) {
 
         return new ResponseEntity<>(

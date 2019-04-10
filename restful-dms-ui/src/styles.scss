@@ -16,26 +16,28 @@
     height: 100%;
   }
 
-@media (max-width: 740px) {
-  html,
-  body,
-  header,
-  .view {
-    height: 1000px;
-  }
+//@media (max-width: 740px) {
+//  html,
+//  body,
+//  header,
+//  .view {
+//    height: 1000px;
+//  }
+//}
+
+//@media (min-width: 800px) and (max-width: 850px) {
+//  html,
+//  body,
+//  header,
+//  .view {
+//    height: 600px;
+//  }
+//}
+
+main {
+  //padding-top: 70px;
+  padding: 70px 20px 20px 20px;
 }
-
-@media (min-width: 800px) and (max-width: 850px) {
-  html,
-  body,
-  header,
-  .view {
-    height: 600px;
-  }
-}
-
-/* You can add global styles to this file, and also import other style files */
-
 
 .sidebar-fixed {
   height: 100vh;
@@ -62,9 +64,13 @@
   max-height: 50px
 }
 
+.navbar {
+  //height: 70px;
+}
+
 @media (min-width: 1200px) {
   .navbar, .page-footer, main {
-    padding-left: 270px
+    margin-left: 270px
   }
 }
 

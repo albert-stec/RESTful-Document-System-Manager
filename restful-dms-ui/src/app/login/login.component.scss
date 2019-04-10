@@ -20,5 +20,10 @@ a:link {
     color: #FF0000;
   }
 
-  
+@media (min-width: 1200px) {
+  .navbar, .page-footer, main {
+    padding-left: 0
+  }
+}
+
   

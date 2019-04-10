@@ -1,0 +1,101 @@
+<!--Main Navigation-->
+<header>
+
+  <!-- Sidebar -->
+  <div class="sidebar-fixed position-fixed">
+
+    <a class="logo-wrapper waves-effect">
+      <img alt="" class="img-fluid" src="../../../../assets/logo.png">
+    </a>
+
+    <div class="list-group list-group-flush">
+
+      <a class="list-group-item list-group-item-action waves-effect" routerLink="dashboards/v1"
+         routerLinkActive="active">
+        <mdb-icon class="mr-3" fas icon="chart-pie"></mdb-icon>Dashboard
+      </a>
+      <a class="list-group-item list-group-item-action waves-effect" routerLink="profiles/profile1"
+         routerLinkActive="active">
+        <mdb-icon class="mr-3" fas icon="user"></mdb-icon>Profile
+      </a>
+      <a class="list-group-item list-group-item-action waves-effect" routerLink="tables/table1"
+         routerLinkActive="active">
+        <mdb-icon class="mr-3" fas icon="table"></mdb-icon>Tables
+      </a>
+      <a class="list-group-item list-group-item-action waves-effect" routerLink="maps/map1" routerLinkActive="active">
+        <mdb-icon class="mr-3" far icon="map"></mdb-icon>Maps
+      </a>
+      <a class="list-group-item list-group-item-action waves-effect" routerLink="nonExistingPath"
+         routerLinkActive="active">
+        <mdb-icon class="mr-3" fas icon="exclamation"></mdb-icon>404
+      </a>
+
+    </div>
+
+  </div>
+  <!-- Sidebar -->
+
+  <!--Navbar-->
+  <mdb-navbar SideClass="navbar navbar-expand-lg navbar-light white fixed-top" [containerInside]="false">
+
+    <!-- Navbar brand -->
+    <logo class="ml-5">
+      <a class="navbar-brand" href="">
+        <strong class="blue-text">RESTful DMS</strong>
+      </a>
+    </logo>
+
+    <!-- Collapsible content -->
+    <links>
+
+      <!-- Links -->
+      <ul class="navbar-nav mr-auto">
+        <li class="nav-item active">
+          <a class="nav-link" mdbWavesEffect>Home
+            <span class="sr-only">(current)</span>
+          </a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="" mdbWavesEffect target="_blank">1</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="" mdbWavesEffect target="_blank">2</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="" mdbWavesEffect target="_blank">3</a>
+
+        </li>
+      </ul>
+      <!-- Links -->
+
+      <!-- Search form -->
+      <ul class="navbar-nav nav-flex-icons">
+
+        <li class="nav-item">
+          <a class="nav-link" href="" mdbWavesEffect target="_blank">
+          </a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="" mdbWavesEffect target="_blank">
+          </a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link border border-light" href=""
+             mdbWavesEffect target="_blank">
+            <mdb-icon class="mr-2" fab icon=""></mdb-icon>test
+          </a>
+        </li>
+        <li class="nav-item">
+          <a class="ml-1 nav-link border border-light rounded" href="" mdbWavesEffect>
+            <mdb-icon class=" left" far icon=""></mdb-icon>
+          </a>
+        </li>
+      </ul>
+    </links>
+    <!-- Collapsible content -->
+
+  </mdb-navbar>
+  <!--/.Navbar-->
+
+</header>
+<!--Main Navigation-->

@@ -1,9 +1,9 @@
-import { User } from './../models/user';
+import {User} from './../models/user';
 import {Injectable} from '@angular/core';
 import {HttpClient, HttpResponse} from '@angular/common/http';
 import {BehaviorSubject, Observable} from 'rxjs';
-import {map, tap} from 'rxjs/operators';
-import { environment } from 'src/environments/environment';
+import {map} from 'rxjs/operators';
+import {environment} from 'src/environments/environment';
 
 
 @Injectable({providedIn: 'root'})
@@ -26,7 +26,6 @@ export class AuthenticationService {
       .pipe(
         map((response: HttpResponse<any>) => {
           const token = response.headers.get('Authorization');
-          console.log(token);
           const user: User = new User();
 
           if (token) {

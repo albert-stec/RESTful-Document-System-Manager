@@ -2,30 +2,31 @@
 <header>
 
   <!-- Sidebar -->
-  <div class="sidebar-fixed position-fixed">
+  <div class="sidebar-fixed position-fixed" id="sidebar">
 
-    <a class="logo-wrapper waves-effect">
-      <img alt="" class="img-fluid" src="../../../../assets/profile-placeholder.png">
-    </a>
-
+    <!--<a class="logo-wrapper waves-effect">-->
+    <!--<img alt="" class="img-fluid rounded" src="../../../../assets/profile-placeholder.png">-->
+    <!--</a>-->
     <div class="list-group list-group-flush">
 
-      <a class="list-group-item list-group-item-action waves-effect" routerLink="dashboards/v1"
+      <h5 class="list-group-item-title">Dokumenty</h5>
+
+      <a class="list-group-item list-group-item-action waves-effect" href="/home" routerLink="/home"
          routerLinkActive="active">
         <mdb-icon class="mr-3" fas icon="chart-pie"></mdb-icon>Dashboard
       </a>
-      <a class="list-group-item list-group-item-action waves-effect" routerLink="profiles/profile1"
+      <a class="list-group-item list-group-item-action waves-effect " routerLink="profiles/profile1"
          routerLinkActive="active">
         <mdb-icon class="mr-3" fas icon="user"></mdb-icon>Profile
       </a>
-      <a class="list-group-item list-group-item-action waves-effect" routerLink="tables/table1"
+      <a class="list-group-item list-group-item-action waves-effect " routerLink="tables/table1"
          routerLinkActive="active">
         <mdb-icon class="mr-3" fas icon="table"></mdb-icon>Tables
       </a>
-      <a class="list-group-item list-group-item-action waves-effect" routerLink="maps/map1" routerLinkActive="active">
+      <a class="list-group-item list-group-item-action waves-effect " routerLink="maps/map1" routerLinkActive="active">
         <mdb-icon class="mr-3" far icon="map"></mdb-icon>Maps
       </a>
-      <a class="list-group-item list-group-item-action waves-effect" routerLink="nonExistingPath"
+      <a class="list-group-item list-group-item-action waves-effect " routerLink="nonExistingPath"
          routerLinkActive="active">
         <mdb-icon class="mr-3" fas icon="exclamation"></mdb-icon>404
       </a>
@@ -36,40 +37,42 @@
   <!-- Sidebar -->
 
   <!--Navbar-->
-  <mdb-navbar SideClass="navbar navbar-expand-lg navbar-light white fixed-top" [containerInside]="false">
+  <mdb-navbar SideClass="navbar navbar-expand-lg navbar-light white fixed-top unique-color" [containerInside]="false">
 
     <!-- Navbar brand -->
     <logo class="ml-5">
       <a class="navbar-brand" href="">
-        <strong class="blue-text">RESTful DMS</strong>
+        <strong class="white-text">RESTful DMS</strong>
       </a>
     </logo>
 
     <!-- Collapsible content -->
-    <links>
+    <links class="justify-content-end">
 
       <!-- Links -->
-      <ul class="navbar-nav mr-auto">
-        <li class="nav-item active">
-          <a class="nav-link" mdbWavesEffect>Home
-            <span class="sr-only">(current)</span>
-          </a>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link" href="" mdbWavesEffect target="_blank">1</a>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link" href="" mdbWavesEffect target="_blank">2</a>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link" href="" mdbWavesEffect target="_blank">3</a>
+      <!-- todo: tutaj umieścić nawigację boczną -->
 
-        </li>
-      </ul>
+      <!--<ul class="navbar-nav mr-auto">-->
+      <!--<li class="nav-item active">-->
+      <!--<a class="nav-link" mdbWavesEffect>Home-->
+      <!--<span class="sr-only">(current)</span>-->
+      <!--</a>-->
+      <!--</li>-->
+      <!--<li class="nav-item">-->
+      <!--<a class="nav-link" href="" mdbWavesEffect target="_blank">1</a>-->
+      <!--</li>-->
+      <!--<li class="nav-item">-->
+      <!--<a class="nav-link" href="" mdbWavesEffect target="_blank">2</a>-->
+      <!--</li>-->
+      <!--<li class="nav-item">-->
+      <!--<a class="nav-link" href="" mdbWavesEffect target="_blank">3</a>-->
+
+      <!--</li>-->
+      <!--</ul>-->
       <!-- Links -->
 
       <!-- Search form -->
-      <ul class="navbar-nav nav-flex-icons">
+      <ul class="navbar-nav nav-flex-icons ">
 
         <li class="nav-item">
           <a class="nav-link" href="" mdbWavesEffect target="_blank">dfdf

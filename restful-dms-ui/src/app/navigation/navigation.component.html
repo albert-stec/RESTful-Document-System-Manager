@@ -2,35 +2,81 @@
 <header>
 
   <!-- Sidebar -->
-  <div class="sidebar-fixed position-fixed" id="sidebar">
+  <div class=" sidebar-fixed position-fixed" id="sidebar">
 
     <!--<a class="logo-wrapper waves-effect">-->
     <!--<img alt="" class="img-fluid rounded" src="../../../../assets/profile-placeholder.png">-->
     <!--</a>-->
-    <div class="list-group list-group-flush">
+    <div class=" list-group list-group-flush">
 
-      <h5 class="list-group-item-title">Dokumenty</h5>
+      <!--Documents-->
 
-      <a class="list-group-item list-group-item-action waves-effect" href="/home" routerLink="/home"
+      <h5 class="list-group-item-title menu-section-header">Dokumenty</h5>
+
+      <a class="list-group-item list-group-item-action waves-effect" href="" routerLink="/home"
          routerLinkActive="active">
-        <mdb-icon class="mr-3" fas icon="chart-pie"></mdb-icon>Wszystkie
+        <mdb-icon class="mr-3" fas icon="folder-open"></mdb-icon>Wszystkie
       </a>
-      <a class="list-group-item list-group-item-action waves-effect " routerLink="profiles/profile1"
+
+      <a class="list-group-item list-group-item-action waves-effect " href="#" routerLink="#"
+         routerLinkActive="active">
+        <mdb-icon class="mr-3" fas icon="star"></mdb-icon>Ulubione
+      </a>
+
+      <a class="list-group-item list-group-item-action waves-effect " href="#" routerLink="#"
          routerLinkActive="active">
         <mdb-icon class="mr-3" fas icon="user"></mdb-icon>Własne
       </a>
-      <a class="list-group-item list-group-item-action waves-effect " routerLink="tables/table1"
+
+      <a class="list-group-item list-group-item-action waves-effect " href="#" routerLink="#"
          routerLinkActive="active">
-        <mdb-icon class="mr-3" fas icon="table"></mdb-icon>Tables
-      </a>
-      <a class="list-group-item list-group-item-action waves-effect " routerLink="maps/map1" routerLinkActive="active">
-        <mdb-icon class="mr-3" far icon="map"></mdb-icon>Maps
-      </a>
-      <a class="list-group-item list-group-item-action waves-effect " routerLink="nonExistingPath"
-         routerLinkActive="active">
-        <mdb-icon class="mr-3" fas icon="exclamation"></mdb-icon>404
+        <mdb-icon class="mr-3" fas icon="history"></mdb-icon>Rejestr zdarzeń
       </a>
 
+      <a class="list-group-item list-group-item-action waves-effect" href="#" routerLink="#"
+         routerLinkActive="active">
+        <mdb-icon class="mr-3" fas icon="plus"></mdb-icon>Utwórz nowy
+      </a>
+
+      <!--/Documents-->
+
+      <!--Tickets-->
+      <h5 class="list-group-item-title menu-section-header">Zgłoszenia</h5>
+
+      <a class="list-group-item list-group-item-action waves-effect" href="#" routerLink="#"
+         routerLinkActive="active">
+        <mdb-icon class="mr-3" fas icon="hourglass-half"></mdb-icon>Otwarte
+      </a>
+
+      <a class="list-group-item list-group-item-action waves-effect" href="#" routerLink="#"
+         routerLinkActive="active">
+        <mdb-icon class="mr-3" fas icon="receipt"></mdb-icon>Historia
+      </a>
+
+      <a class="list-group-item list-group-item-action waves-effect" href="#" routerLink="#"
+         routerLinkActive="active">
+        <mdb-icon class="mr-3" fas icon="bullhorn"></mdb-icon>Zgłoś problem
+      </a>
+      <!--/Tickets-->
+
+      <!--Tickets-->
+      <h5 class="list-group-item-title menu-section-header">Użytkownicy</h5>
+
+      <a class="list-group-item list-group-item-action waves-effect" href="#" routerLink="#"
+         routerLinkActive="active">
+        <mdb-icon class="mr-3" fas icon="hourglass-half"></mdb-icon>Przeglądaj
+      </a>
+
+      <a class="list-group-item list-group-item-action waves-effect" href="#" routerLink="#"
+         routerLinkActive="active">
+        <mdb-icon class="mr-3" fas icon="receipt"></mdb-icon>Zablokowani
+      </a>
+
+      <a class="list-group-item list-group-item-action waves-effect" href="#" routerLink="#"
+         routerLinkActive="active">
+        <mdb-icon class="mr-3" fas icon="bullhorn"></mdb-icon>Powiadom
+      </a>
+      <!--/Tickets-->
     </div>
 
   </div>
@@ -48,7 +94,6 @@
 
     <!-- Collapsible content -->
     <links class="justify-content-end">
-
       <!-- Links -->
       <!-- todo: tutaj umieścić nawigację boczną -->
 
@@ -71,33 +116,31 @@
       <!--</ul>-->
       <!-- Links -->
 
-      <!-- Search form -->
-      <ul class="navbar-nav nav-flex-icons">
-        <!--<li class="nav-item">-->
-        <!--<a class="nav-link" href="" mdbWavesEffect target="_blank">dfdf-->
-        <!--</a>-->
-        <!--</li>-->
-        <!--<li class="nav-item">-->
-        <!--<a class="nav-link" href="" mdbWavesEffect target="_blank">-->
-        <!--</a>-->
-        <!--</li>-->
-        <!--<li class="nav-item">-->
-        <!--<a class="nav-link border border-light" href=""-->
-        <!--mdbWavesEffect target="_blank">-->
-        <!--<mdb-icon class="mr-2" fab icon=""></mdb-icon>test-->
-        <!--</a>-->
-        <!--</li>-->
+      <!-- Icons -->
+      <ul class="navbar-nav ml-auto nav-flex-icons">
         <li class="nav-item">
-          <a (click)="logout()" class="nav-link border border-light rounded white-text p-2" href="javascript:void(0)"
-                                mdbWavesEffect>
-            <mdb-icon class="pl-0 white-text" fas icon="sign-out-alt"></mdb-icon>
-            <strong>Wyloguj</strong>
+          <a class="nav-link text-white">1
+            <mdb-icon fas icon="envelope"></mdb-icon>
+          </a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link">
+            <div class="btn-group" mdbDropdown>
+              <mdb-icon class="text-white nav-icon" fas icon="user" mdbDropdownToggle></mdb-icon>
+              <div class="dropdown-menu dropdown-menu-right dropdown-primary">
+                <a class="dropdown-item" href="#">Twój profil</a>
+                <a class="dropdown-item" href="#">Ustawienia</a>
+                <a class="dropdown-item" href="#">Pomoc</a>
+                <div class="divider dropdown-divider"></div>
+                <a (click)="logout()" class="dropdown-item" href="javascript:void(0)">Wyloguj</a>
+              </div>
+            </div>
           </a>
         </li>
       </ul>
-    </links>
-    <!-- Collapsible content -->
 
+      <!-- Icons -->
+    </links>
   </mdb-navbar>
   <!--/.Navbar-->
 

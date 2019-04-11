@@ -1,5 +1,4 @@
 /* You can add global styles to this file, and also import other style files */
-/* You can add global styles to this file, and also import other style files */
 
 #intro {
     // background-image: url('https://mdbootstrap.com/img/Photos/Horizontal/Nature/full%20page/img%20%283%29.jpg');
@@ -17,15 +16,12 @@
   }
 
 main {
-  //padding-top: 70px;
   padding: 70px 20px 20px 20px;
 }
 
 // Sidebar
 
 #sidebar {
-  //background-image: url('https://cdn.pixabay.com/photo/2016/04/12/22/35/watercolour-1325656_1280.jpg');
-  //background-color: #383547;
   background-color: #2f353a;
 }
 
@@ -95,10 +91,6 @@ main {
   text-transform: uppercase;
 }
 
-//.navbar .ul .li {
-//  color: #ffffff
-//}
-
 // Media queries
 
 @media (min-width: 1200px) {
@@ -113,31 +105,3 @@ main {
   }
 }
 
-//@media (max-width: 740px) {
-//  html,
-//  body,
-//  header,
-//  .view {
-//    height: 1000px;
-//  }
-//}
-
-//@media (min-width: 800px) and (max-width: 850px) {
-//  html,
-//  body,
-//  header,
-//  .view {
-//    height: 600px;
-//  }
-//}
-
-
-//.sidebar-fixed .list-group .active {
-//  -webkit-box-shadow: 0 0px 0px 0 rgba(0, 0, 0, .16), 0 0px 0px 0 rgba(0, 0, 0, .12);
-//  box-shadow: 0 0px 0px 0 rgba(0, 0, 0, .16), 0 0px 0px 0 rgba(0, 0, 0, .12);
-//  -webkit-border-radius: 0;
-//  border-radius: 0;
-//  color: #20a8d8;
-//  background-color: #4B515D;
-//}
-  

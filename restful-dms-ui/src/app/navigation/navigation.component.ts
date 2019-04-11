@@ -13,4 +13,8 @@ export class NavigationComponent implements OnInit {
   ngOnInit() {
   }
 
+  logout() {
+    alert("wylogowano");
+  }
+
 }

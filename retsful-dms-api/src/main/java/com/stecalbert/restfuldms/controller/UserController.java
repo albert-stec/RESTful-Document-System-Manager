@@ -8,7 +8,6 @@ import io.swagger.annotations.ApiOperation;
 import io.swagger.annotations.Authorization;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpHeaders;
-import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -16,7 +15,9 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import javax.servlet.http.HttpServletRequest;
 import javax.validation.Valid;
+import java.net.URI;
 import java.util.List;
 
 @Api(value = "US", description = "<div>\n" +
@@ -33,20 +34,22 @@ import java.util.List;
 public class UserController {
 
     private final UserService userService;
+    private final HttpServletRequest request;
 
     @Autowired
-    public UserController(UserService userService) {
+    public UserController(UserService userService, HttpServletRequest request) {
         this.userService = userService;
+        this.request = request;
     }
 
     @PostMapping
     @ApiOperation("Register new user")
     public ResponseEntity<UserEntity> registerUser(@RequestBody @Valid UserDto userDto) {
+        UserEntity createdUser = userService.save(userDto);
 
-        return new ResponseEntity<>(
-                userService.save(userDto),
-                HttpStatus.OK
-        );
+        return ResponseEntity
+                .created(URI.create(request.getRequestURI() + '/' + createdUser.getId()))
+                .body(createdUser);
     }
 
     @GetMapping
@@ -54,9 +57,8 @@ public class UserController {
             authorizations = @Authorization(HttpHeaders.AUTHORIZATION))
     public ResponseEntity<List<UserDto>> getAll() {
 
-        return new ResponseEntity<>(
-                userService.findAll(),
-                HttpStatus.OK
-        );
+        return ResponseEntity
+                .ok()
+                .body(userService.findAll());
     }
 }

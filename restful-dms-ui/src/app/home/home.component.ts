@@ -1,6 +1,5 @@
-import { User } from '../models/user';
-import { first } from 'rxjs/operators';
-import { Component, OnInit } from '@angular/core';
+import {User} from '../models/user';
+import {Component, OnInit} from '@angular/core';
 
 @Component({
   selector: 'app-home',
@@ -9,10 +8,12 @@ import { Component, OnInit } from '@angular/core';
 })
 export class HomeComponent implements OnInit {
   users: User[] = [];
+  currentUser = localStorage.getItem('currentUser');
 
   constructor() {}
 
   ngOnInit() {
+
     // this.userService
     //   .getAll()
     //   .pipe(first())

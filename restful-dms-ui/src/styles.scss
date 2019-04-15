@@ -1,5 +1,4 @@
 /* You can add global styles to this file, and also import other style files */
-/* You can add global styles to this file, and also import other style files */
 
 #intro {
     // background-image: url('https://mdbootstrap.com/img/Photos/Horizontal/Nature/full%20page/img%20%283%29.jpg');
@@ -15,24 +14,23 @@
   .view {
     height: 100%;
   }
-  
-  @media (max-width: 740px) {
-    html,
-    body,
-    header,
-    .view {
-      height: 1000px;
-    }
+
+main {
+  padding: 70px 20px 20px 20px;
+}
+
+
+// Media queries
+
+@media (min-width: 1200px) {
+  .navbar, .page-footer, main {
+    margin-left: 270px
   }
-  @media (min-width: 800px) and (max-width: 850px) {
-    html,
-    body,
-    header,
-    .view {
-      height: 600px;
-    }
+}
+
+@media (max-width: 1199.98px) {
+  .sidebar-fixed {
+    display: none
   }
-  
-  
-  
-  
+}
+

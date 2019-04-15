@@ -1,14 +1,14 @@
-import {Component} from '@angular/core';
-import {AuthenticationService} from "./services/authentication.service";
+import {Component, OnInit} from '@angular/core';
 import {Router} from "@angular/router";
-import {User} from "./models/user";
+import {AuthenticationService} from "../services/authentication.service";
+import {User} from "../models/user";
 
 @Component({
-  selector: 'app-root',
-  templateUrl: './app.component.html',
-  styleUrls: ['./app.component.scss']
+  selector: 'app-navigation',
+  templateUrl: './navigation.component.html',
+  styleUrls: ['./navigation.component.scss']
 })
-export class AppComponent {
+export class NavigationComponent implements OnInit {
   currentUser: User;
 
   constructor(
@@ -18,8 +18,12 @@ export class AppComponent {
     this.authenticationService.currentUser.subscribe(x => this.currentUser = x);
   }
 
+  ngOnInit() {
+  }
+
   logout() {
     this.authenticationService.logout();
     this.router.navigate(['/login']);
   }
+
 }

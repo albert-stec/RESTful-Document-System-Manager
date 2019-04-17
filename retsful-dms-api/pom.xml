@@ -115,6 +115,14 @@
             <version>2.9.2</version>
         </dependency>
 
+        <!-- https://mvnrepository.com/artifact/com.googlecode.jmapper-framework/jmapper-core -->
+        <dependency>
+            <groupId>com.googlecode.jmapper-framework</groupId>
+            <artifactId>jmapper-core</artifactId>
+            <version>1.6.1.CR2</version>
+        </dependency>
+
+
     </dependencies>
 
     <build>
@@ -123,6 +131,8 @@
                 <groupId>org.springframework.boot</groupId>
                 <artifactId>spring-boot-maven-plugin</artifactId>
             </plugin>
+
+
         </plugins>
     </build>
 

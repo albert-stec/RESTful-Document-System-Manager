@@ -44,12 +44,12 @@ public class UserController {
 
     @PostMapping
     @ApiOperation("Register new user")
-    public ResponseEntity<UserEntity> registerUser(@RequestBody @Valid UserDto userDto) {
-        UserEntity createdUser = userService.save(userDto);
+    public ResponseEntity<UserEntity> register(@RequestBody @Valid UserDto userDto) {
+        UserEntity saved = userService.save(userDto);
 
         return ResponseEntity
-                .created(URI.create(request.getRequestURI() + '/' + createdUser.getId()))
-                .body(createdUser);
+                .created(URI.create(request.getRequestURI() + '/' + saved.getId()))
+                .body(saved);
     }
 
     @GetMapping

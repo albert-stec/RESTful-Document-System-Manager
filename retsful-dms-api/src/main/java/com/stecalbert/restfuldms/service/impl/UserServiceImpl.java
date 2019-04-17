@@ -1,18 +1,19 @@
 package com.stecalbert.restfuldms.service.impl;
 
 import com.stecalbert.restfuldms.exception.ExistingUserException;
+import com.stecalbert.restfuldms.exception.UserNotFoundException;
 import com.stecalbert.restfuldms.model.dto.UserDto;
 import com.stecalbert.restfuldms.model.entity.UserEntity;
 import com.stecalbert.restfuldms.repository.UserRepository;
 import com.stecalbert.restfuldms.service.UserService;
 import org.modelmapper.ModelMapper;
-import org.modelmapper.TypeToken;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import java.lang.reflect.Type;
+import java.security.Principal;
 import java.util.List;
 
 @Service
@@ -32,12 +33,8 @@ public class UserServiceImpl implements UserService {
     public List<UserDto> findAll() {
         List<UserEntity> userEntityList = userRepository.findAll();
 
-        var modelMapper = new ModelMapper();
-        Type sourceListType =
-                new TypeToken<List<UserEntity>>() {
-                }.getType();
-
-        return modelMapper.map(userEntityList, sourceListType);
+        return new ModelMapper()
+                .map(userEntityList, userEntityList.getClass());
     }
 
     @Transactional
@@ -50,7 +47,19 @@ public class UserServiceImpl implements UserService {
         userDto.setPassword(encryptedPassword);
 
         UserEntity userEntity = new ModelMapper().map(userDto, UserEntity.class);
+
         return userRepository.save(userEntity);
+    }
+
+    @Override
+    public UserEntity getAuthenticatedUser() {
+        Principal principal =
+                SecurityContextHolder.getContext().getAuthentication();
+
+        return userRepository
+                .findByUsername(principal.getName())
+                .orElseThrow(() -> new UserNotFoundException("There was a problem with your authentication. " +
+                        "Couldn't find user with given username."));
     }
 
     private void throwIfUsernameExists(String username) {

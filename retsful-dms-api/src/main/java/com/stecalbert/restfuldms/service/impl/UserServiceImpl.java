@@ -19,13 +19,14 @@ import java.util.List;
 @Service
 public class UserServiceImpl implements UserService {
     private final UserRepository userRepository;
-
     private final BCryptPasswordEncoder bCryptPasswordEncoder;
+    private final ModelMapper modelMapper;
 
     @Autowired
-    public UserServiceImpl(UserRepository userRepository, BCryptPasswordEncoder bCryptPasswordEncoder) {
+    public UserServiceImpl(UserRepository userRepository, BCryptPasswordEncoder bCryptPasswordEncoder, ModelMapper modelMapper) {
         this.userRepository = userRepository;
         this.bCryptPasswordEncoder = bCryptPasswordEncoder;
+        this.modelMapper = modelMapper;
     }
 
     @Transactional(readOnly = true)
@@ -33,8 +34,7 @@ public class UserServiceImpl implements UserService {
     public List<UserDto> findAll() {
         List<UserEntity> userEntityList = userRepository.findAll();
 
-        return new ModelMapper()
-                .map(userEntityList, userEntityList.getClass());
+        return modelMapper.map(userEntityList, userEntityList.getClass());
     }
 
     @Transactional
@@ -46,7 +46,7 @@ public class UserServiceImpl implements UserService {
         String encryptedPassword = bCryptPasswordEncoder.encode(userDto.getPassword());
         userDto.setPassword(encryptedPassword);
 
-        UserEntity userEntity = new ModelMapper().map(userDto, UserEntity.class);
+        UserEntity userEntity = modelMapper.map(userDto, UserEntity.class);
 
         return userRepository.save(userEntity);
     }

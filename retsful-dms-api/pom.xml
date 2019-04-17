@@ -71,11 +71,11 @@
             <scope>provided</scope>
         </dependency>
 
-        <dependency>
-            <groupId>org.modelmapper</groupId>
-            <artifactId>modelmapper</artifactId>
-            <version>2.3.0</version>
-        </dependency>
+        <!--<dependency>-->
+        <!--<groupId>org.modelmapper</groupId>-->
+        <!--<artifactId>modelmapper</artifactId>-->
+        <!--<version>2.3.0</version>-->
+        <!--</dependency>-->
         <dependency>
             <groupId>org.junit.jupiter</groupId>
             <artifactId>junit-jupiter-api</artifactId>
@@ -114,15 +114,11 @@
             <artifactId>springfox-swagger-ui</artifactId>
             <version>2.9.2</version>
         </dependency>
-
-        <!-- https://mvnrepository.com/artifact/com.googlecode.jmapper-framework/jmapper-core -->
         <dependency>
-            <groupId>com.googlecode.jmapper-framework</groupId>
-            <artifactId>jmapper-core</artifactId>
-            <version>1.6.1.CR2</version>
+            <groupId>com.github.jmnarloch</groupId>
+            <artifactId>modelmapper-spring-boot-starter</artifactId>
+            <version>1.1.0</version>
         </dependency>
-
-
     </dependencies>
 
     <build>

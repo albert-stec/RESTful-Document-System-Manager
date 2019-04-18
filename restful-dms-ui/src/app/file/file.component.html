@@ -1,0 +1,50 @@
+<!--PoC upload file-->
+<div *ngIf="!showLoginCard" class="card-body p-0" id="registerCard">
+  <!-- Default form register -->
+  <form (ngSubmit)="onUpload()" [formGroup]="uploadForm" class="text-center p-4">
+
+    <input (change)="changeListener($event)" accept="" type="file">
+
+    <div>
+      <h3>Result:</h3>
+
+      <a [download]="elo" [href]="getSafeUrl()" download="elo" target="_self" title='o ficheirinho de tostas.pdf'>eeee
+        aqui oh sashavore</a>
+      <h4>Base64 encoded:</h4>
+      <p>{{image?.replace("data:image/png;base64,", "")}}</p>
+      <p>{{image}}</p>
+      <p>{{pdf}}</p>
+      <h4>Image:</h4>
+      <img alt="" src="{{image}}">
+
+
+    </div>
+
+    <div class="md-form">
+      <input class="form-control" formControlName="brief" id="brief" mdbInput type="text"/>
+      <label for="brief">brief</label>
+
+    </div>
+
+    <!--File-->
+    <div>
+      <input (change)="onFileSelect($event)" name="profile" type="file"/>
+    </div>
+
+    <!-- Sign in button -->
+    <button block="true" class="my-4 waves-effect z-depth-0 signInBtn" mdbBtn mdbWavesEffect outline="true"
+            type="submit">
+      Sign up
+    </button>
+
+    <p>
+      Already a member?
+      <a (click)="onSwitchLoginAndRegisterForm()" href="javascript:void(0);">Sign in</a>
+    </p>
+
+  </form>
+  <!-- Default form register -->
+
+  <iframe *ngIf="url" [src]="getSafeUrl()" frameborder="0"></iframe>
+
+</div>

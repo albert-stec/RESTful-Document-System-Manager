@@ -20,9 +20,15 @@ a:link {
     color: #FF0000;
   }
 
+main {
+  padding: 0;
+}
+
+// Media queries
+
 @media (min-width: 1200px) {
   .navbar, .page-footer, main {
-    padding-left: 0
+    margin-left: 0
   }
 }
 

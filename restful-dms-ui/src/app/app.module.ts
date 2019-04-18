@@ -12,9 +12,10 @@ import {JwtInterceptor} from './interceptors/jwt.interceptor';
 import {BrowserAnimationsModule} from "@angular/platform-browser/animations";
 import {ToastrModule} from "ngx-toastr";
 import {NavigationComponent} from './navigation/navigation.component';
+import {FileComponent} from './file/file.component';
 
 @NgModule({
-  declarations: [AppComponent, LoginComponent, HomeComponent, NavigationComponent],
+  declarations: [AppComponent, LoginComponent, HomeComponent, NavigationComponent, FileComponent],
   imports: [
     BrowserModule,
     routing,

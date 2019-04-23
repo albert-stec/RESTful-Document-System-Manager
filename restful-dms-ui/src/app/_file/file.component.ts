@@ -2,6 +2,7 @@ import {Component, OnInit} from '@angular/core';
 import {DomSanitizer} from "@angular/platform-browser";
 import {Document} from "../models/document";
 import {DocumentService} from "../services/file.service";
+import {Mime} from "../models/mime";
 
 @Component({
   selector: 'app-file',
@@ -76,10 +77,9 @@ export class FileComponent implements OnInit {
       .subscribe(
         response => {
           let brief: string = response.brief;
-          console.log(brief);
 
           this.viewFile = response.file;
-          this.viewFileUrl = 'data:application/pdf;base64,' + this.viewFile;
+          this.viewFileUrl = Mime['pdf'] + this.viewFile;
         },
         error1 => {
           console.log(error1)

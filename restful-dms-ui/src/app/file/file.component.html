@@ -13,9 +13,11 @@
       <p>{{pdf}}</p>
       <h4>Image:</h4>
 
-      <object [data]="sanitaze()"></object>
-      <!--<iframe class="pt-0" [src]="sanitaze()"></iframe>-->
+      <button (click)="getDocument()" color="primary" mdbBtn mdbWavesEffect type="button">Primary</button>
 
+
+      <object *ngIf="viewFile" [data]="sanitaze(viewFileUrl)"></object>
+      <!--<iframe class="pt-0" [src]="viewFileUrl"></iframe>-->
 
     </div>
 

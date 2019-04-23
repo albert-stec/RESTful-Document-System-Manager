@@ -4,5 +4,6 @@ export class Document {
   description: string;
   base64File: string;
   ownerUsername: string;
+  file;
 }
 

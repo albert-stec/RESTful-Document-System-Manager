@@ -10,6 +10,8 @@ import {DocumentService} from "../services/file.service";
 })
 export class FileComponent implements OnInit {
   file;
+  viewFile;
+  viewFileUrl;
   base64File;
 
   constructor(private sanitizer: DomSanitizer, private documentService: DocumentService) {
@@ -22,9 +24,8 @@ export class FileComponent implements OnInit {
     this.readThis($event.target);
   }
 
-  static populateDocumentData(base65File): Document {
+  static populateDocumentData(): Document {
     let document: Document = new Document();
-    // document.base64File = base65File;
     document.brief = "testBrief";
     document.description = "testDescription";
 
@@ -37,7 +38,8 @@ export class FileComponent implements OnInit {
 
     myReader.onloadend = () => {
       this.base64File = myReader.result;
-      const document = FileComponent.populateDocumentData(this.base64File);
+      console.log(this.base64File)
+      const document = FileComponent.populateDocumentData();
 
       let formData = new FormData();
       formData.append("file", file);
@@ -47,7 +49,6 @@ export class FileComponent implements OnInit {
 
       this.sendDocumentSaveRequest(formData);
     };
-
 
     myReader.readAsDataURL(file);
   }
@@ -65,10 +66,26 @@ export class FileComponent implements OnInit {
       );
   }
 
-  sanitaze() {
-    return this.sanitizer.bypassSecurityTrustResourceUrl(this.base64File);
+  sanitaze(url) {
+    return this.sanitizer.bypassSecurityTrustResourceUrl(url);
   }
 
+  getDocument() {
+    this.documentService
+      .getById(4)
+      .subscribe(
+        response => {
+          let brief: string = response.brief;
+          console.log(brief);
+
+          this.viewFile = response.file;
+          this.viewFileUrl = 'data:application/pdf;base64,' + this.viewFile;
+        },
+        error1 => {
+          console.log(error1)
+        }
+      )
+  }
 
   // this.pdf = window.URL.createObjectURL(blob).replace('application/pdf', 'application/octet-stream');
 

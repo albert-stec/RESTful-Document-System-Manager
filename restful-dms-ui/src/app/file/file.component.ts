@@ -1,7 +1,7 @@
 import {Component, OnInit} from '@angular/core';
 import {DomSanitizer} from "@angular/platform-browser";
-
-// import {saveAs} from 'file-saver/FileSaver';
+import {Document} from "../models/document";
+import {DocumentService} from "../services/file.service";
 
 @Component({
   selector: 'app-file',
@@ -9,11 +9,10 @@ import {DomSanitizer} from "@angular/platform-browser";
   styleUrls: ['./file.component.scss']
 })
 export class FileComponent implements OnInit {
-  image;
-  pdf;
   file;
+  base64File;
 
-  constructor(private sanitizer: DomSanitizer) {
+  constructor(private sanitizer: DomSanitizer, private documentService: DocumentService) {
   }
 
   ngOnInit() {
@@ -23,25 +22,47 @@ export class FileComponent implements OnInit {
     this.readThis($event.target);
   }
 
+  static populateDocumentData(base65File): Document {
+    let document: Document = new Document();
+    document.base64File = base65File;
+    document.brief = "testBrief";
+    document.description = "testDescription";
+
+    return document;
+  }
+
   readThis(inputValue: any): void {
-    var file: File = inputValue.files[0];
-    var myReader: FileReader = new FileReader();
+    let file: File = inputValue.files[0];
+    let myReader: FileReader = new FileReader();
 
     myReader.onloadend = () => {
-      this.pdf = myReader.result;
-    }
+      this.base64File = myReader.result;
+      const document = FileComponent.populateDocumentData(this.base64File);
+      this.sendDocumentSaveRequest(document);
+    };
 
-    const blob = myReader.readAsDataURL(file);
+    myReader.readAsDataURL(file);
+  }
 
-    // url
-    // this.pdf = window.URL.createObjectURL(blob).replace('application/pdf', 'application/octet-stream');
+  sendDocumentSaveRequest(document) {
+    this.documentService
+      .register(document)
+      .subscribe(
+        response => {
+          console.log(JSON.stringify(response));
+        },
+        error => {
+          console.log(JSON.stringify(error));
+        }
+      );
   }
 
   sanitaze() {
-    return this.sanitizer.bypassSecurityTrustResourceUrl(this.pdf);
+    return this.sanitizer.bypassSecurityTrustResourceUrl(this.base64File);
   }
 
 
+  // this.pdf = window.URL.createObjectURL(blob).replace('application/pdf', 'application/octet-stream');
 
   // setupUploadForm() {
   //   this.uploadForm = this.formBuilder.group({
@@ -88,7 +109,6 @@ export class FileComponent implements OnInit {
   //     });
   //   } else alert('Nothing')
   // }
-
 
 
 }

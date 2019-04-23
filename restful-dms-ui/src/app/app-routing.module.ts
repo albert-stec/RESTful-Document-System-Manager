@@ -18,7 +18,9 @@ const appRoutes: Routes = [
   },
   {
     path: 'file',
-    component: FileComponent
+    component: FileComponent,
+    canActivate: [AuthGuard]
+
   },
   // default path for / and unknown paths
   { path: '**', redirectTo: 'home' }

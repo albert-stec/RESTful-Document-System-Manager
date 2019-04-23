@@ -12,8 +12,11 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import javax.persistence.EntityNotFoundException;
 import java.time.LocalDateTime;
+import java.util.Base64;
 import java.util.List;
+import java.util.Optional;
 
 @Service
 public class DocumentServiceImpl implements DocumentService {
@@ -22,7 +25,9 @@ public class DocumentServiceImpl implements DocumentService {
     private final ModelMapper modelMapper;
 
     @Autowired
-    public DocumentServiceImpl(DocumentRepository documentRepository, UserService userService, ModelMapper modelMapper) {
+    public DocumentServiceImpl(DocumentRepository documentRepository,
+                               UserService userService,
+                               ModelMapper modelMapper) {
         this.documentRepository = documentRepository;
         this.userService = userService;
         this.modelMapper = modelMapper;
@@ -36,18 +41,34 @@ public class DocumentServiceImpl implements DocumentService {
         return modelMapper.map(documentEntityList, documentEntityList.getClass());
     }
 
+    @Transactional(readOnly = true)
+    @Override
+    public DocumentDto findById(Long id) {
+        Optional<DocumentEntity> optionalDocument = documentRepository.findById(id);
+        DocumentEntity documentEntity =
+                optionalDocument.orElseThrow(() ->
+                        new EntityNotFoundException("Could not find document with given id= " + id));
+
+        return modelMapper.map(documentEntity, DocumentDto.class);
+    }
+
     @Transactional
     @Override
     public DocumentDto create(DocumentDto documentDto) {
         UserEntity ownerEntity = userService.getAuthenticatedUser();
 
+        // todo: czesc mappingu, powinna byc w konfiguracji
         DocumentEntity documentEntity = modelMapper.map(documentDto, DocumentEntity.class);
+        String base64File = documentDto.getBase64File();
+        byte[] decodedFile = Base64.getMimeDecoder().decode(base64File.split(",")[1]);
+        documentEntity.setFile(decodedFile);
+
+        // populate initial data/
         documentEntity.setCreationDateTime(LocalDateTime.now());
         documentEntity.setVersion(1);
         documentEntity.setStatus(DocumentStatus.PENDING);
         documentEntity.setOwner(ownerEntity);
-//  todo      documentEntity.setFile();
-//  todo      documentEntity.setAcceptor();
+        //  todo      documentEntity.setAcceptor();
 
         DocumentEntity created = documentRepository.save(documentEntity);
 

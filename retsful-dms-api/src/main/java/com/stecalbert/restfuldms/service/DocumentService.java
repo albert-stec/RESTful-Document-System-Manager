@@ -8,5 +8,7 @@ public interface DocumentService {
 
     List<DocumentDto> findAll();
 
+    DocumentDto findById(Long id);
+
     DocumentDto create(DocumentDto documentDto);
 }

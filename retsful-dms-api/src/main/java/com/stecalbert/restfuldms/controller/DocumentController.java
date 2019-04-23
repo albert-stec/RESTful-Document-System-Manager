@@ -7,12 +7,16 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestPart;
 import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.multipart.MultipartFile;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.validation.Valid;
+import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.NotNull;
+import java.io.IOException;
 import java.net.URI;
 
 @RestController
@@ -29,8 +33,12 @@ public class DocumentController {
         this.httpServletRequest = httpServletRequest;
     }
 
-    @PostMapping
-    public ResponseEntity<DocumentDto> create(@RequestBody @Valid DocumentDto documentDto) {
+    @PostMapping(consumes = "multipart/form-data")
+    public ResponseEntity<DocumentDto> executeSampleService(
+            @RequestPart("documentDto") DocumentDto documentDto,
+            @RequestPart("file") @Valid @NotNull @NotBlank MultipartFile file) throws IOException {
+
+        documentDto.setFile(file.getBytes());
         DocumentDto created = documentService.create(documentDto);
 
         return ResponseEntity

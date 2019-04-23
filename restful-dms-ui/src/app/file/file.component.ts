@@ -24,7 +24,7 @@ export class FileComponent implements OnInit {
 
   static populateDocumentData(base65File): Document {
     let document: Document = new Document();
-    document.base64File = base65File;
+    // document.base64File = base65File;
     document.brief = "testBrief";
     document.description = "testDescription";
 
@@ -38,8 +38,16 @@ export class FileComponent implements OnInit {
     myReader.onloadend = () => {
       this.base64File = myReader.result;
       const document = FileComponent.populateDocumentData(this.base64File);
-      this.sendDocumentSaveRequest(document);
+
+      let formData = new FormData();
+      formData.append("file", file);
+      formData.append('documentDto', new Blob([JSON.stringify(document)], {
+        type: "application/json"
+      }));
+
+      this.sendDocumentSaveRequest(formData);
     };
+
 
     myReader.readAsDataURL(file);
   }

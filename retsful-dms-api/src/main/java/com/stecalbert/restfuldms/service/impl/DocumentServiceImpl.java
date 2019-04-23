@@ -14,7 +14,6 @@ import org.springframework.transaction.annotation.Transactional;
 
 import javax.persistence.EntityNotFoundException;
 import java.time.LocalDateTime;
-import java.util.Base64;
 import java.util.List;
 import java.util.Optional;
 
@@ -57,13 +56,7 @@ public class DocumentServiceImpl implements DocumentService {
     public DocumentDto create(DocumentDto documentDto) {
         UserEntity ownerEntity = userService.getAuthenticatedUser();
 
-        // todo: czesc mappingu, powinna byc w konfiguracji
         DocumentEntity documentEntity = modelMapper.map(documentDto, DocumentEntity.class);
-        String base64File = documentDto.getBase64File();
-        byte[] decodedFile = Base64.getMimeDecoder().decode(base64File.split(",")[1]);
-        documentEntity.setFile(decodedFile);
-
-        // populate initial data/
         documentEntity.setCreationDateTime(LocalDateTime.now());
         documentEntity.setVersion(1);
         documentEntity.setStatus(DocumentStatus.PENDING);

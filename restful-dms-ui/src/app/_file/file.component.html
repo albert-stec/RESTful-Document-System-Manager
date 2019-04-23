@@ -16,13 +16,13 @@
       <button (click)="getDocument()" color="primary" mdbBtn mdbWavesEffect type="button">Primary</button>
 
 
-      <object *ngIf="viewFile" [data]="sanitaze(viewFileUrl)"></object>
+      <object *ngIf="viewFileUrl" [data]="sanitaze(viewFileUrl)"></object>
       <!--<iframe class="pt-0" [src]="viewFileUrl"></iframe>-->
 
     </div>
 
 
-    <!-- Default form register -->
+    <!-- Default form upload -->
     <form (ngSubmit)="onUpload()" [formGroup]="uploadForm" class="text-center p-4">
 
 
@@ -49,7 +49,7 @@
       </p>
 
     </form>
-    <!-- Default form register -->
+    <!-- Default form upload -->
 
     <iframe *ngIf="url" [src]="sanitaze()" frameborder="0"></iframe>
   </div>

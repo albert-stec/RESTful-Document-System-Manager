@@ -11,7 +11,6 @@ import {Mime} from "../models/mime";
 })
 export class FileComponent implements OnInit {
   file;
-  viewFile;
   viewFileUrl;
   base64File;
 
@@ -56,7 +55,7 @@ export class FileComponent implements OnInit {
 
   sendDocumentSaveRequest(document) {
     this.documentService
-      .register(document)
+      .upload(document)
       .subscribe(
         response => {
           console.log(JSON.stringify(response));
@@ -78,8 +77,7 @@ export class FileComponent implements OnInit {
         response => {
           let brief: string = response.brief;
 
-          this.viewFile = response.file;
-          this.viewFileUrl = Mime['pdf'] + this.viewFile;
+          this.viewFileUrl = Mime['pdf'] + response.file;
         },
         error1 => {
           console.log(error1)

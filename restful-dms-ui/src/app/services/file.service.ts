@@ -2,28 +2,26 @@ import {Injectable} from '@angular/core';
 import {HttpClient} from '@angular/common/http';
 import {environment} from "../../environments/environment";
 import {Document} from "../models/document";
+import {ApiResource} from "../models/endpoint";
 
 
 @Injectable({providedIn: 'root'})
 export class DocumentService {
-  private apiHost: string = environment.apiHost;
+  private contextResourceUrl: string = environment.apiHost + ApiResource.documents;
 
   constructor(private http: HttpClient) {
   }
 
   getAll() {
-    return this.http.get<Document[]>(this.apiHost + "/documents");
+    return this.http.get<Document[]>(this.contextResourceUrl);
   }
 
   getById(id) {
-    // const httpOptions = {
-    //   'responseType'  : 'arraybuffer' as 'json'
-    //   //'responseType'  : 'blob' as 'json'        //This also worked
-    // };
-    return this.http.get<Document>(this.apiHost + "/documents/" + id);
+    return this.http.get<Document>(this.contextResourceUrl + '/' + id);
   }
 
-  register(document) {
-    return this.http.post<any>(this.apiHost + '/documents', document, {observe: 'response'});
+  upload(document) {
+    return this.http.post<any>(this.contextResourceUrl, document,
+      {observe: 'response'});
   }
 }

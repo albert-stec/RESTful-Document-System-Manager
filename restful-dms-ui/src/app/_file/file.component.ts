@@ -14,6 +14,7 @@ export class FileComponent implements OnInit {
   viewFileUrl;
   base64File;
 
+//
   constructor(private sanitizer: DomSanitizer, private documentService: DocumentService) {
   }
 

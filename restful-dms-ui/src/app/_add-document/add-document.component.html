@@ -1,27 +1,43 @@
-<div class="modal-dialog modal-notify modal-warning" role="document">
-  <!--Content-->
-  <div class="modal-content">
-    <!--Header-->
-    <div class="modal-header text-center">
-      <h4 class="modal-title white-text w-100 font-weight-bold py-2">Subscribe</h4>
-      <button (click)="closeModal()" aria-label="Close" class="close" data-dismiss="modal" type="button">
-        <span aria-hidden="true" class="white-text">&times;</span>
-      </button>
-    </div>
+<div #addDocumentModal="mdbModal" (onHidden)="modalOnHidden()" [config]="{backdrop: true, ignoreBackdropClick: true}"
+     aria-hidden="true"
+     aria-labelledby="myModalLabel" class="modal fade top"
+     id="frameModalTop"
+     mdbModal role="dialog"
+     tabindex="-1">
 
-    <!--Body-->
-    <div class="modal-body">
+  <!--Dialog-->
+  <div class="modal-dialog modal-notify modal-warning" role="document">
 
-      <form (ngSubmit)="onLogin()" [formGroup]="addDocumentForm" class="text-center">
+    <!--Content-->
+    <div class="modal-content ">
 
-        <!--Title-->
-        <div class="md-form mb-5">
-          <input class="form-control" formControlName="title" id="title" mdbInput type="text">
-          <label data-error="wrong" data-success="right" for="title">Title</label>
-        </div>
+      <!--Header-->
+      <div class="modal-header text-center info-color-dark">
+        <h4 class="modal-title white-text  w-100 font-weight-bold py-2">Subscribe</h4>
+        <button (click)="closeModal()" aria-label="Close" class="close" data-dismiss="modal" type="button">
+          <span aria-hidden="true" class="white-text">&times;</span>
+        </button>
+      </div>
 
-      </form>
+      <!--Body-->
+      <div class="modal-body">
 
+        <!--Form-->
+        <form (ngSubmit)="onLogin()" [formGroup]="addDocumentForm" class="text-center">
+
+          <!--Title-->
+          <div class="md-form mb-5">
+            <input class="form-control" formControlName="title" id="title" mdbInput type="text">
+            <label data-error="wrong" data-success="right" for="title">
+              Title
+              <span class="required-field"></span>
+            </label>
+          </div>
+
+          <!--./Form-->
+        </form>
+
+      </div>
     </div>
   </div>
 </div>

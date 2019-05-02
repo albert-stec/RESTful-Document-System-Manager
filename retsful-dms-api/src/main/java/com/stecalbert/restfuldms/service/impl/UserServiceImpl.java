@@ -1,30 +1,32 @@
 package com.stecalbert.restfuldms.service.impl;
 
 import com.stecalbert.restfuldms.exception.ExistingUserException;
+import com.stecalbert.restfuldms.exception.UserNotFoundException;
 import com.stecalbert.restfuldms.model.dto.UserDto;
 import com.stecalbert.restfuldms.model.entity.UserEntity;
 import com.stecalbert.restfuldms.repository.UserRepository;
 import com.stecalbert.restfuldms.service.UserService;
 import org.modelmapper.ModelMapper;
-import org.modelmapper.TypeToken;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import java.lang.reflect.Type;
+import java.security.Principal;
 import java.util.List;
 
 @Service
 public class UserServiceImpl implements UserService {
     private final UserRepository userRepository;
-
     private final BCryptPasswordEncoder bCryptPasswordEncoder;
+    private final ModelMapper modelMapper;
 
     @Autowired
-    public UserServiceImpl(UserRepository userRepository, BCryptPasswordEncoder bCryptPasswordEncoder) {
+    public UserServiceImpl(UserRepository userRepository, BCryptPasswordEncoder bCryptPasswordEncoder, ModelMapper modelMapper) {
         this.userRepository = userRepository;
         this.bCryptPasswordEncoder = bCryptPasswordEncoder;
+        this.modelMapper = modelMapper;
     }
 
     @Transactional(readOnly = true)
@@ -32,12 +34,7 @@ public class UserServiceImpl implements UserService {
     public List<UserDto> findAll() {
         List<UserEntity> userEntityList = userRepository.findAll();
 
-        var modelMapper = new ModelMapper();
-        Type sourceListType =
-                new TypeToken<List<UserEntity>>() {
-                }.getType();
-
-        return modelMapper.map(userEntityList, sourceListType);
+        return modelMapper.map(userEntityList, userEntityList.getClass());
     }
 
     @Transactional
@@ -49,8 +46,20 @@ public class UserServiceImpl implements UserService {
         String encryptedPassword = bCryptPasswordEncoder.encode(userDto.getPassword());
         userDto.setPassword(encryptedPassword);
 
-        UserEntity userEntity = new ModelMapper().map(userDto, UserEntity.class);
+        UserEntity userEntity = modelMapper.map(userDto, UserEntity.class);
+
         return userRepository.save(userEntity);
+    }
+
+    @Override
+    public UserEntity getAuthenticatedUser() {
+        Principal principal =
+                SecurityContextHolder.getContext().getAuthentication();
+
+        return userRepository
+                .findByUsername(principal.getName())
+                .orElseThrow(() -> new UserNotFoundException("There was a problem with your authentication. " +
+                        "Couldn't find user with given username."));
     }
 
     private void throwIfUsernameExists(String username) {

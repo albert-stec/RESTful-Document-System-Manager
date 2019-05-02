@@ -32,7 +32,8 @@ public class WebSecurity extends WebSecurityConfigurerAdapter {
             "/configuration/security",
             "/swagger-ui.html",
             "/webjars/**",
-            "/h2-console/**"
+            "/h2-console/**",
+            "/documents/**"
     };
     private final Environment environment;
     private final JwtTokenProvider jwtTokenProvider;

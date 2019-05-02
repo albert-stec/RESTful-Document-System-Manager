@@ -1,20 +1,22 @@
 package com.stecalbert.restfuldms.model.entity;
 
 import com.stecalbert.restfuldms.model.constants.DocumentStatus;
+import lombok.AccessLevel;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
-import lombok.Generated;
 import lombok.NoArgsConstructor;
+import lombok.Setter;
 
 import javax.persistence.Basic;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
+import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import javax.persistence.Lob;
 import javax.persistence.ManyToOne;
-import javax.validation.constraints.NotNull;
 import java.time.LocalDateTime;
 import java.util.Optional;
 
@@ -26,35 +28,43 @@ import java.util.Optional;
 public class DocumentEntity {
 
     @Id
-    @Generated
+    @Setter(AccessLevel.NONE)
+    @GeneratedValue
     private Long id;
 
     @ManyToOne
-    private @NotNull UserEntity owner;
+    private UserEntity owner;
 
     @Column(nullable = false)
-    private @NotNull String shortDescription;
+    private String brief;
 
     private String description;
 
     @Basic
     @Column(nullable = false)
-    private @NotNull LocalDateTime creationDateTime;
+    private LocalDateTime creationDateTime;
 
-    private int version;
+    @Column(nullable = false)
+    private Integer version;
 
     @Basic
+    @Column
     private LocalDateTime lastUpdatedDateTime;
 
     @Basic
-    private LocalDateTime acceptanceTime;
+    @Column
+    private LocalDateTime acceptanceDateTime;
 
     @ManyToOne
-    private @NotNull UserEntity acceptor;
+    private UserEntity acceptor;
 
     @Enumerated(EnumType.STRING)
     @Column(length = 8, nullable = false)
-    private @NotNull DocumentStatus status;
+    private DocumentStatus status;
+
+    @Lob
+    @Column
+    private byte[] file;
 
     public Optional<String> getDescription() {
         return Optional.ofNullable(description);
@@ -63,4 +73,9 @@ public class DocumentEntity {
     public Optional<LocalDateTime> getLastUpdatedDateTime() {
         return Optional.ofNullable(lastUpdatedDateTime);
     }
+
+    public Optional<LocalDateTime> getAcceptanceDateTime() {
+        return Optional.ofNullable(acceptanceDateTime);
+    }
+
 }

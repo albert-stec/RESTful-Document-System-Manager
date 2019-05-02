@@ -1,8 +1,8 @@
-import { AuthGuard } from './guards/auth.guard';
-import { HomeComponent } from './home/home.component';
-import { LoginComponent } from './login/login.component';
-import { NgModule } from '@angular/core';
-import { Routes, RouterModule } from '@angular/router';
+import {AuthGuard} from './guards/auth.guard';
+import {HomeComponent} from './_home/home.component';
+import {LoginComponent} from './_login/login.component';
+import {RouterModule, Routes} from '@angular/router';
+import {FileComponent} from "./_file/file.component";
 
 const routes: Routes = [];
 
@@ -15,6 +15,12 @@ const appRoutes: Routes = [
   {
     path: 'login',
     component: LoginComponent
+  },
+  {
+    path: 'file',
+    component: FileComponent,
+    canActivate: [AuthGuard]
+
   },
   // default path for / and unknown paths
   { path: '**', redirectTo: 'home' }

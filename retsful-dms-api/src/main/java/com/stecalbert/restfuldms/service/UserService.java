@@ -10,4 +10,7 @@ public interface UserService {
     List<UserDto> findAll();
 
     UserEntity save(UserDto userDto);
+
+    UserEntity getAuthenticatedUser();
+
 }

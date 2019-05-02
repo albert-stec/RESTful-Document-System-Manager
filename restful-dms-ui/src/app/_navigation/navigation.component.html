@@ -38,6 +38,17 @@
         <mdb-icon class="mr-3" fas icon="plus"></mdb-icon>Utwórz nowy
       </a>
 
+      <button (click)="addDocumentModal.show()" color="default" data-target="#basicExample" data-toggle="modal" mdbBtn
+              mdbWavesEffect
+              rounded="true" type="button">Launch Modal
+      </button>
+
+      <button (click)="openAddDocumentComponentModal()" color="default" data-target="#basicExample" data-toggle="modal"
+              mdbBtn mdbWavesEffect
+              rounded="true" type="button">Launch Modal
+      </button>
+
+
       <!--/Documents-->
 
       <!--Tickets-->
@@ -189,6 +200,12 @@
     </links>
   </mdb-navbar>
   <!--/.Navbar-->
+
+  <div #addDocumentModal="mdbModal" aria-hidden="true" aria-labelledby="myModalLabel" class="modal fade top"
+       id="frameModalTop" mdbModal
+       role="dialog" tabindex="-1">
+    <app-add-document></app-add-document>
+  </div>
 
 </header>
 <!--Main Navigation-->

@@ -13,9 +13,21 @@ import {BrowserAnimationsModule} from "@angular/platform-browser/animations";
 import {ToastrModule} from "ngx-toastr";
 import {NavigationComponent} from './_navigation/navigation.component';
 import {FileComponent} from './_file/file.component';
+import {AddDocumentComponent} from './_add-document/add-document.component';
+import {NgbModule} from '@ng-bootstrap/ng-bootstrap';
 
 @NgModule({
-  declarations: [AppComponent, LoginComponent, HomeComponent, NavigationComponent, FileComponent],
+  declarations: [
+    AppComponent,
+    LoginComponent,
+    HomeComponent,
+    NavigationComponent,
+    FileComponent,
+    AddDocumentComponent
+  ],
+  entryComponents: [
+    AddDocumentComponent
+  ],
   imports: [
     BrowserModule,
     routing,
@@ -23,6 +35,7 @@ import {FileComponent} from './_file/file.component';
     HttpClientModule,
     BrowserAnimationsModule,
     IconsModule,
+    NgbModule,
     ToastrModule.forRoot({
       timeOut: 5000,
       positionClass: 'toast-top-center',
@@ -32,8 +45,9 @@ import {FileComponent} from './_file/file.component';
   ],
   schemas: [NO_ERRORS_SCHEMA],
   providers: [
-    { provide: HTTP_INTERCEPTORS, useClass: JwtInterceptor, multi: true },
-    { provide: HTTP_INTERCEPTORS, useClass: ErrorInterceptor, multi: true },
-],  bootstrap: [AppComponent]
+    {provide: HTTP_INTERCEPTORS, useClass: JwtInterceptor, multi: true},
+    {provide: HTTP_INTERCEPTORS, useClass: ErrorInterceptor, multi: true},
+  ], bootstrap: [AppComponent]
 })
-export class AppModule {}
+export class AppModule {
+}

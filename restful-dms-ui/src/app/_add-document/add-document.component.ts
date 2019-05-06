@@ -23,9 +23,19 @@ export class AddDocumentComponent implements AfterViewInit {
     private documentService: DocumentService
   ) {
     this.addDocumentForm = this.formBuilder.group({
-      title: ['', Validators.required],
-      brief: ['', Validators.required],
-      description: ['', Validators.required]
+      title: ['',
+        [
+          Validators.required,
+          Validators.minLength(3),
+          Validators.maxLength(30)]
+      ],
+      brief: ['',
+        [
+          Validators.required,
+          Validators.minLength(3),
+          Validators.maxLength(30)]
+      ],
+      description: ['', Validators.maxLength(255)]
     });
   }
 
@@ -67,5 +77,17 @@ export class AddDocumentComponent implements AfterViewInit {
           console.log(JSON.stringify(error));
         }
       );
+  }
+
+  get title() {
+    return this.addDocumentForm.get('title');
+  }
+
+  get brief() {
+    return this.addDocumentForm.get('brief');
+  }
+
+  get description() {
+    return this.addDocumentForm.get('description');
   }
 }

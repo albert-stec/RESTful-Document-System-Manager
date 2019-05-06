@@ -6,7 +6,7 @@
      tabindex="-1">
 
   <!--Dialog-->
-  <div class="modal-dialog modal-notify modal-warning" role="document">
+  <div class="modal-dialog modal-notify" role="document">
 
     <!--Content-->
     <div class="modal-content ">
@@ -23,20 +23,50 @@
       <div class="modal-body">
 
         <!--Form-->
-        <form (ngSubmit)="onLogin()" [formGroup]="addDocumentForm" class="text-center">
+        <form (ngSubmit)="onSubmit()" [formGroup]="addDocumentForm">
 
           <!--Title-->
-          <div class="md-form mb-5">
+          <div class="md-form mb-3">
             <input class="form-control" formControlName="title" id="title" mdbInput type="text">
             <label data-error="wrong" data-success="right" for="title">
-              Title
+              Nazwa
               <span class="required-field"></span>
             </label>
           </div>
 
+          <!--Brief-->
+          <div class="md-form mb-3">
+            <input class="form-control" formControlName="brief" id="brief" mdbInput type="text">
+            <label data-error="wrong" data-success="right" for="brief">
+              Krótki opis
+              <span class="required-field"></span>
+            </label>
+          </div>
+
+          <!--Description-->
+          <div class="md-form mb-3">
+            <textarea class="form-control md-textarea" formControlName="description" id="description" mdbInput rows="3"
+                      type="text"></textarea>
+            <label data-error="wrong" data-success="right" for="description">
+              Opis
+            </label>
+          </div>
+
+          <!--File-->
+          <div class="md-form mb-3 file-field">
+            <input (change)="onFileChange($event)" id="file" name="file" style="width: 235px" type="file"/>
+            <span class="required-field"></span>
+          </div>
+
+          <!-- Submit -->
+          <button block="true" class="my-4 waves-effect z-depth-0 info-color-dark-button" mdbBtn mdbWavesEffect
+                  outline="true"
+                  type="submit">
+            Sign up
+          </button>
+
           <!--./Form-->
         </form>
-
       </div>
     </div>
   </div>

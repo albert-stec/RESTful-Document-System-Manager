@@ -32,6 +32,9 @@ public class DocumentEntity {
     @GeneratedValue
     private Long id;
 
+    @Column(nullable = false)
+    private String title;
+
     @ManyToOne
     private UserEntity owner;
 

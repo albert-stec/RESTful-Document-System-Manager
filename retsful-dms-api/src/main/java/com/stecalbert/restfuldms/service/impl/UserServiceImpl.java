@@ -7,12 +7,14 @@ import com.stecalbert.restfuldms.model.entity.UserEntity;
 import com.stecalbert.restfuldms.repository.UserRepository;
 import com.stecalbert.restfuldms.service.UserService;
 import org.modelmapper.ModelMapper;
+import org.modelmapper.TypeToken;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.lang.reflect.Type;
 import java.security.Principal;
 import java.util.List;
 
@@ -33,8 +35,11 @@ public class UserServiceImpl implements UserService {
     @Override
     public List<UserDto> findAll() {
         List<UserEntity> userEntityList = userRepository.findAll();
+        Type userDtoListType =
+                new TypeToken<List<UserDto>>() {
+                }.getType();
 
-        return modelMapper.map(userEntityList, userEntityList.getClass());
+        return modelMapper.map(userEntityList, userDtoListType);
     }
 
     @Transactional

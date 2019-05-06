@@ -20,6 +20,12 @@ main {
   padding: 70px 20px 20px 20px;
 }
 
+.info-color-dark-button {
+  border-radius: 20px;
+  color: #0099CC;
+  border: 2px solid #0099CC;
+}
+
 .required-field::after {
   content: "*";
   color: red;

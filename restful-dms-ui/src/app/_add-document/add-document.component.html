@@ -4,13 +4,10 @@
      id="frameModalTop"
      mdbModal role="dialog"
      tabindex="-1">
-
   <!--Dialog-->
   <div class="modal-dialog modal-notify" role="document">
-
     <!--Content-->
-    <div class="modal-content mb-3">
-
+    <div class="modal-content mb-3" id="addDocumentFormContent">
       <!--Header-->
       <div class="modal-header text-center info-color-dark">
         <h4 class="modal-title white-text  w-100 font-weight-bold py-2">Subscribe</h4>
@@ -18,13 +15,10 @@
           <span aria-hidden="true" class="white-text">&times;</span>
         </button>
       </div>
-
       <!--Body-->
       <div class="modal-body">
-
         <!--Form-->
         <form (ngSubmit)="onSubmit()" [formGroup]="addDocumentForm">
-
           <!--Title-->
           <div class="md-form">
             <input [validateSuccess]="false" class="form-control" formControlName="title" id="title" mdbInput
@@ -33,13 +27,13 @@
               Nazwa
               <span class="required-field"></span>
             </label>
-            <mdb-error *ngIf="title.invalid
-            && (title.dirty || title.touched)">Minimalna długość: 3
+            <mdb-error *ngIf="title.invalid && (title.dirty || title.touched)">
+              <span *ngIf="title.errors.required">Pole wymagane</span>
+              <span *ngIf="title.errors.minlength">Minimalna ilość znaków: 3</span>
+              <span *ngIf="title.errors.maxlength">Maksymalna ilość znaków: 50</span>
             </mdb-error>
           </div>
-
           <!--Brief-->
-          <!--Title-->
           <div class="md-form">
             <input [validateSuccess]="false" class="form-control" formControlName="brief" id="brief" mdbInput
                    mdbValidate type="text">
@@ -47,11 +41,12 @@
               Krótki opis
               <span class="required-field"></span>
             </label>
-            <mdb-error *ngIf="brief.invalid
-            && (brief.dirty || brief.touched)">Minimalna długość: 3
+            <mdb-error *ngIf="brief.invalid && (brief.dirty || brief.touched)">
+              <span *ngIf="brief.errors.required">Pole wymagane</span>
+              <span *ngIf="brief.errors.minlength">Minimalna ilość znaków: 3</span>
+              <span *ngIf="brief.errors.maxlength">Maksymalna ilość znaków: 80</span>
             </mdb-error>
           </div>
-
           <!--Description-->
           <div class="md-form">
             <textarea [validateSuccess]="false" class="form-control md-textarea" formControlName="description"
@@ -60,27 +55,30 @@
             <label for="description">
               Opis
             </label>
-            <mdb-error *ngIf="description.invalid
-            && (description.dirty || description.touched)">Maksymalna długość długość: 255
+            <mdb-error *ngIf="description.invalid && (description.dirty || description.touched)">
+              <span *ngIf="description.errors.maxlength">Maksymalna ilość znaków: 255</span>
             </mdb-error>
           </div>
-
           <!--File-->
           <div class="md-form file-field">
             <input (change)="onFileChange($event)" id="file" name="file" style="width: 235px" type="file"/>
             <span class="required-field"></span>
           </div>
-
           <!-- Submit -->
           <button block="true" class="my-4 waves-effect z-depth-0 info-color-dark-button" mdbBtn mdbWavesEffect
                   outline="true"
                   type="submit">
-            Sign up
+            <span *ngIf="!showSpinner">Submit</span>
+            <span *ngIf="showSpinner">
+              <span aria-hidden="true" class="mr-2 spinner-border spinner-border-sm" role="status"></span>
+              <span>Loading...</span>
+            </span>
           </button>
-
           <!--./Form-->
         </form>
       </div>
     </div>
+
+
   </div>
 </div>

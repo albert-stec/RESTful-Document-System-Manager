@@ -13,6 +13,8 @@ import {DocumentService} from "../services/file.service";
 export class AddDocumentComponent implements AfterViewInit {
   addDocumentForm: FormGroup;
   file: File;
+  showSpinner: boolean = false;
+  showSuccessView: boolean = false;
 
   @ViewChild('addDocumentModal')
   addDocumentModal: ModalDirective;
@@ -27,13 +29,13 @@ export class AddDocumentComponent implements AfterViewInit {
         [
           Validators.required,
           Validators.minLength(3),
-          Validators.maxLength(30)]
+          Validators.maxLength(50)]
       ],
       brief: ['',
         [
           Validators.required,
           Validators.minLength(3),
-          Validators.maxLength(30)]
+          Validators.maxLength(80)]
       ],
       description: ['', Validators.maxLength(255)]
     });
@@ -56,6 +58,12 @@ export class AddDocumentComponent implements AfterViewInit {
   }
 
   onSubmit() {
+    if (this.addDocumentForm.invalid) {
+      return;
+    }
+
+    this.showSpinner = true;
+
     let document: Document = this.addDocumentForm.value;
     let formData = new FormData();
     formData.append("file", this.file);
@@ -76,7 +84,7 @@ export class AddDocumentComponent implements AfterViewInit {
         error => {
           console.log(JSON.stringify(error));
         }
-      );
+      ).add(() => this.showSpinner = false);
   }
 
   get title() {

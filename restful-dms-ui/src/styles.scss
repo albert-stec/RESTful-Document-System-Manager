@@ -31,10 +31,20 @@ main {
   color: red;
 }
 
-.openModalBtn {
+.primary-button {
   border-radius: 20px;
-  //color: #0099CC;
-  //border: 2px solid #0099CC;
+  background-color: #007bff;
+  color: white;
+
+  &:hover {
+    background-color: #005abb;
+    color: ghostwhite;
+  }
+
+  &:active {
+    background-color: #004288;
+    color: gray;
+  }
 }
 
 // Media queries

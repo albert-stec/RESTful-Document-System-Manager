@@ -15,7 +15,8 @@ export class AddDocumentComponent implements AfterViewInit {
   file: File;
   showSpinner: boolean = false;
   showSuccessView: boolean = false;
-  showFileError: boolean = false;
+  fileError: boolean = false;
+  wasSubmitted: boolean = false;
 
   @ViewChild('addDocumentModal')
   addDocumentModal: ModalDirective;
@@ -56,11 +57,17 @@ export class AddDocumentComponent implements AfterViewInit {
 
   onFileChange($event) {
     this.file = $event.target.files[0];
-    this.showFileError = this.file.type != 'application/pdf';
+    this.fileError = this.file.type != 'application/pdf';
   }
 
   onSubmit() {
+    this.wasSubmitted = true;
+
     if (this.addDocumentForm.invalid) {
+      return;
+    }
+
+    if (!this.file || this.fileError) {
       return;
     }
 

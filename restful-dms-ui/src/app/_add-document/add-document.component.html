@@ -62,8 +62,10 @@
           <!--File-->
           <div class="md-form file-field">
             <input (change)="onFileChange($event)" id="file" name="file" style="width: 235px" type="file"/>
-            <span class="required-field"></span>
+            <span class="required-field pb-3"></span>
+            <label *ngIf="showFileError" class="file-error-message">Plik musi być w formacie PDF</label>
           </div>
+
           <!-- Submit -->
           <button block="true" class="my-4 waves-effect z-depth-0 info-color-dark-button" mdbBtn mdbWavesEffect
                   outline="true"

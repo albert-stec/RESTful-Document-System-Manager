@@ -1,7 +1,7 @@
 /* You can add global styles to this file, and also import other style files */
 
 #intro {
-    // background-image: url('https://mdbootstrap.com/img/Photos/Horizontal/Nature/full%20page/img%20%283%29.jpg');
+  // background-image: url('https://mdbootstrap.com/img/Photos/Horizontal/Nature/full%20page/img%20%283%29.jpg');
   //background-image: url('https://cdn.pixabay.com/photo/2016/01/16/01/00/blue-1142745_1280.jpg');
   background-image: url('assets/typewriter.jpg');
     background-repeat: no-repeat;
@@ -20,6 +20,49 @@ main {
   padding: 70px 20px 20px 20px;
 }
 
+.primary-dark-outlined-button {
+  border-radius: 20px;
+  color: #0099CC;
+  border: 2px solid #0099CC;
+}
+
+.required-field::after {
+  content: "*";
+  color: red;
+}
+
+.primary-dark-outlined-button {
+  border-radius: 20px;
+  color: #0099CC;
+  border: 2px solid #0099CC;
+
+  &:hover {
+    background-color: #0099CC;
+    color: ghostwhite;
+  }
+
+  &:active {
+    border: 2px solid #007399;
+    background-color: #007399;
+    color: lightgray;
+  }
+}
+
+.primary-button {
+  border-radius: 20px;
+  background-color: #007bff;
+  color: white;
+
+  &:hover {
+    background-color: #005abb;
+    color: ghostwhite;
+  }
+
+  &:active {
+    background-color: #004288;
+    color: gray;
+  }
+}
 
 // Media queries
 

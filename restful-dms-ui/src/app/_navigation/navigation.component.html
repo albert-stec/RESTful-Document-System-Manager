@@ -15,37 +15,36 @@
 
       <a class="list-group-item list-group-item-action waves-effect" href="" routerLink="/home"
          routerLinkActive="active">
-        <mdb-icon class="mr-3" fas icon="folder-open"></mdb-icon>Wszystkie
+        <mdb-icon class="mr-3" fas icon="folder-open"></mdb-icon>
+        Wszystkie
       </a>
 
       <a class="list-group-item list-group-item-action waves-effect " href="#" routerLink="#"
          routerLinkActive="active">
-        <mdb-icon class="mr-3" fas icon="star"></mdb-icon>Ulubione
+        <mdb-icon class="mr-3" fas icon="star"></mdb-icon>
+        Ulubione
       </a>
 
       <a class="list-group-item list-group-item-action waves-effect " href="#" routerLink="#"
          routerLinkActive="active">
-        <mdb-icon class="mr-3" fas icon="user"></mdb-icon>Własne
+        <mdb-icon class="mr-3" fas icon="user"></mdb-icon>
+        Własne
       </a>
 
       <a class="list-group-item list-group-item-action waves-effect " href="#" routerLink="#"
          routerLinkActive="active">
-        <mdb-icon class="mr-3" fas icon="history"></mdb-icon>Rejestr zdarzeń
+        <mdb-icon class="mr-3" fas icon="history"></mdb-icon>
+        Rejestr zdarzeń
       </a>
 
-      <a class="list-group-item list-group-item-action waves-effect" href="#" routerLink="#"
-         routerLinkActive="active">
-        <mdb-icon class="mr-3" fas icon="plus"></mdb-icon>Utwórz nowy
-      </a>
-
-      <button (click)="addDocumentModal.show()" color="default" data-target="#basicExample" data-toggle="modal" mdbBtn
+      <button (click)="openAddDocumentModal()"
+              class="primary-button"
+              data-target="#basicExample"
+              data-toggle="modal" mdbBtn
               mdbWavesEffect
-              rounded="true" type="button">Launch Modal
-      </button>
-
-      <button (click)="openAddDocumentComponentModal()" color="default" data-target="#basicExample" data-toggle="modal"
-              mdbBtn mdbWavesEffect
-              rounded="true" type="button">Launch Modal
+              rounded="true"
+              type="button">
+        Utwórz nowy
       </button>
 
 
@@ -56,17 +55,20 @@
 
       <a class="list-group-item list-group-item-action waves-effect" href="#" routerLink="#"
          routerLinkActive="active">
-        <mdb-icon class="mr-3" fas icon="hourglass-half"></mdb-icon>Otwarte
+        <mdb-icon class="mr-3" fas icon="hourglass-half"></mdb-icon>
+        Otwarte
       </a>
 
       <a class="list-group-item list-group-item-action waves-effect" href="#" routerLink="#"
          routerLinkActive="active">
-        <mdb-icon class="mr-3" fas icon="receipt"></mdb-icon>Historia
+        <mdb-icon class="mr-3" fas icon="receipt"></mdb-icon>
+        Historia
       </a>
 
       <a class="list-group-item list-group-item-action waves-effect" href="#" routerLink="#"
          routerLinkActive="active">
-        <mdb-icon class="mr-3" fas icon="bullhorn"></mdb-icon>Zgłoś problem
+        <mdb-icon class="mr-3" fas icon="bullhorn"></mdb-icon>
+        Zgłoś problem
       </a>
       <!--/Tickets-->
 
@@ -75,17 +77,20 @@
 
       <a class="list-group-item list-group-item-action waves-effect" href="#" routerLink="#"
          routerLinkActive="active">
-        <mdb-icon class="mr-3" fas icon="address-book"></mdb-icon>Przeglądaj
+        <mdb-icon class="mr-3" fas icon="address-book"></mdb-icon>
+        Przeglądaj
       </a>
 
       <a class="list-group-item list-group-item-action waves-effect" href="#" routerLink="#"
          routerLinkActive="active">
-        <mdb-icon class="mr-3" fas icon="ban"></mdb-icon>Zablokowani
+        <mdb-icon class="mr-3" fas icon="ban"></mdb-icon>
+        Zablokowani
       </a>
 
       <a class="list-group-item list-group-item-action waves-effect" href="#" routerLink="#"
          routerLinkActive="active">
-        <mdb-icon class="mr-3" fas icon="paper-plane"></mdb-icon>Powiadom
+        <mdb-icon class="mr-3" fas icon="paper-plane"></mdb-icon>
+        Powiadom
       </a>
       <!--/Tickets-->
     </div>
@@ -201,11 +206,7 @@
   </mdb-navbar>
   <!--/.Navbar-->
 
-  <div #addDocumentModal="mdbModal" aria-hidden="true" aria-labelledby="myModalLabel" class="modal fade top"
-       id="frameModalTop" mdbModal
-       role="dialog" tabindex="-1">
-    <app-add-document></app-add-document>
-  </div>
+  <app-add-document *ngIf="showAddDocumentComponent"></app-add-document>
 
 </header>
 <!--Main Navigation-->

@@ -1,8 +1,7 @@
 export class Document {
   id: number;
   brief: string;
-  description: string;
-  base64File: string;
+  description?: string;
   ownerUsername: string;
   file;
 }

@@ -1,19 +1,16 @@
-import {AfterViewInit, Component, OnInit, ViewChild} from '@angular/core';
+import {Component} from '@angular/core';
 import {Router} from "@angular/router";
 import {AuthenticationService} from "../services/authentication.service";
 import {User} from "../models/user";
 import {EventService} from "../services/event.service";
-import {ModalDirective} from "angular-bootstrap-md";
 
 @Component({
   selector: 'app-navigation',
   templateUrl: './navigation.component.html',
   styleUrls: ['./navigation.component.scss']
 })
-export class NavigationComponent implements OnInit, AfterViewInit {
-  @ViewChild('addDocumentModal')
-  addDocumentModal: ModalDirective;
-
+export class NavigationComponent {
+  showAddDocumentComponent: boolean = false;
   currentUser: User;
 
   constructor(
@@ -24,16 +21,13 @@ export class NavigationComponent implements OnInit, AfterViewInit {
     this.authenticationService.currentUser.subscribe(x =>
       this.currentUser = x);
 
-    this.eventService.closeDocumentModal.subscribe(() =>
-      this.addDocumentModal.hide());
+    this.eventService.hideAddDocumentComponentEvent.subscribe(() =>
+      this.showAddDocumentComponent = false
+    );
   }
 
-  ngOnInit() {
-  }
-
-  ngAfterViewInit(): void {
-    this.addDocumentModal.onHidden.subscribe(() =>
-      this.eventService.resetDocumentModalForm.next());
+  openAddDocumentModal() {
+    this.showAddDocumentComponent = true;
   }
 
   logout() {

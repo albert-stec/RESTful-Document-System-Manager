@@ -1,27 +1,104 @@
-<div class="modal-dialog modal-notify modal-warning" role="document">
-  <!--Content-->
-  <div class="modal-content">
-    <!--Header-->
-    <div class="modal-header text-center">
-      <h4 class="modal-title white-text w-100 font-weight-bold py-2">Subscribe</h4>
-      <button (click)="closeModal()" aria-label="Close" class="close" data-dismiss="modal" type="button">
-        <span aria-hidden="true" class="white-text">&times;</span>
-      </button>
-    </div>
+<div #addDocumentModal="mdbModal" (onHidden)="modalOnHidden()" [config]="{backdrop: true, ignoreBackdropClick: true}"
+     aria-hidden="true"
+     aria-labelledby="myModalLabel" class="modal fade top"
+     id="frameModalTop"
+     mdbModal role="dialog"
+     tabindex="-1">
+  <!--Dialog-->
+  <div class="modal-dialog modal-notify" role="document">
+    <!--Content-->
+    <div class="modal-content mb-0" id="addDocumentFormContent">
+      <!--Header-->
+      <div class="modal-header text-center info-color-dark">
+        <h4 class="modal-title white-text  w-100 font-weight-bold py-2">Nowy dokument</h4>
+        <button (click)="addDocumentModal.hide()" [disabled]="showSpinner" aria-label="Close" class="close"
+                data-dismiss="modal"
+                type="button">
+          <span aria-hidden="true" class="white-text">&times;</span>
+        </button>
+      </div>
+      <!--FormView-->
+      <div *ngIf="!showSuccessView" class="modal-body">
+        <!--Form-->
+        <form (ngSubmit)="onSubmit()" [formGroup]="addDocumentForm">
+          <!--Title-->
+          <div class="md-form">
+            <input [validateSuccess]="false" class="form-control" formControlName="title" id="title" mdbInput
+                   mdbValidate type="text">
+            <label data-error="wrong" data-success="right" for="title">
+              Nazwa
+              <span class="required-field"></span>
+            </label>
+            <mdb-error *ngIf="title.invalid && (title.dirty || title.touched || wasSubmitted)">
+              <span *ngIf="title.errors.required">Pole wymagane</span>
+              <span *ngIf="title.errors.minlength">Minimalna ilość znaków: 3</span>
+              <span *ngIf="title.errors.maxlength">Maksymalna ilość znaków: 50</span>
+            </mdb-error>
+          </div>
+          <!--Brief-->
+          <div class="md-form">
+            <input [validateSuccess]="false" class="form-control" formControlName="brief" id="brief" mdbInput
+                   mdbValidate type="text">
+            <label data-error="wrong" data-success="right" for="brief">
+              Krótki opis
+              <span class="required-field"></span>
+            </label>
+            <mdb-error *ngIf="brief.invalid && (brief.dirty || brief.touched || wasSubmitted)">
+              <span *ngIf="brief.errors.required">Pole wymagane</span>
+              <span *ngIf="brief.errors.minlength">Minimalna ilość znaków: 3</span>
+              <span *ngIf="brief.errors.maxlength">Maksymalna ilość znaków: 80</span>
+            </mdb-error>
+          </div>
+          <!--Description-->
+          <div class="md-form">
+            <textarea [validateSuccess]="false" class="form-control md-textarea" formControlName="description"
+                      id="description" mdbInput mdbValidate rows="3"
+                      type="text"></textarea>
+            <label for="description">
+              Opis
+            </label>
+            <mdb-error *ngIf="description.invalid && (description.dirty || description.touched || wasSubmitted)">
+              <span *ngIf="description.errors.maxlength">Maksymalna ilość znaków: 255</span>
+            </mdb-error>
+          </div>
+          <!--File-->
+          <div class="md-form file-field">
+            <input (change)="onFileChange($event)" id="file" name="file" style="width: 235px" type="file"/>
+            <span class="required-field pb-3"></span>
+            <label *ngIf="invalidFileType && file" class="file-error-message">Plik musi być w formacie PDF</label>
+            <label *ngIf="!file && wasSubmitted" class="file-error-message">Pole wymagane</label>
+          </div>
 
-    <!--Body-->
-    <div class="modal-body">
+          <!-- Submit  -->
+          <button block="true" class=" waves-effect z-depth-0 primary-dark-outlined-button" mdbBtn mdbWavesEffect
+                  outline="true"
+                  type="submit">
+            <span *ngIf="!showSpinner">Submit</span>
+            <span *ngIf="showSpinner">
+              <span aria-hidden="true" class="mr-2 spinner-border spinner-border-sm" role="status"></span>
+              <span>Loading...</span>
+            </span>
+          </button>
+          <!--./Form-->
+        </form>
+      </div>
 
-      <form (ngSubmit)="onLogin()" [formGroup]="addDocumentForm" class="text-center">
-
-        <!--Title-->
-        <div class="md-form mb-5">
-          <input class="form-control" formControlName="title" id="title" mdbInput type="text">
-          <label data-error="wrong" data-success="right" for="title">Title</label>
+      <!--SuccessView-->
+      <div *ngIf="showSuccessView" class="modal-body">
+        <div class="text-center">
+          <i class="fas fa-check fa-4x mb-3 animated rotateIn" id="success-icon"></i>
+          <p>Dokument został utworzony i oczekuje na akceptację administratora.
+            <br>Do tego czasu jest widoczny tylko dla Ciebie.</p>
         </div>
 
-      </form>
-
+        <button (click)="addDocumentModal.hide()" block="true"
+                class=" waves-effect z-depth-0 primary-dark-outlined-button" mdbBtn
+                mdbWavesEffect
+                outline="true"
+                type="submit">
+          Rozumiem
+        </button>
+      </div>
     </div>
   </div>
 </div>

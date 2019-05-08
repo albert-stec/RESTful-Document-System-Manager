@@ -15,6 +15,8 @@ public class DocumentDto {
 
     private Long id;
 
+    private @NotNull String title;
+
     private @NotNull String brief;
 
     private String description;

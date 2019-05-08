@@ -8,11 +8,13 @@ import com.stecalbert.restfuldms.repository.DocumentRepository;
 import com.stecalbert.restfuldms.service.DocumentService;
 import com.stecalbert.restfuldms.service.UserService;
 import org.modelmapper.ModelMapper;
+import org.modelmapper.TypeToken;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import javax.persistence.EntityNotFoundException;
+import java.lang.reflect.Type;
 import java.time.LocalDateTime;
 import java.util.List;
 import java.util.Optional;
@@ -36,8 +38,11 @@ public class DocumentServiceImpl implements DocumentService {
     @Override
     public List<DocumentDto> findAll() {
         List<DocumentEntity> documentEntityList = documentRepository.findAll();
+        Type documentDtoListType =
+                new TypeToken<List<DocumentDto>>() {
+                }.getType();
 
-        return modelMapper.map(documentEntityList, documentEntityList.getClass());
+        return modelMapper.map(documentEntityList, documentDtoListType);
     }
 
     @Transactional(readOnly = true)

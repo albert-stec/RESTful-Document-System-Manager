@@ -4,6 +4,7 @@ import {EventService} from "../services/event.service";
 import {ModalDirective} from "angular-bootstrap-md";
 import {Document} from "../models/document";
 import {DocumentService} from "../services/file.service";
+import {ToastrService} from "ngx-toastr";
 
 @Component({
   selector: 'app-add-document',
@@ -24,7 +25,8 @@ export class AddDocumentComponent implements AfterViewInit {
   constructor(
     private eventService: EventService,
     private formBuilder: FormBuilder,
-    private documentService: DocumentService
+    private documentService: DocumentService,
+    private toastr: ToastrService
   ) {
     this.addDocumentForm = this.formBuilder.group({
       title: ['',
@@ -51,13 +53,21 @@ export class AddDocumentComponent implements AfterViewInit {
     this.eventService.hideAddDocumentComponentEvent.next();
   }
 
-  get fileInput() {
-    return this.addDocumentForm.get('description');
-  }
-
   onFileChange($event) {
     this.file = $event.target.files[0];
     this.invalidFileType = this.file.type != 'application/pdf';
+  }
+
+  get title() {
+    return this.addDocumentForm.get('title');
+  }
+
+  get brief() {
+    return this.addDocumentForm.get('brief');
+  }
+
+  get description() {
+    return this.addDocumentForm.get('description');
   }
 
   onSubmit() {
@@ -76,20 +86,7 @@ export class AddDocumentComponent implements AfterViewInit {
       type: "application/json"
     }));
 
-    this.showSuccessView = true;
-    // this.sendDocumentCreationRequest(formData);
-  }
-
-  get title() {
-    return this.addDocumentForm.get('title');
-  }
-
-  get brief() {
-    return this.addDocumentForm.get('brief');
-  }
-
-  get description() {
-    return this.addDocumentForm.get('description');
+    this.sendDocumentCreationRequest(formData);
   }
 
   sendDocumentCreationRequest(formData) {
@@ -99,8 +96,9 @@ export class AddDocumentComponent implements AfterViewInit {
         () => {
           this.showSuccessView = true;
         },
-        error => {
-          console.log(JSON.stringify(error));
+        () => {
+          this.toastr.error("Spróbuj ponownie później.",
+            "Wystąpił nieoczekiwany błąd.")
         }
       ).add(() => this.showSpinner = false);
   }

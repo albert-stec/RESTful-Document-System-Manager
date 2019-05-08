@@ -7,17 +7,18 @@
   <!--Dialog-->
   <div class="modal-dialog modal-notify" role="document">
     <!--Content-->
-    <div class="modal-content mb-3" id="addDocumentFormContent">
+    <div class="modal-content mb-0" id="addDocumentFormContent">
       <!--Header-->
       <div class="modal-header text-center info-color-dark">
-        <h4 class="modal-title white-text  w-100 font-weight-bold py-2">Subscribe</h4>
-        <button (click)="closeModal()" [disabled]="showSpinner" aria-label="Close" class="close" data-dismiss="modal"
+        <h4 class="modal-title white-text  w-100 font-weight-bold py-2">Nowy dokument</h4>
+        <button (click)="addDocumentModal.hide()" [disabled]="showSpinner" aria-label="Close" class="close"
+                data-dismiss="modal"
                 type="button">
           <span aria-hidden="true" class="white-text">&times;</span>
         </button>
       </div>
-      <!--Body-->
-      <div class="modal-body">
+      <!--FormView-->
+      <div *ngIf="!showSuccessView" class="modal-body">
         <!--Form-->
         <form (ngSubmit)="onSubmit()" [formGroup]="addDocumentForm">
           <!--Title-->
@@ -64,12 +65,12 @@
           <div class="md-form file-field">
             <input (change)="onFileChange($event)" id="file" name="file" style="width: 235px" type="file"/>
             <span class="required-field pb-3"></span>
-            <label *ngIf="fileError" class="file-error-message">Plik musi być w formacie PDF</label>
-            <label *ngIf="!file && wasSubmitted" class="file-error-message">Pole wymagane</label>
+            <span *ngIf="invalidFileType && file" class="file-error-message">Plik musi być w formacie PDF</span>
+            <span *ngIf="!file && wasSubmitted" class="file-error-message">Pole wymagane</span>
           </div>
 
-          <!-- Submit -->
-          <button block="true" class="my-4 waves-effect z-depth-0 info-color-dark-button" mdbBtn mdbWavesEffect
+          <!-- Submit  -->
+          <button block="true" class=" waves-effect z-depth-0 primary-dark-outlined-button" mdbBtn mdbWavesEffect
                   outline="true"
                   type="submit">
             <span *ngIf="!showSpinner">Submit</span>
@@ -81,6 +82,33 @@
           <!--./Form-->
         </form>
       </div>
+
+      <!--SuccessView-->
+      <div *ngIf="showSuccessView" class="modal-body">
+        <div class="text-center">
+          <i class="fas fa-check fa-4x mb-3 animated rotateIn" id="success-icon"></i>
+          <p>Dokument został utworzony i oczekuje na akceptację administratora.
+            <br>Do tego czasu jest widoczny tylko dla Ciebie.</p>
+        </div>
+
+        <button (click)="addDocumentModal.hide()" block="true"
+                class=" waves-effect z-depth-0 primary-dark-outlined-button" mdbBtn
+                mdbWavesEffect
+                outline="true"
+                type="submit">
+          Rozumiem
+        </button>
+      </div>
+
+      <!--SuccessView Footer-->
+      <!--<div *ngIf="showSuccessView" class="modal-footer justify-content-center">-->
+      <!--<a type="button" mdbBtn color="success" class="waves-effect" mdbWavesEffect>Get it now-->
+      <!--<i class="far fa-gem ml-1"></i>-->
+      <!--</a>-->
+      <!--<a type="button" mdbBtn color="success" outline="true" class="waves-effect" mdbWavesEffect-->
+      <!--(click)="frame.hide()">No, thanks</a>-->
+      <!--</div>-->
+
     </div>
 
 

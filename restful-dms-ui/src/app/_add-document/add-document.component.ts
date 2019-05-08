@@ -15,7 +15,7 @@ export class AddDocumentComponent implements AfterViewInit {
   file: File;
   showSpinner: boolean = false;
   showSuccessView: boolean = false;
-  fileError: boolean = false;
+  invalidFileType: boolean = false;
   wasSubmitted: boolean = false;
 
   @ViewChild('addDocumentModal')
@@ -43,10 +43,6 @@ export class AddDocumentComponent implements AfterViewInit {
     });
   }
 
-  closeModal() {
-    this.addDocumentModal.hide();
-  }
-
   ngAfterViewInit(): void {
     this.addDocumentModal.show();
   }
@@ -55,19 +51,19 @@ export class AddDocumentComponent implements AfterViewInit {
     this.eventService.hideAddDocumentComponentEvent.next();
   }
 
+  get fileInput() {
+    return this.addDocumentForm.get('description');
+  }
+
   onFileChange($event) {
     this.file = $event.target.files[0];
-    this.fileError = this.file.type != 'application/pdf';
+    this.invalidFileType = this.file.type != 'application/pdf';
   }
 
   onSubmit() {
     this.wasSubmitted = true;
 
-    if (this.addDocumentForm.invalid) {
-      return;
-    }
-
-    if (!this.file || this.fileError) {
+    if (this.addDocumentForm.invalid || !this.file || this.invalidFileType) {
       return;
     }
 
@@ -80,20 +76,8 @@ export class AddDocumentComponent implements AfterViewInit {
       type: "application/json"
     }));
 
-    this.sendDocumentCreationRequest(formData);
-  }
-
-  sendDocumentCreationRequest(formData) {
-    this.documentService
-      .upload(formData)
-      .subscribe(
-        response => {
-          console.log(JSON.stringify(response));
-        },
-        error => {
-          console.log(JSON.stringify(error));
-        }
-      ).add(() => this.showSpinner = false);
+    this.showSuccessView = true;
+    // this.sendDocumentCreationRequest(formData);
   }
 
   get title() {
@@ -107,4 +91,18 @@ export class AddDocumentComponent implements AfterViewInit {
   get description() {
     return this.addDocumentForm.get('description');
   }
+
+  sendDocumentCreationRequest(formData) {
+    this.documentService
+      .upload(formData)
+      .subscribe(
+        () => {
+          this.showSuccessView = true;
+        },
+        error => {
+          console.log(JSON.stringify(error));
+        }
+      ).add(() => this.showSpinner = false);
+  }
 }
+

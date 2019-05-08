@@ -35,6 +35,17 @@ main {
   border-radius: 20px;
   color: #0099CC;
   border: 2px solid #0099CC;
+
+  &:hover {
+    background-color: #0099CC;
+    color: ghostwhite;
+  }
+
+  &:active {
+    border: 2px solid #007399;
+    background-color: #007399;
+    color: lightgray;
+  }
 }
 
 .primary-button {

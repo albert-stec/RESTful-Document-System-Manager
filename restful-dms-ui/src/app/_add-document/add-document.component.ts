@@ -58,18 +58,6 @@ export class AddDocumentComponent implements AfterViewInit {
     this.invalidFileType = this.file.type != 'application/pdf';
   }
 
-  get title() {
-    return this.addDocumentForm.get('title');
-  }
-
-  get brief() {
-    return this.addDocumentForm.get('brief');
-  }
-
-  get description() {
-    return this.addDocumentForm.get('description');
-  }
-
   onSubmit() {
     this.wasSubmitted = true;
 
@@ -101,6 +89,18 @@ export class AddDocumentComponent implements AfterViewInit {
             "Wystąpił nieoczekiwany błąd.")
         }
       ).add(() => this.showSpinner = false);
+  }
+
+  get title() {
+    return this.addDocumentForm.get('title');
+  }
+
+  get brief() {
+    return this.addDocumentForm.get('brief');
+  }
+
+  get description() {
+    return this.addDocumentForm.get('description');
   }
 }
 

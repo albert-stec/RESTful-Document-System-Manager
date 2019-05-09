@@ -73,8 +73,7 @@ public class UserServiceImpl implements UserService {
 
     private void throwIfUsernameExists(String username) {
         if (userRepository.countByUsername(username) > 0) {
-            throw new ExistingUserException(Translator.toLocale("hello"));
-//            throw new ExistingUserException("User with that username already exists.");
+            throw new ExistingUserException("hello");
         }
     }
 

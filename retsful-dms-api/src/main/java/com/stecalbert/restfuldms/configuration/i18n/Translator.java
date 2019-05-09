@@ -1,5 +1,6 @@
 package com.stecalbert.restfuldms.configuration.i18n;
 
+import org.apache.commons.lang3.ArrayUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.i18n.LocaleContextHolder;
 import org.springframework.context.support.ResourceBundleMessageSource;
@@ -13,16 +14,14 @@ public final class Translator {
     private static ResourceBundleMessageSource messageSource;
 
     @Autowired
-    Translator(ResourceBundleMessageSource messageSource) {
+    public Translator(ResourceBundleMessageSource messageSource) {
         Translator.messageSource = messageSource;
     }
 
-    public static String toLocale(String msgCode) {
+    static String toLocale(String msgCode) {
         Locale locale = LocaleContextHolder.getLocale();
+        String message = messageSource.getMessage(msgCode, ArrayUtils.EMPTY_OBJECT_ARRAY, locale);
 
-        String s = messageSource.getMessage(msgCode, null, locale);
-        System.out.println(s);
-
-        return s;
+        return message;
     }
 }

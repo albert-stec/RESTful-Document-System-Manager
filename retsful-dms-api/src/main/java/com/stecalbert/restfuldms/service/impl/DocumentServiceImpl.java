@@ -1,6 +1,6 @@
 package com.stecalbert.restfuldms.service.impl;
 
-import com.stecalbert.restfuldms.exception.DocumentNotFoundException;
+import com.stecalbert.restfuldms.exception.NoEntityException;
 import com.stecalbert.restfuldms.model.constants.DocumentStatus;
 import com.stecalbert.restfuldms.model.dto.DocumentDto;
 import com.stecalbert.restfuldms.model.entity.DocumentEntity;
@@ -53,7 +53,7 @@ public class DocumentServiceImpl implements DocumentService {
                 optionalDocument.orElseThrow(() -> {
 //                    String message = Translator.toLocale("documentNotFoundExceptionMessage", id);
 //                    return new EntityNotFoundException(message);
-                    return new DocumentNotFoundException("documentNotFoundExceptionMessage", id);
+                    return new NoEntityException("documentNotFoundExceptionMessage", id);
                 });
 
         return modelMapper.map(documentEntity, DocumentDto.class);

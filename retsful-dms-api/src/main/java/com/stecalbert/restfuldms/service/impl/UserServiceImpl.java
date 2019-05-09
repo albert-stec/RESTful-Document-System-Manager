@@ -67,23 +67,18 @@ public class UserServiceImpl implements UserService {
 
         return userRepository
                 .findByUsername(principal.getName())
-                .orElseThrow(() -> {
-                    String message = Translator.toLocale("documentNotFoundExceptionMessage");
-                    return new UserNotFoundException(message);
-                });
+                .orElseThrow(() -> new UserNotFoundException("documentNotFoundExceptionMessage"));
     }
 
     private void throwIfUsernameExists(String username) {
         if (userRepository.countByUsername(username) > 0) {
-            String message = Translator.toLocale("existingUserExceptionMessage");
-            throw new ExistingUserException(message);
+            throw new ExistingUserException("existingUserExceptionMessage");
         }
     }
 
     private void throwIfEmailExists(String email) {
         if (userRepository.countByEmail(email) > 0) {
-            String message = Translator.toLocale("existingUserExceptionMessage");
-            throw new ExistingUserException(message);
+            throw new ExistingUserException("existingUserExceptionMessage");
         }
     }
 }

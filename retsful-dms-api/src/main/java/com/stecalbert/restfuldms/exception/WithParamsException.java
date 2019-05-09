@@ -1,14 +1,13 @@
 package com.stecalbert.restfuldms.exception;
 
-public class NotFoundException extends RuntimeException {
+public class WithParamsException extends RuntimeException {
     private Object[] params;
 
-    public NotFoundException(String message) {
-
+    public WithParamsException(String message) {
         super(message);
     }
 
-    public NotFoundException(String message, Object... params) {
+    public WithParamsException(String message, Object... params) {
         super(message);
         this.params = params;
     }

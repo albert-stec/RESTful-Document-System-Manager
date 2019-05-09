@@ -1,32 +1,36 @@
 package com.stecalbert.restfuldms.configuration.i18n;
 
-import com.stecalbert.restfuldms.exception.DocumentNotFoundException;
+import com.stecalbert.restfuldms.exception.WithParamsException;
 import org.apache.commons.lang3.ArrayUtils;
 import org.springframework.boot.web.servlet.error.DefaultErrorAttributes;
 import org.springframework.stereotype.Component;
 import org.springframework.web.context.request.WebRequest;
 
 import java.util.Map;
-import java.util.Objects;
+import java.util.Optional;
 
 @Component
 public class ErrorMessageTranslator extends DefaultErrorAttributes {
+
+    private static void messageToLocale(Throwable error, Map<String, Object> errorAttributes) {
+        Object[] params = getParamsIfPresent(error);
+        String localizedMessage = Translator.toLocale(error.getMessage(), params);
+        errorAttributes.put("message", localizedMessage);
+    }
+
+    private static Object[] getParamsIfPresent(Throwable error) {
+        return error instanceof WithParamsException
+                ? ((WithParamsException) error).getParams()
+                : ArrayUtils.EMPTY_OBJECT_ARRAY;
+    }
 
     @Override
     public Map<String, Object> getErrorAttributes(WebRequest webRequest, boolean includeStackTrace) {
         Map<String, Object> errorAttributes = super.getErrorAttributes(webRequest, includeStackTrace);
         final Throwable error = super.getError(webRequest);
-
-        if (Objects.nonNull(error.getMessage())) {
-            Object[] params = ArrayUtils.EMPTY_OBJECT_ARRAY;
-
-            if (error instanceof DocumentNotFoundException) {
-                params = ((DocumentNotFoundException) error).getParams();
-            }
-
-            String localizedMessage = Translator.toLocale(error.getMessage(), params);
-            errorAttributes.put("message", localizedMessage);
-        }
+        Optional
+                .ofNullable(error.getMessage())
+                .ifPresent(e -> messageToLocale(error, errorAttributes));
 
         return errorAttributes;
     }

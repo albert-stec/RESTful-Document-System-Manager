@@ -73,7 +73,7 @@ public class UserServiceImpl implements UserService {
 
     private void throwIfUsernameExists(String username) {
         if (userRepository.countByUsername(username) > 0) {
-            throw new ExistingUserException("hello");
+            throw new ExistingUserException("userNotFoundExceptionMessage");
         }
     }
 

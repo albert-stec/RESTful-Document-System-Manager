@@ -1,6 +1,7 @@
 package com.stecalbert.restfuldms.security;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.stecalbert.restfuldms.configuration.i18n.Translator;
 import com.stecalbert.restfuldms.model.entity.UserEntity;
 import org.springframework.http.HttpHeaders;
 import org.springframework.security.authentication.AuthenticationManager;
@@ -44,7 +45,8 @@ class JwtAuthenticationFilter extends UsernamePasswordAuthenticationFilter {
             return new ObjectMapper()
                     .readValue(request.getInputStream(), UserEntity.class);
         } catch (IOException e) {
-            throw new IllegalArgumentException("Error parsing application user data", e);
+            String message = Translator.toLocale("parsingUserDataExceptionMessage");
+            throw new IllegalArgumentException(message, e);
         }
     }
 

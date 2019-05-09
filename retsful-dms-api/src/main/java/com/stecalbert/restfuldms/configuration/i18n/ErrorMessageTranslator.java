@@ -12,6 +12,17 @@ import java.util.Optional;
 @Component
 public class ErrorMessageTranslator extends DefaultErrorAttributes {
 
+    @Override
+    public Map<String, Object> getErrorAttributes(WebRequest webRequest, boolean includeStackTrace) {
+        Map<String, Object> errorAttributes = super.getErrorAttributes(webRequest, includeStackTrace);
+        final Throwable error = super.getError(webRequest);
+        Optional
+                .ofNullable(error.getMessage())
+                .ifPresent(e -> messageToLocale(error, errorAttributes));
+
+        return errorAttributes;
+    }
+
     private static void messageToLocale(Throwable error, Map<String, Object> errorAttributes) {
         Object[] params = getParamsIfPresent(error);
         String localizedMessage = Translator.toLocale(error.getMessage(), params);
@@ -22,16 +33,5 @@ public class ErrorMessageTranslator extends DefaultErrorAttributes {
         return error instanceof WithParamsException
                 ? ((WithParamsException) error).getParams()
                 : ArrayUtils.EMPTY_OBJECT_ARRAY;
-    }
-
-    @Override
-    public Map<String, Object> getErrorAttributes(WebRequest webRequest, boolean includeStackTrace) {
-        Map<String, Object> errorAttributes = super.getErrorAttributes(webRequest, includeStackTrace);
-        final Throwable error = super.getError(webRequest);
-        Optional
-                .ofNullable(error.getMessage())
-                .ifPresent(e -> messageToLocale(error, errorAttributes));
-
-        return errorAttributes;
     }
 }

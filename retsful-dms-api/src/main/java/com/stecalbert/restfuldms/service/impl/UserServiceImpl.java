@@ -1,5 +1,6 @@
 package com.stecalbert.restfuldms.service.impl;
 
+import com.stecalbert.restfuldms.configuration.i18n.Translator;
 import com.stecalbert.restfuldms.exception.ExistingUserException;
 import com.stecalbert.restfuldms.exception.UserNotFoundException;
 import com.stecalbert.restfuldms.model.dto.UserDto;
@@ -23,6 +24,9 @@ public class UserServiceImpl implements UserService {
     private final UserRepository userRepository;
     private final BCryptPasswordEncoder bCryptPasswordEncoder;
     private final ModelMapper modelMapper;
+
+    @Autowired
+    Translator translator;
 
     @Autowired
     public UserServiceImpl(UserRepository userRepository, BCryptPasswordEncoder bCryptPasswordEncoder, ModelMapper modelMapper) {
@@ -69,7 +73,8 @@ public class UserServiceImpl implements UserService {
 
     private void throwIfUsernameExists(String username) {
         if (userRepository.countByUsername(username) > 0) {
-            throw new ExistingUserException("User with that username already exists.");
+            throw new ExistingUserException(Translator.toLocale("hello"));
+//            throw new ExistingUserException("User with that username already exists.");
         }
     }
 

@@ -1,6 +1,6 @@
 package com.stecalbert.restfuldms.service.impl;
 
-import com.stecalbert.restfuldms.configuration.i18n.Translator;
+import com.stecalbert.restfuldms.exception.DocumentNotFoundException;
 import com.stecalbert.restfuldms.model.constants.DocumentStatus;
 import com.stecalbert.restfuldms.model.dto.DocumentDto;
 import com.stecalbert.restfuldms.model.entity.DocumentEntity;
@@ -14,7 +14,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import javax.persistence.EntityNotFoundException;
 import java.lang.reflect.Type;
 import java.time.LocalDateTime;
 import java.util.List;
@@ -52,8 +51,9 @@ public class DocumentServiceImpl implements DocumentService {
         Optional<DocumentEntity> optionalDocument = documentRepository.findById(id);
         DocumentEntity documentEntity =
                 optionalDocument.orElseThrow(() -> {
-                    String message = Translator.toLocale("documentNotFoundExceptionMessage", id);
-                    return new EntityNotFoundException(message);
+//                    String message = Translator.toLocale("documentNotFoundExceptionMessage", id);
+//                    return new EntityNotFoundException(message);
+                    return new DocumentNotFoundException("documentNotFoundExceptionMessage", id);
                 });
 
         return modelMapper.map(documentEntity, DocumentDto.class);

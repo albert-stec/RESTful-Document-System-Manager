@@ -67,19 +67,18 @@ public class UserServiceImpl implements UserService {
 
         return userRepository
                 .findByUsername(principal.getName())
-                .orElseThrow(() -> new UserNotFoundException("There was a problem with your authentication. " +
-                        "Couldn't find user with given username."));
+                .orElseThrow(() -> new UserNotFoundException("userNotFoundExceptionMessage"));
     }
 
     private void throwIfUsernameExists(String username) {
         if (userRepository.countByUsername(username) > 0) {
-            throw new ExistingUserException("hello");
+            throw new ExistingUserException("existingUserExceptionMessage");
         }
     }
 
     private void throwIfEmailExists(String email) {
         if (userRepository.countByEmail(email) > 0) {
-            throw new ExistingUserException("User with that email already exists.");
+            throw new ExistingUserException("existingUserEmailExceptionMessage");
         }
     }
 }

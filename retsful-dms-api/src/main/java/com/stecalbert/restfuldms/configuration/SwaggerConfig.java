@@ -24,7 +24,6 @@ public class SwaggerConfig {
         return new Docket(DocumentationType.SWAGGER_2)
                 .groupName("RESTful DMS API")
                 .securitySchemes(Collections.singletonList(securitySchemes()))
-//                .securityContexts(Collections.singletonList(authTokenSecurityContext()))
                 .apiInfo(apiInfo())
                 .select()
                 .apis(RequestHandlerSelectors.basePackage("com.stecalbert.restfuldms"))
@@ -41,24 +40,4 @@ public class SwaggerConfig {
     private static SecurityScheme securitySchemes() {
         return new ApiKey(HttpHeaders.AUTHORIZATION, HttpHeaders.AUTHORIZATION, "header");
     }
-
-//    private static SecurityContext authTokenSecurityContext() {
-//        return SecurityContext.builder()
-//                .securityReferences(Collections.singletonList(
-//                        new SecurityReference("Bearer Token", new AuthorizationScope[0])
-//                ))
-//                .forPaths(customRequestHandlers())
-//                .forHttpMethods()
-//                .build();
-//    }
-//
-//
-//    private Predicate<RequestHandler> customRequestHandlers() {
-//        return (RequestHandler input) -> {
-//            Set<RequestMethod> methods = input.supportedMethods();
-//            return (methods.contains(RequestMethod.GET) || methods.contains(RequestMethod.POST));
-//        };
-//    }
-
-
 }

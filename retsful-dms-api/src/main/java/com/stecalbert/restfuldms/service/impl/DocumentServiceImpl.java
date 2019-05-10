@@ -50,11 +50,8 @@ public class DocumentServiceImpl implements DocumentService {
     public DocumentDto findById(Long id) {
         Optional<DocumentEntity> optionalDocument = documentRepository.findById(id);
         DocumentEntity documentEntity =
-                optionalDocument.orElseThrow(() -> {
-//                    String message = Translator.toLocale("documentNotFoundExceptionMessage", id);
-//                    return new EntityNotFoundException(message);
-                    return new NoEntityException("documentNotFoundExceptionMessage", id);
-                });
+                optionalDocument.orElseThrow(() ->
+                        new NoEntityException("documentNotFoundExceptionMessage", id));
 
         return modelMapper.map(documentEntity, DocumentDto.class);
     }

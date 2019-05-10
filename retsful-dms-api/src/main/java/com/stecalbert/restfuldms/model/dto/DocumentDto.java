@@ -21,12 +21,7 @@ public class DocumentDto {
 
     private String description;
 
-//    private @NotNull String base64File;
-
     private @NotNull byte[] file;
-
-
-//    private @NotNull MultipartFile file;
 
     private String ownerUsername;
 }

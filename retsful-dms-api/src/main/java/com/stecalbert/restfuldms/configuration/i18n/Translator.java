@@ -13,14 +13,12 @@ public final class Translator {
     private static ResourceBundleMessageSource messageSource;
 
     @Autowired
-    public Translator(ResourceBundleMessageSource messageSource) {
+    private Translator(ResourceBundleMessageSource messageSource) {
         Translator.messageSource = messageSource;
     }
 
-    public static String toLocale(String msgCode, Object... params) {
+    static String toLocale(String msgCode, Object... params) {
         Locale locale = LocaleContextHolder.getLocale();
-        String message = messageSource.getMessage(msgCode, params, locale);
-
-        return message;
+        return messageSource.getMessage(msgCode, params, locale);
     }
 }

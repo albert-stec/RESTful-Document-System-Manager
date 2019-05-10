@@ -18,7 +18,7 @@ export class LoginComponent implements OnInit {
   submitted = false;
   returnUrl: string;
   showLoginCard = true;
-  title = 'Sign in';
+  title = 'login.signUp';
 
   constructor(
     private formBuilder: FormBuilder,
@@ -128,6 +128,6 @@ export class LoginComponent implements OnInit {
     this.loginForm.reset();
     this.registerForm.reset();
     this.showLoginCard = !this.showLoginCard;
-    this.title = this.showLoginCard === true ? 'Sign in' : 'Sign up';
+    this.title = this.showLoginCard === true ? 'login.signIn' : 'login.signUp';
   }
 }

@@ -11,30 +11,30 @@
 
       <!--Documents-->
 
-      <h5 class="list-group-item-title menu-section-header">Dokumenty</h5>
+      <h5 class="list-group-item-title menu-section-header">{{ 'navigation.documents.title' | translate }}</h5>
 
       <a class="list-group-item list-group-item-action waves-effect" href="" routerLink="/home"
          routerLinkActive="active">
         <mdb-icon class="mr-3" fas icon="folder-open"></mdb-icon>
-        Wszystkie
+        {{ 'navigation.documents.all' | translate }}
       </a>
 
       <a class="list-group-item list-group-item-action waves-effect " href="#" routerLink="#"
          routerLinkActive="active">
         <mdb-icon class="mr-3" fas icon="star"></mdb-icon>
-        Ulubione
+        {{ 'navigation.documents.favorites' | translate }}
       </a>
 
       <a class="list-group-item list-group-item-action waves-effect " href="#" routerLink="#"
          routerLinkActive="active">
         <mdb-icon class="mr-3" fas icon="user"></mdb-icon>
-        Własne
+        {{ 'navigation.documents.own' | translate }}
       </a>
 
       <a class="list-group-item list-group-item-action waves-effect " href="#" routerLink="#"
          routerLinkActive="active">
         <mdb-icon class="mr-3" fas icon="history"></mdb-icon>
-        Rejestr zdarzeń
+        {{ 'navigation.documents.events' | translate }}
       </a>
 
       <button (click)="openAddDocumentModal()"
@@ -44,55 +44,57 @@
               mdbWavesEffect
               rounded="true"
               type="button">
-        Utwórz nowy
+        <mdb-icon class="mr-1" fas icon="plus"></mdb-icon>
+        {{ 'navigation.documents.add' | translate }}
       </button>
 
 
       <!--/Documents-->
 
       <!--Tickets-->
-      <h5 class="list-group-item-title menu-section-header">Zgłoszenia</h5>
+      <h5 class="list-group-item-title menu-section-header">{{ 'navigation.tickets.title' | translate }}
+      </h5>
 
       <a class="list-group-item list-group-item-action waves-effect" href="#" routerLink="#"
          routerLinkActive="active">
         <mdb-icon class="mr-3" fas icon="hourglass-half"></mdb-icon>
-        Otwarte
+        {{ 'navigation.tickets.open' | translate }}
       </a>
 
       <a class="list-group-item list-group-item-action waves-effect" href="#" routerLink="#"
          routerLinkActive="active">
         <mdb-icon class="mr-3" fas icon="receipt"></mdb-icon>
-        Historia
+        {{ 'navigation.tickets.history' | translate }}
       </a>
 
       <a class="list-group-item list-group-item-action waves-effect" href="#" routerLink="#"
          routerLinkActive="active">
         <mdb-icon class="mr-3" fas icon="bullhorn"></mdb-icon>
-        Zgłoś problem
+        {{ 'navigation.tickets.report' | translate }}
       </a>
       <!--/Tickets-->
 
-      <!--Tickets-->
-      <h5 class="list-group-item-title menu-section-header">Użytkownicy</h5>
+      <!--Users-->
+      <h5 class="list-group-item-title menu-section-header">{{ 'navigation.users.title' | translate }}</h5>
 
       <a class="list-group-item list-group-item-action waves-effect" href="#" routerLink="#"
          routerLinkActive="active">
         <mdb-icon class="mr-3" fas icon="address-book"></mdb-icon>
-        Przeglądaj
+        {{ 'navigation.users.browse' | translate }}
       </a>
 
       <a class="list-group-item list-group-item-action waves-effect" href="#" routerLink="#"
          routerLinkActive="active">
         <mdb-icon class="mr-3" fas icon="ban"></mdb-icon>
-        Zablokowani
+        {{ 'navigation.users.banned' | translate }}
       </a>
 
       <a class="list-group-item list-group-item-action waves-effect" href="#" routerLink="#"
          routerLinkActive="active">
         <mdb-icon class="mr-3" fas icon="paper-plane"></mdb-icon>
-        Powiadom
+        {{ 'navigation.users.notify' | translate }}
       </a>
-      <!--/Tickets-->
+      <!--/Users-->
     </div>
 
   </div>
@@ -106,7 +108,7 @@
     <!-- Navbar brand -->
     <logo class="ml-5">
       <a class="navbar-brand" href="">
-        <strong class="white-text" id="logo-text">RESTful DMS</strong>
+        <strong class="white-text" id="logo-text">{{ 'app.name' | translate }}</strong>
       </a>
     </logo>
 
@@ -122,16 +124,16 @@
             <div class="btn-group w-100" mdbDropdown>
               <a class="nav-link dropdown-toggle waves-light w-100" dropdownToggle mdbWavesEffect mdbWavesEffect
                  type="button">
-                Dokumenty
+                {{ 'navigation.documents.title' | translate }}
                 <span class="caret"></span>
               </a>
               <div class="dropdown-menu dropdown-primary pt-0 pb-0 w-100">
-                <a class="dropdown-item " href="#">Wszystkie</a>
-                <a class="dropdown-item" href="#">Ulubione</a>
-                <a class="dropdown-item" href="#">Własne</a>
-                <a class="dropdown-item" href="#">Rejestr zdarzeń</a>
+                <a class="dropdown-item " href="#">{{ 'navigation.documents.all' | translate }}</a>
+                <a class="dropdown-item" href="#">{{ 'navigation.documents.favorites' | translate }}</a>
+                <a class="dropdown-item" href="#">{{ 'navigation.documents.own' | translate }}</a>
+                <a class="dropdown-item" href="#">{{ 'navigation.documents.events' | translate }}</a>
                 <div class="divider dropdown-divider"></div>
-                <a class="dropdown-item" href="#">Utwórz nowy</a>
+                <a class="dropdown-item" href="#">{{ 'navigation.documents.add' | translate }}</a>
               </div>
             </div>
           </a>
@@ -142,14 +144,14 @@
             <div class="btn-group w-100" mdbDropdown>
               <a class="nav-link dropdown-toggle waves-light w-100" dropdownToggle mdbWavesEffect mdbWavesEffect
                  type="button">
-                Zgłoszenia
+                {{ 'navigation.tickets.title' | translate }}
                 <span class="caret"></span>
               </a>
               <div class="dropdown-menu dropdown-primary pt-0 pb-0 w-100">
-                <a class="dropdown-item" href="#">Otwarte</a>
-                <a class="dropdown-item" href="#">Historia</a>
+                <a class="dropdown-item" href="#">{{ 'navigation.tickets.open' | translate }}</a>
+                <a class="dropdown-item" href="#">{{ 'navigation.tickets.history' | translate }}</a>
                 <div class="divider dropdown-divider"></div>
-                <a class="dropdown-item" href="#">Zgłoś problem</a>
+                <a class="dropdown-item" href="#">{{ 'navigation.tickets.report' | translate }}</a>
               </div>
             </div>
           </a>
@@ -160,14 +162,14 @@
             <div class="btn-group w-100" mdbDropdown>
               <a class="nav-link dropdown-toggle waves-light w-100" dropdownToggle mdbWavesEffect mdbWavesEffect
                  type="button">
-                Użytkownicy
+                {{ 'navigation.users.title' | translate }}
                 <span class="caret"></span>
               </a>
               <div class="dropdown-menu dropdown-menu-right dropdown-primary pt-0 pb-0 w-100">
-                <a class="dropdown-item" href="#">Przeglądaj</a>
-                <a class="dropdown-item" href="#">Zablokowani</a>
+                <a class="dropdown-item" href="#">{{ 'navigation.users.browse' | translate }}</a>
+                <a class="dropdown-item" href="#">{{ 'navigation.users.banned' | translate }}</a>
                 <div class="divider dropdown-divider"></div>
-                <a class="dropdown-item" href="#">Powiadom</a>
+                <a class="dropdown-item" href="#">{{ 'navigation.users.notify' | translate }}</a>
               </div>
             </div>
           </a>
@@ -190,11 +192,12 @@
             <div class="btn-group dropleft" mdbDropdown>
               <mdb-icon class="text-white nav-icon" fas icon="user" mdbDropdownToggle></mdb-icon>
               <div class="dropdown-menu dropdown-menu-right dropdown-primary pt-0 pb-0">
-                <a class="dropdown-item" href="#">Twój profil</a>
-                <a class="dropdown-item" href="#">Ustawienia</a>
-                <a class="dropdown-item" href="#">Pomoc</a>
+                <a class="dropdown-item" href="#">{{ 'profile.title' | translate }}</a>
+                <a class="dropdown-item" href="#">{{ 'profile.settings' | translate }}</a>
+                <a class="dropdown-item" href="#">{{ 'profile.help' | translate }}</a>
                 <div class="divider dropdown-divider"></div>
-                <a (click)="logout()" class="dropdown-item" href="javascript:void(0)">Wyloguj</a>
+                <a (click)="logout()" class="dropdown-item"
+                   href="javascript:void(0)">{{ 'profile.signOut' | translate }}</a>
               </div>
             </div>
           </a>

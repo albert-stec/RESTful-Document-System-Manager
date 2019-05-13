@@ -1,4 +1,7 @@
 {
+  "app": {
+    "name": "RESTful DMS"
+  },
   "login": {
     "signUp": "Sign up",
     "signIn": "Sign in",
@@ -23,6 +26,34 @@
     "registerSuccessTitle": "Registered!",
     "registerSuccessMsg": "You can now sign in.",
     "registerErrorMsg": "Try again with different one."
+  },
+  "navigation": {
+    "documents": {
+      "title": "Documents",
+      "all": "All",
+      "favorites": "Favorites",
+      "own": "Own",
+      "events": "Activity history ",
+      "add": "Add"
+    },
+    "tickets": {
+      "title": "Tickets",
+      "open": "Open",
+      "history": "History",
+      "report": "Create"
+    },
+    "users": {
+      "title": "Users",
+      "browse": "Browse",
+      "banned": "Banned",
+      "notify": "Send notification"
+    }
+  },
+  "profile": {
+    "title": "Your profile",
+    "settings": "Settings",
+    "help": "Help",
+    "signOut": "Sign out"
   }
 }
 

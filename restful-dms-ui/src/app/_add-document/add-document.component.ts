@@ -5,6 +5,7 @@ import {ModalDirective} from "angular-bootstrap-md";
 import {Document} from "../models/document";
 import {DocumentService} from "../services/file.service";
 import {ToastrService} from "ngx-toastr";
+import {TranslateService} from "@ngx-translate/core";
 
 @Component({
   selector: 'app-add-document',
@@ -26,7 +27,8 @@ export class AddDocumentComponent implements AfterViewInit {
     private eventService: EventService,
     private formBuilder: FormBuilder,
     private documentService: DocumentService,
-    private toastr: ToastrService
+    private toastr: ToastrService,
+    private translate: TranslateService
   ) {
     this.addDocumentForm = this.formBuilder.group({
       title: ['',
@@ -85,8 +87,8 @@ export class AddDocumentComponent implements AfterViewInit {
           this.showSuccessView = true;
         },
         () => {
-          this.toastr.error("Spróbuj ponownie później.",
-            "Wystąpił nieoczekiwany błąd.")
+          this.toastr.error(this.translate.instant('unexpectedErrorMsg'),
+            this.translate.instant('unexpectedErrorTitle'))
         }
       ).add(() => this.showSpinner = false);
   }

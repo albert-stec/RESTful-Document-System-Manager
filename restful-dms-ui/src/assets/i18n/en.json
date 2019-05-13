@@ -2,6 +2,13 @@
   "app": {
     "name": "RESTful DMS"
   },
+  "shared": {
+    "submit": "Submit",
+    "loading": "Loading...",
+    "ok": "OK",
+    "unexpectedErrorTitle": "An unexpected error occurred",
+    "unexpectedErrorMsg": "Please try again later."
+  },
   "login": {
     "signUp": "Sign up",
     "signIn": "Sign in",
@@ -54,6 +61,24 @@
     "settings": "Settings",
     "help": "Help",
     "signOut": "Sign out"
+  },
+  "add-document": {
+    "header": "New document",
+    "title": "Title",
+    "titleRequired": "Title is required",
+    "titleMin": "Title must be at least 3 characters long",
+    "titleMax": "Title must be at most 50 characters long",
+    "brief": "Brief desription",
+    "briefRequired": "Brief desription is required",
+    "briefMin": "Brief desription must be at least 3 characters long",
+    "briefMax": "Brief desription must be at most 50 characters long",
+    "description": "Description",
+    "descriptionMax": "Description must be at most 255 characters long",
+    "fileInvalidFormat": "File must be a PDF",
+    "fileRequired": "File is required",
+    "successTitle": "Document was successfully created and is awaiting for acceptation",
+    "successMsg": "Before acceptation only you can browse it."
   }
 }
+
 

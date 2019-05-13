@@ -5,6 +5,7 @@ import {ActivatedRoute, Router} from '@angular/router';
 import {UserService} from "../services/user.service";
 import {ToastrService} from "ngx-toastr";
 import {User} from "../models/user";
+import {TranslateService} from "@ngx-translate/core";
 
 @Component({
   selector: 'app-login',
@@ -18,7 +19,7 @@ export class LoginComponent implements OnInit {
   submitted = false;
   returnUrl: string;
   showLoginCard = true;
-  title = 'Sign in';
+  title = 'login.signIn';
 
   constructor(
     private formBuilder: FormBuilder,
@@ -26,7 +27,8 @@ export class LoginComponent implements OnInit {
     private router: Router,
     private authenticationService: AuthenticationService,
     private userService: UserService,
-    private toastr: ToastrService
+    private toastr: ToastrService,
+    private translate: TranslateService
   ) {
   }
 
@@ -93,8 +95,8 @@ export class LoginComponent implements OnInit {
           this.loading = false;
 
           if (error.status === 401) {
-            this.toastr.error("Enter valid credentials and try again.",
-              "Invalid username or password.")
+            this.toastr.error(this.translate.instant('login.credentialsErrorMsg'),
+              this.translate.instant('login.credentialsErrorTitle'))
           }
         }
       )
@@ -112,12 +114,13 @@ export class LoginComponent implements OnInit {
     this.userService.register(user)
       .subscribe(
         () => {
-          this.toastr.success('You can now sign in.', 'Registered!');
+          this.toastr.success(this.translate.instant('login.registerSuccessMsg'),
+            this.translate.instant('login.registerSuccessTitle'));
           this.onSwitchLoginAndRegisterForm();
         },
         err => {
           if (err.status === 409) {
-            this.toastr.error("Try again with different one.",
+            this.toastr.error(this.translate.instant('login.registerErrorMsg'),
               err.message)
           }
         })
@@ -128,6 +131,6 @@ export class LoginComponent implements OnInit {
     this.loginForm.reset();
     this.registerForm.reset();
     this.showLoginCard = !this.showLoginCard;
-    this.title = this.showLoginCard === true ? 'Sign in' : 'Sign up';
+    this.title = this.showLoginCard === true ? 'login.signIn' : 'login.signUp';
   }
 }

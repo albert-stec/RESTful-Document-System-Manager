@@ -1,0 +1,84 @@
+{
+  "app": {
+    "name": "RESTful DMS"
+  },
+  "shared": {
+    "submit": "Submit",
+    "loading": "Loading...",
+    "ok": "OK",
+    "unexpectedErrorTitle": "An unexpected error occurred",
+    "unexpectedErrorMsg": "Please try again later."
+  },
+  "login": {
+    "signUp": "Sign up",
+    "signIn": "Sign in",
+    "username": "Username",
+    "usernameRequired": "Username is required",
+    "usernameMin": "Username must be at least 5 characters  long",
+    "password": "Password",
+    "passwordRequired": "Password is required",
+    "passwordValidation": "Password must be at least 8 characters long and contain at least one lowercase letter, uppercase letter, number and special character",
+    "notMember": "Not a member?",
+    "firstName": "First Name",
+    "firstNameRequired": "First Name is required",
+    "lastName": "Last Name",
+    "lastNameRequired": "Last Name is required",
+    "lastNameValidation": "Last Name must contain only letters",
+    "email": "E-mail",
+    "emailRequired": "E-mail is required",
+    "emailValidation": "Provide a valid email address",
+    "isMember": "Already a member?",
+    "credentialsErrorMsg": "Enter valid credentials and try again.",
+    "credentialsErrorTitle": "Invalid username or password.",
+    "registerSuccessTitle": "Registered!",
+    "registerSuccessMsg": "You can now sign in.",
+    "registerErrorMsg": "Try again with different one."
+  },
+  "navigation": {
+    "documents": {
+      "title": "Documents",
+      "all": "All",
+      "favorites": "Favorites",
+      "own": "Own",
+      "events": "Activity history ",
+      "add": "Add"
+    },
+    "tickets": {
+      "title": "Tickets",
+      "open": "Open",
+      "history": "History",
+      "report": "Create"
+    },
+    "users": {
+      "title": "Users",
+      "browse": "Browse",
+      "banned": "Banned",
+      "notify": "Send notification"
+    }
+  },
+  "profile": {
+    "title": "Your profile",
+    "settings": "Settings",
+    "help": "Help",
+    "signOut": "Sign out"
+  },
+  "add-document": {
+    "header": "New document",
+    "title": "Title",
+    "titleRequired": "Title is required",
+    "titleMin": "Title must be at least 3 characters long",
+    "titleMax": "Title must be at most 50 characters long",
+    "brief": "Brief description",
+    "briefRequired": "Brief description is required",
+    "briefMin": "Brief description must be at least 3 characters long",
+    "briefMax": "Brief description must be at most 50 characters long",
+    "description": "Description",
+    "descriptionMax": "Description must be at most 255 characters long",
+    "fileInvalidFormat": "File must be a PDF",
+    "fileRequired": "File is required",
+    "successTitle": "Document was successfully created and is awaiting for acceptation",
+    "successMsg": "Before acceptation only you can browse it."
+  }
+}
+
+

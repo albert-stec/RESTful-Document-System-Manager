@@ -10,7 +10,8 @@
     <div class="modal-content mb-0" id="addDocumentFormContent">
       <!--Header-->
       <div class="modal-header text-center info-color-dark">
-        <h4 class="modal-title white-text  w-100 font-weight-bold py-2">Nowy dokument</h4>
+        <h4
+          class="modal-title white-text  w-100 font-weight-bold py-2">{{ 'add-document.header' | translate }}</h4>
         <button (click)="addDocumentModal.hide()" [disabled]="showSpinner" aria-label="Close" class="close"
                 data-dismiss="modal"
                 type="button">
@@ -26,13 +27,13 @@
             <input [validateSuccess]="false" class="form-control" formControlName="title" id="title" mdbInput
                    mdbValidate type="text">
             <label data-error="wrong" data-success="right" for="title">
-              Nazwa
+              {{ 'add-document.title' | translate }}
               <span class="required-field"></span>
             </label>
             <mdb-error *ngIf="title.invalid && (title.dirty || title.touched || wasSubmitted)">
-              <span *ngIf="title.errors.required">Pole wymagane</span>
-              <span *ngIf="title.errors.minlength">Minimalna ilość znaków: 3</span>
-              <span *ngIf="title.errors.maxlength">Maksymalna ilość znaków: 50</span>
+              <span *ngIf="title.errors.required">{{ 'add-document.titleRequired' | translate }}</span>
+              <span *ngIf="title.errors.minlength">{{ 'add-document.titleMin' | translate }}</span>
+              <span *ngIf="title.errors.maxlength">{{ 'add-document.titleMax' | translate }}</span>
             </mdb-error>
           </div>
           <!--Brief-->
@@ -40,13 +41,13 @@
             <input [validateSuccess]="false" class="form-control" formControlName="brief" id="brief" mdbInput
                    mdbValidate type="text">
             <label data-error="wrong" data-success="right" for="brief">
-              Krótki opis
+              {{ 'add-document.brief' | translate }}
               <span class="required-field"></span>
             </label>
             <mdb-error *ngIf="brief.invalid && (brief.dirty || brief.touched || wasSubmitted)">
-              <span *ngIf="brief.errors.required">Pole wymagane</span>
-              <span *ngIf="brief.errors.minlength">Minimalna ilość znaków: 3</span>
-              <span *ngIf="brief.errors.maxlength">Maksymalna ilość znaków: 80</span>
+              <span *ngIf="brief.errors.required">{{ 'add-document.briefRequired' | translate }}</span>
+              <span *ngIf="brief.errors.minlength">{{ 'add-document.briefMin' | translate }}</span>
+              <span *ngIf="brief.errors.maxlength">{{ 'add-document.briefMax' | translate }}</span>
             </mdb-error>
           </div>
           <!--Description-->
@@ -55,28 +56,30 @@
                       id="description" mdbInput mdbValidate rows="3"
                       type="text"></textarea>
             <label for="description">
-              Opis
+              {{ 'add-document.description' | translate }}
             </label>
             <mdb-error *ngIf="description.invalid && (description.dirty || description.touched || wasSubmitted)">
-              <span *ngIf="description.errors.maxlength">Maksymalna ilość znaków: 255</span>
+              <span *ngIf="description.errors.maxlength">{{ 'add-document.descriptionMax' | translate }}</span>
             </mdb-error>
           </div>
           <!--File-->
           <div class="md-form file-field">
             <input (change)="onFileChange($event)" id="file" name="file" style="width: 235px" type="file"/>
             <span class="required-field pb-3"></span>
-            <label *ngIf="invalidFileType && file" class="file-error-message">Plik musi być w formacie PDF</label>
-            <label *ngIf="!file && wasSubmitted" class="file-error-message">Pole wymagane</label>
+            <label *ngIf="invalidFileType && file"
+                   class="file-error-message">{{ 'add-document.fileInvalidFormat' | translate }}</label>
+            <label *ngIf="!file && wasSubmitted"
+                   class="file-error-message">{{ 'add-document.fileRequired' | translate }}</label>
           </div>
 
           <!-- Submit  -->
           <button block="true" class=" waves-effect z-depth-0 primary-dark-outlined-button" mdbBtn mdbWavesEffect
                   outline="true"
                   type="submit">
-            <span *ngIf="!showSpinner">Submit</span>
+            <span *ngIf="!showSpinner">{{ 'shared.submit' | translate }}</span>
             <span *ngIf="showSpinner">
               <span aria-hidden="true" class="mr-2 spinner-border spinner-border-sm" role="status"></span>
-              <span>Loading...</span>
+              <span>{{ 'shared.loading' | translate }}</span>
             </span>
           </button>
           <!--./Form-->
@@ -87,8 +90,8 @@
       <div *ngIf="showSuccessView" class="modal-body">
         <div class="text-center">
           <i class="fas fa-check fa-4x mb-3 animated rotateIn" id="success-icon"></i>
-          <p>Dokument został utworzony i oczekuje na akceptację administratora.
-            <br>Do tego czasu jest widoczny tylko dla Ciebie.</p>
+          <p>{{ 'add-document.successTitle' | translate }}
+            <br>{{ 'add-document.successMsg' | translate }}</p>
         </div>
 
         <button (click)="addDocumentModal.hide()" block="true"
@@ -96,7 +99,7 @@
                 mdbWavesEffect
                 outline="true"
                 type="submit">
-          Rozumiem
+          {{ 'shared.ok' | translate }}
         </button>
       </div>
     </div>

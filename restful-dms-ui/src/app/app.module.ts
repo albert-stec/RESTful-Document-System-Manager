@@ -6,7 +6,7 @@ import {IconsModule, MDBBootstrapModule} from 'angular-bootstrap-md';
 import {LoginComponent} from './_login/login.component';
 import {routing} from './app-routing.module';
 import {HomeComponent} from './_home/home.component';
-import {HTTP_INTERCEPTORS, HttpClientModule} from '@angular/common/http';
+import {HTTP_INTERCEPTORS, HttpClient, HttpClientModule} from '@angular/common/http';
 import {ErrorInterceptor} from './interceptors/error.interceptor';
 import {JwtInterceptor} from './interceptors/jwt.interceptor';
 import {BrowserAnimationsModule} from "@angular/platform-browser/animations";
@@ -15,6 +15,9 @@ import {NavigationComponent} from './_navigation/navigation.component';
 import {FileComponent} from './_file/file.component';
 import {AddDocumentComponent} from './_add-document/add-document.component';
 import {NgbModule} from '@ng-bootstrap/ng-bootstrap';
+import {TranslateLoader, TranslateModule} from '@ngx-translate/core';
+import {TranslateHttpLoader} from "@ngx-translate/http-loader";
+import {LanguageInterceptor} from "./interceptors/language.interceptor";
 
 @NgModule({
   declarations: [
@@ -41,13 +44,26 @@ import {NgbModule} from '@ng-bootstrap/ng-bootstrap';
       positionClass: 'toast-top-center',
       preventDuplicates: true,
     }),
-    MDBBootstrapModule.forRoot()
+    MDBBootstrapModule.forRoot(),
+    TranslateModule.forRoot({
+      loader: {
+        provide: TranslateLoader,
+        useFactory: HttpLoaderFactory,
+        deps: [HttpClient]
+      }
+    })
   ],
   schemas: [NO_ERRORS_SCHEMA],
   providers: [
     {provide: HTTP_INTERCEPTORS, useClass: JwtInterceptor, multi: true},
     {provide: HTTP_INTERCEPTORS, useClass: ErrorInterceptor, multi: true},
+    {provide: HTTP_INTERCEPTORS, useClass: LanguageInterceptor, multi: true},
   ], bootstrap: [AppComponent]
 })
+
 export class AppModule {
+}
+
+export function HttpLoaderFactory(http: HttpClient) {
+  return new TranslateHttpLoader(http);
 }

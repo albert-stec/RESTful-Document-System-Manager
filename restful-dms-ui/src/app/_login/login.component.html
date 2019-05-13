@@ -20,10 +20,11 @@
                 <div class="md-form">
                   <input type="text" id="usernameLogin" class="form-control" formControlName="username"
                          [ngClass]="{ 'is-invalid': submitted && loginFormControls.username.errors }" mdbInput/>
-                  <label for="usernameLogin">Username</label>
+                  <label for="usernameLogin">{{ 'login.username' | translate }}</label>
 
                   <div *ngIf="submitted && loginFormControls.username.errors" class="invalid-feedback">
-                    <div *ngIf="loginFormControls.username.errors.required">Username is required</div>
+                    <div
+                      *ngIf="loginFormControls.username.errors.required">{{ 'login.usernameRequired' | translate }}</div>
                   </div>
                 </div>
 
@@ -31,22 +32,11 @@
                 <div class="md-form">
                   <input type="password" id="passwordLogin" class="form-control" formControlName="password"
                          [ngClass]="{ 'is-invalid': submitted && loginFormControls.password.errors }" mdbInput/>
-                  <label for="passwordLogin">Password</label>
+                  <label for="passwordLogin">{{ 'login.password' | translate }}</label>
 
                   <div *ngIf="submitted && loginFormControls.password.errors" class="invalid-feedback">
-                    <div *ngIf="loginFormControls.password.errors.required">Password is required</div>
-                  </div>
-                </div>
-
-                <!-- Remember me container -->
-                <div class="d-flex justify-content-around" *ngIf="false">
-                  <div>
-                    <!-- Remember me -->
-                    <mdb-checkbox [default]="true">Remember me</mdb-checkbox>
-                  </div>
-                  <div>
-                    <!-- Forgot password -->
-                    <a href="">Forgot password?</a>
+                    <div
+                      *ngIf="loginFormControls.password.errors.required">{{ 'login.passwordRequired' | translate }}</div>
                   </div>
                 </div>
 
@@ -55,13 +45,14 @@
                         mdbWavesEffect
                         outline="true"
                         type="submit">
-                  Sign in
+                  {{ title | translate }}
                 </button>
 
                 <!-- Register -->
                 <p>
-                  Not a member?
-                  <a href="javascript:void(0);" (click)="onSwitchLoginAndRegisterForm()">Sign up</a>
+                  {{ 'login.notMember' | translate }}
+                  <a (click)="onSwitchLoginAndRegisterForm()"
+                     href="javascript:void(0);">{{ 'login.signUp' | translate }}</a>
                 </p>
                 <!-- style="color: #0000FF" -->
 
@@ -77,12 +68,12 @@
                 <div class="md-form">
                   <input type="text" id="username" class="form-control" formControlName="username"
                          [ngClass]="{ 'is-invalid': submitted && registerFormControls.username.errors }" mdbInput/>
-                  <label for="username">Username</label>
+                  <label for="username">{{ 'login.username' | translate }}</label>
 
                   <div *ngIf="submitted && registerFormControls.username.errors" class="invalid-feedback">
-                    <div *ngIf="registerFormControls.username.errors.required">Username is required</div>
-                    <div *ngIf="registerFormControls.username.errors.minlength">Username must be at least 5 characters
-                      long
+                    <div
+                      *ngIf="registerFormControls.username.errors.required">{{ 'login.usernameRequired' | translate }}</div>
+                    <div *ngIf="registerFormControls.username.errors.minlength">{{ 'login.usernameMin' | translate }}
                     </div>
                   </div>
                 </div>
@@ -92,13 +83,13 @@
                   <input type="password" id="password" class="form-control"
                          formControlName="password"
                          [ngClass]="{ 'is-invalid': submitted && registerFormControls.password.errors }" mdbInput/>
-                  <label for="password">Password</label>
+                  <label for="password">{{ 'login.password' | translate }}</label>
 
                   <div *ngIf="submitted && registerFormControls.password.errors" class="invalid-feedback">
-                    <div *ngIf="registerFormControls.password.errors.required">Password is required</div>
-                    <div *ngIf="registerFormControls.password.errors.pattern">Password must be at least 8 characters
-                      long
-                      and contain at least one lowercase letter, uppercase letter, number and special character
+                    <div
+                      *ngIf="registerFormControls.password.errors.required">{{ 'login.passwordRequired' | translate }}</div>
+                    <div
+                      *ngIf="registerFormControls.password.errors.pattern">{{ 'login.passwordValidation' | translate }}
                     </div>
 
                   </div>
@@ -109,11 +100,13 @@
                   <input type="text" id="firstName" class="form-control" formControlName="firstName"
                          [ngClass]="{ 'is-invalid': submitted && registerFormControls.firstName.errors }" mdbInput
                          required/>
-                  <label for="firstName">First Name</label>
+                  <label for="firstName">{{ 'login.firstName' | translate }}</label>
 
                   <div *ngIf="submitted && registerFormControls.firstName.errors" class="invalid-feedback">
-                    <div *ngIf="registerFormControls.firstName.errors.required">First Name is required</div>
-                    <div *ngIf="registerFormControls.firstName.errors.pattern">First Name must contain only letters
+                    <div
+                      *ngIf="registerFormControls.firstName.errors.required">{{ 'login.firstNameRequired' | translate }}</div>
+                    <div
+                      *ngIf="registerFormControls.firstName.errors.pattern">{{ 'login.firstNameValidation' | translate }}
                     </div>
                   </div>
                 </div>
@@ -122,11 +115,13 @@
                 <div class="md-form">
                   <input type="text" id="lastName" class="form-control" formControlName="lastName"
                          [ngClass]="{ 'is-invalid': submitted && registerFormControls.lastName.errors }" mdbInput/>
-                  <label for="lastName">Last Name</label>
+                  <label for="lastName">{{ 'login.lastName' | translate }}</label>
 
                   <div *ngIf="submitted && registerFormControls.lastName.errors" class="invalid-feedback">
-                    <div *ngIf="registerFormControls.lastName.errors.required">Last Name is required</div>
-                    <div *ngIf="registerFormControls.lastName.errors.pattern">Last Name must contain only letters</div>
+                    <div
+                      *ngIf="registerFormControls.lastName.errors.required">{{ 'login.lastNameRequired' | translate }}</div>
+                    <div
+                      *ngIf="registerFormControls.lastName.errors.pattern">{{ 'login.lastNameValidation' | translate }}</div>
                   </div>
                 </div>
 
@@ -134,11 +129,12 @@
                 <div class="md-form">
                   <input type="email" id="email" class="form-control" formControlName="email"
                          [ngClass]="{ 'is-invalid': submitted && registerFormControls.email.errors }" mdbInput/>
-                  <label for="email">E-mail</label>
+                  <label for="email">{{ 'login.email' | translate }}</label>
 
                   <div *ngIf="submitted && registerFormControls.email.errors" class="invalid-feedback">
-                    <div *ngIf="registerFormControls.email.errors.required">E-mail is required</div>
-                    <div *ngIf="registerFormControls.email.errors.email">Provide a valid email address.</div>
+                    <div
+                      *ngIf="registerFormControls.email.errors.required">{{ 'login.emailRequired' | translate }}</div>
+                    <div *ngIf="registerFormControls.email.errors.email">{{ 'login.emailValidation' | translate }}</div>
                   </div>
                 </div>
 
@@ -147,12 +143,13 @@
                         mdbWavesEffect
                         outline="true"
                         type="submit">
-                  Sign up
+                  {{ 'login.signIn' | translate }}
                 </button>
 
                 <p>
-                  Already a member?
-                  <a href="javascript:void(0);" (click)="onSwitchLoginAndRegisterForm()">Sign in</a>
+                  {{ 'login.isMember' | translate }}
+                  <a (click)="onSwitchLoginAndRegisterForm()"
+                     href="javascript:void(0);">{{ 'login.signIn' | translate }}</a>
                 </p>
 
               </form>

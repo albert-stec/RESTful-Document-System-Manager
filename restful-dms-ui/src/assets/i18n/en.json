@@ -1,6 +1,28 @@
 {
   "login": {
     "signUp": "Sign up",
-    "signIn": "Sign in"
+    "signIn": "Sign in",
+    "username": "Username",
+    "usernameRequired": "Username is required",
+    "usernameMin": "Username must be at least 5 characters  long",
+    "password": "Password",
+    "passwordRequired": "Password is required",
+    "passwordValidation": "Password must be at least 8 characters long and contain at least one lowercase letter, uppercase letter, number and special character",
+    "notMember": "Not a member?",
+    "firstName": "First Name",
+    "firstNameRequired": "First Name is required",
+    "lastName": "Last Name",
+    "lastNameRequired": "Last Name is required",
+    "lastNameValidation": "Last Name must contain only letters",
+    "email": "E-mail",
+    "emailRequired": "E-mail is required",
+    "emailValidation": "Provide a valid email address",
+    "isMember": "Already a member?",
+    "credentialsErrorMsg": "Enter valid credentials and try again.",
+    "credentialsErrorTitle": "Invalid username or password.",
+    "registerSuccessTitle": "Registered!",
+    "registerSuccessMsg": "You can now sign in.",
+    "registerErrorMsg": "Try again with different one."
   }
 }
+

@@ -17,6 +17,7 @@ import {AddDocumentComponent} from './_add-document/add-document.component';
 import {NgbModule} from '@ng-bootstrap/ng-bootstrap';
 import {TranslateLoader, TranslateModule} from '@ngx-translate/core';
 import {TranslateHttpLoader} from "@ngx-translate/http-loader";
+import {LanguageInterceptor} from "./interceptors/language.interceptor";
 
 @NgModule({
   declarations: [
@@ -56,6 +57,7 @@ import {TranslateHttpLoader} from "@ngx-translate/http-loader";
   providers: [
     {provide: HTTP_INTERCEPTORS, useClass: JwtInterceptor, multi: true},
     {provide: HTTP_INTERCEPTORS, useClass: ErrorInterceptor, multi: true},
+    {provide: HTTP_INTERCEPTORS, useClass: LanguageInterceptor, multi: true},
   ], bootstrap: [AppComponent]
 })
 

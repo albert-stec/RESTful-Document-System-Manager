@@ -21,6 +21,7 @@ export class LoginComponent implements OnInit {
   returnUrl: string;
   showLoginCard = true;
   title = 'login.signIn';
+  showSpinner: boolean = false;
 
   constructor(
     private formBuilder: FormBuilder,
@@ -93,14 +94,15 @@ export class LoginComponent implements OnInit {
           this.router.navigate([this.returnUrl]);
         },
         error => {
-          this.loading = false;
 
           if (error.status === HttpError.Unauthorized) {
             this.toastr.error(this.translate.instant('login.credentialsErrorMsg'),
               this.translate.instant('login.credentialsErrorTitle'))
           }
         }
-      )
+      ).add(() =>
+      this.loading = false
+    )
   }
 
   onRegister() {
@@ -112,6 +114,7 @@ export class LoginComponent implements OnInit {
 
     const user: User = this.registerForm.value;
 
+    this.loading = true;
     this.userService.register(user)
       .subscribe(
         () => {
@@ -124,7 +127,7 @@ export class LoginComponent implements OnInit {
             this.toastr.error(this.translate.instant('login.registerErrorMsg'),
               err.message)
           }
-        })
+        }).add(() => this.loading = false)
   }
 
   onSwitchLoginAndRegisterForm() {

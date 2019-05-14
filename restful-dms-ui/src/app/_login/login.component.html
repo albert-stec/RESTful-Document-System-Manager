@@ -45,7 +45,11 @@
                         mdbWavesEffect
                         outline="true"
                         type="submit">
-                  {{ title | translate }}
+                  <span *ngIf="!loading">{{ title | translate }}</span>
+                  <span *ngIf="loading">
+                    <span aria-hidden="true" class="mr-2 spinner-border spinner-border-sm" role="status"></span>
+                      <span>{{ 'shared.loading' | translate }}</span>
+                   </span>
                 </button>
 
                 <!-- Register -->
@@ -143,7 +147,11 @@
                         mdbWavesEffect
                         outline="true"
                         type="submit">
-                  {{ 'login.signUp' | translate }}
+                  <span *ngIf="!loading">{{ 'login.signUp' | translate }}</span>
+                  <span *ngIf="loading">
+                      <span aria-hidden="true" class="mr-2 spinner-border spinner-border-sm" role="status"></span>
+                        <span>{{ 'shared.loading' | translate }}</span>
+                     </span>
                 </button>
 
                 <p>

@@ -4,8 +4,6 @@ import {EventService} from "../services/event.service";
 import {ModalDirective} from "angular-bootstrap-md";
 import {Document} from "../models/document";
 import {DocumentService} from "../services/file.service";
-import {ToastrService} from "ngx-toastr";
-import {TranslateService} from "@ngx-translate/core";
 
 @Component({
   selector: 'app-add-document',
@@ -26,9 +24,7 @@ export class AddDocumentComponent implements AfterViewInit {
   constructor(
     private eventService: EventService,
     private formBuilder: FormBuilder,
-    private documentService: DocumentService,
-    private toastr: ToastrService,
-    private translate: TranslateService
+    private documentService: DocumentService
   ) {
     this.addDocumentForm = this.formBuilder.group({
       title: ['',
@@ -85,9 +81,6 @@ export class AddDocumentComponent implements AfterViewInit {
       .subscribe(
         () => {
           this.showSuccessView = true;
-        },
-        () => {
-
         }
       ).add(() => this.showSpinner = false);
   }

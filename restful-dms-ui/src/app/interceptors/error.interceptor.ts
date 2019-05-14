@@ -1,4 +1,4 @@
-import {Injectable} from '@angular/core';
+import {Injectable, Injector} from '@angular/core';
 import {HttpEvent, HttpHandler, HttpInterceptor, HttpRequest} from '@angular/common/http';
 import {Observable, throwError} from 'rxjs';
 import {catchError} from 'rxjs/operators';
@@ -6,13 +6,15 @@ import {AuthenticationService} from '../services/authentication.service';
 import {ToastrService} from "ngx-toastr";
 import {TranslateService} from "@ngx-translate/core";
 import {HttpError} from "../models/http-error";
+import {RollbarService} from "../app.module";
 
 
 @Injectable()
 export class ErrorInterceptor implements HttpInterceptor {
   constructor(private authenticationService: AuthenticationService,
               private toastr: ToastrService,
-              private translate: TranslateService
+              private translate: TranslateService,
+              private injector: Injector
   ) {
   }
 
@@ -22,6 +24,9 @@ export class ErrorInterceptor implements HttpInterceptor {
           'status': err.status,
           'message': err.error.message || err.message || err.statusText
         };
+
+      const rollbar = this.injector.get(RollbarService);
+      rollbar.error(error);
 
         console.log(JSON.stringify(err, null, 2));
         console.log(JSON.stringify(event, null, 2));

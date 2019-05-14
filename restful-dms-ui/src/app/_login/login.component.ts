@@ -6,6 +6,7 @@ import {UserService} from "../services/user.service";
 import {ToastrService} from "ngx-toastr";
 import {User} from "../models/user";
 import {TranslateService} from "@ngx-translate/core";
+import {HttpError} from "../models/http-error";
 
 @Component({
   selector: 'app-login',
@@ -94,7 +95,7 @@ export class LoginComponent implements OnInit {
         error => {
           this.loading = false;
 
-          if (error.status === 401) {
+          if (error.status === HttpError.Unauthorized) {
             this.toastr.error(this.translate.instant('login.credentialsErrorMsg'),
               this.translate.instant('login.credentialsErrorTitle'))
           }
@@ -119,7 +120,7 @@ export class LoginComponent implements OnInit {
           this.onSwitchLoginAndRegisterForm();
         },
         err => {
-          if (err.status === 409) {
+          if (err.status === HttpError.Conflict) {
             this.toastr.error(this.translate.instant('login.registerErrorMsg'),
               err.message)
           }

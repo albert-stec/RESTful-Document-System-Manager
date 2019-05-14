@@ -87,8 +87,7 @@ export class AddDocumentComponent implements AfterViewInit {
           this.showSuccessView = true;
         },
         () => {
-          this.toastr.error(this.translate.instant('unexpectedErrorMsg'),
-            this.translate.instant('unexpectedErrorTitle'))
+
         }
       ).add(() => this.showSpinner = false);
   }

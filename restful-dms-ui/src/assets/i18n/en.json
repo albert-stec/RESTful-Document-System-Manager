@@ -7,7 +7,8 @@
     "loading": "Loading...",
     "ok": "OK",
     "unexpectedErrorTitle": "An unexpected error occurred",
-    "unexpectedErrorMsg": "Please try again later."
+    "tryAgainLaterErrorMsg": "Please try again later.",
+    "offlineErrorTitle": "The server is currently offline."
   },
   "login": {
     "signUp": "Sign up",

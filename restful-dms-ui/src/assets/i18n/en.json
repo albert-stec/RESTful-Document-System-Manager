@@ -78,7 +78,8 @@
     "fileInvalidFormat": "File must be a PDF",
     "fileRequired": "File is required",
     "successTitle": "Document was successfully created and is awaiting for acceptation",
-    "successMsg": "Before acceptation only you can browse it."
+    "successMsg": "Before acceptation only you can browse it.",
+    "noFile": "No file chosen"
   }
 }
 

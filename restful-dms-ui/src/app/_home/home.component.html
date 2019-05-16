@@ -1,3 +1,50 @@
 <main>
+  <div>
+    <table [dataSource]="dataSource" mat-table>
+      <ng-container matColumnDef="name">
+        <th *matHeaderCellDef mat-header-cell> Name</th>
+        <td *matCellDef="let element" mat-cell> {{element.name}} </td>
+      </ng-container>
 
+      <ng-container matColumnDef="dateOfBirth">
+        <th *matHeaderCellDef mat-header-cell> Date of Birth</th>
+        <td *matCellDef="let element" mat-cell> {{element.dateOfBirth | date}} </td>
+      </ng-container>
+
+      <ng-container matColumnDef="address">
+        <th *matHeaderCellDef mat-header-cell> Address</th>
+        <td *matCellDef="let element" mat-cell> {{element.address}} </td>
+      </ng-container>
+
+      <ng-container matColumnDef="details">
+        <th *matHeaderCellDef mat-header-cell> Details</th>
+        <td *matCellDef="let element" mat-cell>
+          <button (click)="redirectToDetails(element.id)" color="primary" mat-icon-button>
+            <mat-icon class="mat-18">reorder</mat-icon>
+          </button>
+        </td>
+      </ng-container>
+
+      <ng-container matColumnDef="update">
+        <th *matHeaderCellDef mat-header-cell> Update</th>
+        <td *matCellDef="let element" mat-cell>
+          <button (click)="redirectToUpdate(element.id)" color="accent" mat-icon-button>
+            <mat-icon class="mat-18">system_update</mat-icon>
+          </button>
+        </td>
+      </ng-container>
+
+      <ng-container matColumnDef="delete">
+        <th *matHeaderCellDef mat-header-cell> Delete</th>
+        <td *matCellDef="let element" mat-cell>
+          <button (click)="redirectToDelete(element.id)" color="warn" mat-icon-button>
+            <mat-icon class="mat-18">delete</mat-icon>
+          </button>
+        </td>
+      </ng-container>
+
+      <tr *matHeaderRowDef="displayedColumns" mat-header-row></tr>
+      <tr *matRowDef="let row; columns: displayedColumns;" mat-row></tr>
+    </table>
+  </div>
 </main>

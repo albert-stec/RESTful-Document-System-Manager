@@ -19,7 +19,16 @@ import {TranslateLoader, TranslateModule} from '@ngx-translate/core';
 import {TranslateHttpLoader} from "@ngx-translate/http-loader";
 import {LanguageInterceptor} from "./interceptors/language.interceptor";
 import * as Rollbar from 'rollbar';
-
+import {DocumentDataTableComponent} from './document-data-table/document-data-table.component';
+import {
+  MatButtonModule,
+  MatIconModule,
+  MatInputModule,
+  MatPaginatorModule,
+  MatSelectModule,
+  MatSortModule,
+  MatTableModule
+} from '@angular/material';
 
 const rollbarConfig = {
   accessToken: '5d227e19179b4821ad9097e127683857',
@@ -41,7 +50,8 @@ export const RollbarService = new InjectionToken<Rollbar>('rollbar');
     HomeComponent,
     NavigationComponent,
     FileComponent,
-    AddDocumentComponent
+    AddDocumentComponent,
+    DocumentDataTableComponent
   ],
   entryComponents: [
     AddDocumentComponent
@@ -66,7 +76,17 @@ export const RollbarService = new InjectionToken<Rollbar>('rollbar');
         useFactory: HttpLoaderFactory,
         deps: [HttpClient]
       }
-    })
+    }),
+    MatTableModule,
+    MatPaginatorModule,
+    MatSortModule,
+    MatInputModule,
+    MatButtonModule,
+    MatSelectModule,
+    MatIconModule
+  ],
+  exports: [
+    MatTableModule,
   ],
   schemas: [NO_ERRORS_SCHEMA],
   providers: [
